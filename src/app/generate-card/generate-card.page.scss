@@ -1,0 +1,64 @@
+.cardCntr{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ion-card{
+    width: 258px; 
+    height: 480px;
+    margin: 10px;
+    text-align: center;
+}
+
+.forLabel{
+    font-weight: bold;
+    color: black;
+}
+
+.forLabelLight{
+    color: black;
+}
+
+ion-list{
+    margin-top: 15px;
+}
+
+ion-label{
+    text-align: left;
+}
+
+ion-avatar{
+    vertical-align: middle;
+    width: 70px;
+    height: 70px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+ion-button{
+    padding: 5px;
+    margin: 10px;
+}
+
+.imgCentr{
+    margin: 0 auto;
+}
+
+ion-card-title{
+    font-size: 17px;
+    font-weight: bold;
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 5px;
+}
+
+#oneLine{
+    display: flex;
+    align-items: center;
+    ion-input{
+        width: 50%;
+    }
+    ion-button{
+        width: 40%;
+    }
+}

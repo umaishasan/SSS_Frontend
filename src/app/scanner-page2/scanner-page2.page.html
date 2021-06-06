@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Scan Items</ion-title>
+    <ion-menu-button slot="start"></ion-menu-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button expand="full" (click)="scanCode()">
+    <ion-icon slot="start" name="scan"></ion-icon>Scan
+  </ion-button>
+  <div style="text-align: center;">
+    <ion-label class="itemss">Items</ion-label>
+  </div>
+  <ion-item *ngFor="let j of show">
+    <ion-label>{{j}}</ion-label>
+  </ion-item>
+</ion-content>

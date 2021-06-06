@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Select Items</ion-title>
+    <ion-menu-button slot="start"></ion-menu-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Id:</ion-label>
+    <ion-input type="number" [(ngModel)]="ids"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Items Select:</ion-label>
+    <ion-select multiple="true" [(ngModel)]="itemSelection" (ionChange)="onChange(itemSelection)">
+      <ion-select-option *ngFor="let i of Itemsdatas" [disabled]="i.quantity==0" [value]="i.product_id">{{i.product_name}} ({{i.product_price}}/-)</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <div class="labelSetting">
+    <ion-label>Total Price: {{totalPrice}}</ion-label>
+  </div>
+  <div *ngFor="let j of nameArr">
+    <ion-label>{{j}}</ion-label>
+  </div>
+  <ion-button expand="full" (click)="select()">Select</ion-button>
+</ion-content>

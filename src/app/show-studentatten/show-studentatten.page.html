@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{classiName}}</ion-title>
+    <ion-button fill="clear" slot="start" (click)="click()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let classss of classNmae.param">
+      <ion-label>
+        <ion-row>
+          <ion-col>{{classss.name}}</ion-col>
+          <ion-col>{{classss.attendance}} Presents</ion-col>
+        </ion-row>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Voucher 
+    </ion-title>
+    <ion-menu-button slot="start"></ion-menu-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <ion-label stacked>Class:</ion-label>
+    <ion-select [(ngModel)]="sClass" (ionChange)="onChange()">
+      <ion-select-option *ngFor="let i of clase" value="{{i.clas}}">{{i.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>Student:</ion-label>
+    <ion-select [(ngModel)]="sSudent" (ionChange)="inChange()">
+      <ion-select-option *ngFor="let i of dataa" value="{{i.id}}">{{i.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>Tution Fee:</ion-label>
+    <ion-input type="number" [(ngModel)]="tution"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>Fine:</ion-label>
+    <ion-input type="number" [(ngModel)]="fine"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>Registration Fee:</ion-label>
+    <ion-input type="number" [(ngModel)]="registration"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>Security Fee:</ion-label>
+    <ion-input type="number" [(ngModel)]="security"></ion-input>
+  </ion-item>
+  <ion-button expand="full" (click)="createpdf()">Create Voucher</ion-button>
+</ion-content>

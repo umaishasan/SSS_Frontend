@@ -1,0 +1,26 @@
+ion-button{
+    margin: 10px;
+    padding: 5px;
+}
+
+.textArea{
+    border: 1px solid black;
+}
+
+.forCenter{
+    text-align: center;
+    border-bottom: 1px solid gray;
+}
+
+.forGap{
+    margin-top: 10px;
+}
+
+.twoBtnCntr{
+    width: 50%;
+}
+
+#forCntr{
+    display: flex;
+    align-items: center;
+}

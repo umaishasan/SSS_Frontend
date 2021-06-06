@@ -1,0 +1,287 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Upload Works</ion-title>
+    <ion-menu-button slot="start"></ion-menu-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment [(ngModel)]="elementType" (ionChange)="segmentsChanges(elementType)">
+    <ion-segment-button value="home">
+      <ion-label>Homework</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="quiz">
+      <ion-label>Quiz</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="result">
+      <ion-label>Result</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div *ngIf="elementType=='home'">
+    <div class="forCenter">
+      <h2 class="forGap">Online Class</h2>
+      <ion-button expand="full" (click)="openUrl()">
+        <ion-icon slot="start" name="link-outline"></ion-icon>Take Class
+      </ion-button>
+    </div>
+    <div class="forCenter">
+      <h2 class="forGap">Download</h2>
+      <ion-item>
+        <ion-label position="floating">Teacher:</ion-label>
+        <ion-select [(ngModel)]="selectTeacher">
+          <ion-select-option *ngFor="let i of homedata;" value="{{i.name}}">{{i.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <!-- subject for 1 to 8 class -->
+      <ion-item *ngIf="showSubjectO">
+        <ion-label position="floating">Subject:</ion-label>
+        <ion-select [(ngModel)]="selectS">
+          <ion-select-option *ngFor="let i of subjectOE;" value="{{i}}">{{i}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <!-- subject for 9 class -->
+      <ion-item *ngIf="showSubjectN">
+        <ion-label position="floating">Subject:</ion-label>
+        <ion-select [(ngModel)]="selectS">
+          <ion-select-option *ngFor="let i of subjectN;" value="{{i}}">{{i}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <!-- subject for 10 class -->
+      <ion-item *ngIf="showSubjectT">
+        <ion-label position="floating">Subject:</ion-label>
+        <ion-select [(ngModel)]="selectS">
+          <ion-select-option *ngFor="let i of subjectT;" value="{{i}}">{{i}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-button expand="full" (click)="DownloadHome()">Submit</ion-button>
+    </div>
+    <div class="forCenter">
+      <h2 class="forGap">Upload</h2>
+      <!-- subject for 1 to 8 class -->
+      <ion-item *ngIf="showSubjectO">
+        <ion-label position="floating">Subject:</ion-label>
+        <ion-select [(ngModel)]="selectS">
+          <ion-select-option *ngFor="let i of subjectOE;" value="{{i}}">{{i}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <!-- subject for 9 class -->
+      <ion-item *ngIf="showSubjectN">
+        <ion-label position="floating">Subject:</ion-label>
+        <ion-select [(ngModel)]="selectS">
+          <ion-select-option *ngFor="let i of subjectN;" value="{{i}}">{{i}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <!-- subject for 10 class -->
+      <ion-item *ngIf="showSubjectT">
+        <ion-label position="floating">Subject:</ion-label>
+        <ion-select [(ngModel)]="selectS">
+          <ion-select-option *ngFor="let i of subjectT;" value="{{i}}">{{i}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-button expand="full">
+        <input type="file" id="file-input" (change)="fileUploads($event)">
+      </ion-button>
+      <ion-button expand="full" (click)="uploadHome()">Submit</ion-button>
+    </div>
+  </div>
+
+  <div *ngIf="elementType=='quiz'">
+    <ion-item *ngIf="showSubjectO">
+      <ion-label position="floating">Subject:</ion-label>
+      <ion-select [(ngModel)]="selectS">
+        <ion-select-option *ngFor="let i of subjectOE;" value="{{i}}">{{i}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <!-- subject for 9 class -->
+    <ion-item *ngIf="showSubjectN">
+      <ion-label position="floating">Subject:</ion-label>
+      <ion-select [(ngModel)]="selectS">
+        <ion-select-option *ngFor="let i of subjectN;" value="{{i}}">{{i}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <!-- subject for 10 class -->
+    <ion-item *ngIf="showSubjectT">
+      <ion-label position="floating">Subject:</ion-label>
+      <ion-select [(ngModel)]="selectS">
+        <ion-select-option *ngFor="let i of subjectT;" value="{{i}}">{{i}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-card>
+      <ion-card-content *ngIf="selectS">
+        <ion-radio-group (ionChange)="checkk($event)" *ngFor="let q of quizdata">
+          <ion-list-header style="margin-top: 5px;">
+            <ion-label>Q{{q.QNo}}: {{q.Q}}</ion-label>
+          </ion-list-header>
+          <ion-item>
+            <ion-label>{{q.Option2}}</ion-label>
+            <ion-radio slot="start"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>{{q.Ans}}</ion-label>
+            <ion-radio slot="start" name="{{q.QNo}}" value="{{q.Ans}}"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>{{q.Option1}}</ion-label>
+            <ion-radio slot="start"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-card-content>
+
+    </ion-card>
+    <ion-button expand="full" (click)="submitQuiz()">Submit</ion-button>
+  </div>
+
+  <div *ngIf="elementType=='result'">
+    <div *ngIf="showSubjectO">
+      <ion-item>
+        <ion-label>Id:</ion-label>
+        <ion-label>{{resultdata.Id}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Name:</ion-label>
+        <ion-label>{{resultdata.Name}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>English:</ion-label>
+        <ion-label>{{resultdata.Eng}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Urdu:</ion-label>
+        <ion-label>{{resultdata.Urdu}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Math:</ion-label>
+        <ion-label>{{resultdata.Math}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Science:</ion-label>
+        <ion-label>{{resultdata.Sci}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Social Studies:</ion-label>
+        <ion-label>{{resultdata.Sst}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Drawing:</ion-label>
+        <ion-label>{{resultdata.Draw}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Sindhi:</ion-label>
+        <ion-label>{{resultdata.Sindhi}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Islamiat:</ion-label>
+        <ion-label>{{resultdata.Isl}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Total:</ion-label>
+        <ion-label>{{resultdata.Total}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Obtained:</ion-label>
+        <ion-label>{{resultdata.Obtained}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Percentage:</ion-label>
+        <ion-label>{{resultdata.Percentage}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Grade:</ion-label>
+        <ion-label>{{resultdata.Grade}}</ion-label>
+      </ion-item>
+    </div>
+    <div *ngIf="showSubjectN">
+      <ion-item>
+        <ion-label>Id:</ion-label>
+        <ion-label>{{resultdata.Id}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Name:</ion-label>
+        <ion-label>{{resultdata.Name}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>English:</ion-label>
+        <ion-label>{{resultdata.Eng}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Urdu:</ion-label>
+        <ion-label>{{resultdata.Urdu}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Math:</ion-label>
+        <ion-label>{{resultdata.Math}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Chemistry:</ion-label>
+        <ion-label>{{resultdata.Che}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Pakistan Studies:</ion-label>
+        <ion-label>{{resultdata.Pst}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Total:</ion-label>
+        <ion-label>{{resultdata.Total}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Obtained:</ion-label>
+        <ion-label>{{resultdata.Obtained}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Percentage:</ion-label>
+        <ion-label>{{resultdata.Percentage}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Grade:</ion-label>
+        <ion-label>{{resultdata.Grade}}</ion-label>
+      </ion-item>
+    </div>
+    <div *ngIf="showSubjectT">
+      <ion-item>
+        <ion-label>Id:</ion-label>
+        <ion-label>{{resultdata.Id}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Name:</ion-label>
+        <ion-label>{{resultdata.Name}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>English:</ion-label>
+        <ion-label>{{resultdata.Eng}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Urdu:</ion-label>
+        <ion-label>{{resultdata.Urdu}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Physics:</ion-label>
+        <ion-label>{{resultdata.Phy}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Chemistry:</ion-label>
+        <ion-label>{{resultdata.Che}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Islamiat:</ion-label>
+        <ion-label>{{resultdata.Isl}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Total:</ion-label>
+        <ion-label>{{resultdata.Total}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Obtained:</ion-label>
+        <ion-label>{{resultdata.Obtained}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Percentage:</ion-label>
+        <ion-label>{{resultdata.Percentage}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Grade:</ion-label>
+        <ion-label>{{resultdata.Grade}}</ion-label>
+      </ion-item>
+    </div>
+  </div>
+</ion-content>

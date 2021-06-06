@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Annoucement</ion-title>
+    <ion-menu-button slot="start"></ion-menu-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-label>Annoucement:</ion-label>
+    <ion-textarea type="text" [(ngModel)]="annoucement"></ion-textarea>
+  </div>
+  <ion-button expand="full" (click)="goToAnnoucement()">Send</ion-button>
+</ion-content>

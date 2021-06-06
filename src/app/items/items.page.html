@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Items</ion-title>
+    <ion-menu-button slot="start"></ion-menu-button>
+    <ion-button slot="end" fill="clear" (click)="presentModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let items of itemData">
+      <ion-label>{{items.product_name}}</ion-label>
+      <ion-label style="text-align: right;">{{items.product_price}}/-</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

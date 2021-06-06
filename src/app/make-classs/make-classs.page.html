@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Make Classs</ion-title>
+    <ion-menu-button slot="start"></ion-menu-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Select user:</ion-label>
+    <ion-select [(ngModel)]="selectU">
+      <ion-select-option value="Student">Student</ion-select-option>
+      <ion-select-option value="Teacher">Teacher</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Id:</ion-label>
+    <ion-input type="number" [(ngModel)]="id"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Name:</ion-label>
+    <ion-input type="text" [(ngModel)]="name"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Class:</ion-label>
+    <ion-select [(ngModel)]="selectC">
+      <ion-select-option *ngFor="let i of classes;" value="{{i}}">{{i}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <div class="samePlace">
+    <ion-button expand="full" (click)="submit()">Add</ion-button>
+    <ion-button expand="full" (click)="remove()">Remove</ion-button>
+  </div>
+</ion-content>

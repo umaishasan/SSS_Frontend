@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Attendance</ion-title>
+    <ion-menu-button slot="start"></ion-menu-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment [(ngModel)]="elementType" (ionChange)="segmentChanged(elementType)">
+    <ion-segment-button value="Teacher">
+      <ion-label>Teacher</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Student">
+      <ion-label>Student</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div *ngIf="elementType=='Teacher'">
+    <ion-list>
+      <ion-radio-group (ionChange)="classSelect($event)">
+        <ion-item *ngFor="let i of classs">
+          <ion-label>{{i.name}}</ion-label>
+          <ion-radio slot="start" value="{{i.class}}"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+  </div>
+  <div *ngIf="elementType=='Student'">
+    <ion-list>
+      <ion-radio-group (ionChange)="classSelect($event)">
+        <ion-item *ngFor="let i of classs">
+          <ion-label>{{i.name}}</ion-label>
+          <ion-radio slot="start" value="{{i.class}}"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+  </div>
+</ion-content>
