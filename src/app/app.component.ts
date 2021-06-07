@@ -13,6 +13,7 @@ export class AppComponent {
   constructor(public router:Router, public mnuCtrl:MenuController) {}
 
   logout(){
+    close();
     this.router.navigateByUrl('/login');
     this.mnuCtrl.enable(false);
   }

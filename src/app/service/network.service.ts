@@ -8,7 +8,8 @@ export class NetworkService {
   baseUrl: string = "";
 
   constructor(public http: HttpClient) {
-    this.baseUrl = "http://[::1]:3000/";
+    this.baseUrl = "https://anda-sss.herokuapp.com/";
+    // this.baseUrl = 'http://[::1]:3000/';
   }
 
   getData(tableName) {

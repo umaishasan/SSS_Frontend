@@ -19,7 +19,9 @@ export class LoginPage implements OnInit {
   passwordTogleIcon = 'eye';
   showPassword = false;
 
-  constructor(public route: Router,public saveData: ForSaveService,public toas: ToastedService,public network: NetworkService,public mnuCtrl: MenuController,public appComp: AppComponent) { }
+  constructor(public route: Router,public saveData: ForSaveService,public toas: ToastedService,public network: NetworkService,public mnuCtrl: MenuController,public appComp: AppComponent) {
+    this.mnuCtrl.enable(false);
+  }
 
   ngOnInit() { }
 
