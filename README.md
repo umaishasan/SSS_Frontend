@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # FrontEnd
 
   * barcode scanner.
@@ -14,3 +15,6 @@
     - npm install @ionic-native/file --save
   * PDF make.
     - npm install pdfmake
+=======
+# SSS_Frontend
+>>>>>>> c1eec426df8c1a837037d4ed8313ca5b716f5ebf
