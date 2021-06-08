@@ -27,7 +27,8 @@
     </ion-item>
     <ion-item>
       <ion-label position="floating">Password:</ion-label>
-      <ion-input type="password" [(ngModel)]="pass"></ion-input>
+      <ion-input [(ngModel)]="pass" [type]="ShowPassword ? 'text' : 'password'"></ion-input>
+      <ion-icon slot="end" [name]="passwordToggleIcon" (click)="passwordToggle()"></ion-icon>
     </ion-item>
   </ion-list>
 </ion-content>

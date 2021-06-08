@@ -24,7 +24,7 @@
   <ion-item>
     <ion-label position="floating">Class:</ion-label>
     <ion-select [(ngModel)]="selectC">
-      <ion-select-option *ngFor="let i of classes;" value="{{i}}">{{i}}</ion-select-option>
+      <ion-select-option *ngFor="let i of classes;" value="{{i.class}}">{{i.name}}</ion-select-option>
     </ion-select>
   </ion-item>
   <div class="samePlace">

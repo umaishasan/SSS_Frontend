@@ -13,7 +13,6 @@ export class AdminsPage implements OnInit {
     this.datas = this.saveData.dataSave;
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }

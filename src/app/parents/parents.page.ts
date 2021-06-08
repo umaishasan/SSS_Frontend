@@ -17,6 +17,5 @@ export class ParentsPage implements OnInit {
   }
 
   ngOnInit() { }
-
-
+  
 }

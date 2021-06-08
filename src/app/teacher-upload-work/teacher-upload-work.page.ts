@@ -40,8 +40,9 @@ export class TeacherUploadWorkPage implements OnInit {
   ans: string;
   classesForQuiz: Classe[] = [{ id: "quiz-class1s", name: 'Class1' }, { id: "quiz-class2s", name: 'Class2' }, { id: "quiz-class3s", name: 'Class3' }, { id: "quiz-class4s", name: 'Class4' }, { id: "quiz-class5s", name: 'Class5' }, { id: "quiz-class6s", name: 'Class6' }, { id: "quiz-class7s", name: 'Class7' }, { id: "quiz-class8s", name: 'Class8' }, { id: "quiz-class9s", name: 'Class9' }, { id: "quiz-class10s", name: 'Class10' }];
   //for result
-  id: number;
-  name: string;
+  dataa: any;
+  sSudent: any;
+  studentIdd: any;
   Eng: number;
   Math: number;
   Urdu: number;
@@ -193,6 +194,15 @@ export class TeacherUploadWorkPage implements OnInit {
   }
 
   AccordingtoClassSubjectForResult() {
+    var justClass = this.selectC.split('-');
+    console.log(justClass[1]);
+    this.network.getSpecificDataforAttendance(justClass[1], "Student").then(data => {
+      this.dataa = data;
+      console.log("all data", this.dataa);
+      for (let i = 0; i < this.dataa.length; i++) {
+        this.studentIdd = this.dataa[i];
+      }
+    });
     console.log(this.selectC);
     if (this.selectC == 'result-class9s') {
       this.showSubjectN = true;
@@ -427,79 +437,72 @@ export class TeacherUploadWorkPage implements OnInit {
   }
 
   submitResult() {
-    if (this.selectC == 'result-class9s') {
-      this.obtainedN = this.Eng + this.Urdu + this.Math + this.Che + this.Pst;
-      console.log(this.obtainedN);
-      this.percent = (this.obtainedN / 500) * 100;
-      console.log(this.percent);
-      this.makeGrade();
-      var taskn = {
-        Id: this.id,
-        Name: this.name,
-        Eng: this.Eng,
-        Urdu: this.Urdu,
-        Math: this.Math,
-        Pst: this.Pst,
-        Che: this.Che,
-        Total: 500,
-        Obtained: this.obtainedN,
-        Percentage: this.percent,
-        Grade: this.grade
-      };
-      this.postWork(this.selectC, taskn, "Result uploaded successfully!");
+      console.log(this.studentIdd.name,this.studentIdd.id);
+      if (this.selectC == 'result-class9s') {
+        this.obtainedN = this.Eng + this.Urdu + this.Math + this.Che + this.Pst;
+        console.log(this.obtainedN);
+        this.percent = (this.obtainedN / 500) * 100;
+        console.log(this.percent);
+        this.makeGrade();
+        var taskn = {
+          Id: this.studentIdd.id,
+          Name: this.studentIdd.name,
+          Eng: this.Eng,
+          Urdu: this.Urdu,
+          Math: this.Math,
+          Pst: this.Pst,
+          Che: this.Che,
+          Total: 500,
+          Obtained: this.obtainedN,
+          Percentage: this.percent,
+          Grade: this.grade
+        };
+        this.postWork(this.selectC, taskn, "Result uploaded successfully!");
+      }
+      else if (this.selectC == 'result-class10s') {
+        this.obtainedN = this.Eng + this.Urdu + this.Phy + this.Che + this.Isl;
+        console.log(this.obtainedN);
+        this.percent = (this.obtainedN / 500) * 100;
+        console.log(this.percent);
+        this.makeGrade();
+        var taskt = {
+          Id: this.studentIdd.id,
+          Name: this.studentIdd.name,
+          Eng: this.Eng,
+          Urdu: this.Urdu,
+          Phy: this.Phy,
+          Che: this.Che,
+          Isl: this.Isl,
+          Total: 500,
+          Obtained: this.obtainedN,
+          Percentage: this.percent,
+          Grade: this.grade
+        };
+        this.postWork(this.selectC, taskt, "Result uploaded successfully!");
+      }
+      else {
+        this.obtainedN = this.Eng + this.Urdu + this.Math + this.Sci + this.Sst + this.Isl + this.Draw + this.Sindhi;
+        this.percent = (this.obtainedN / 500) * 100;
+        this.makeGrade();
+        var tasko = {
+          Id: this.studentIdd.id,
+          Name: this.studentIdd.name,
+          Eng: this.Eng,
+          Urdu: this.Urdu,
+          Math: this.Math,
+          Sci: this.Sci,
+          Sst: this.Sst,
+          Isl: this.Isl,
+          Draw: this.Draw,
+          Sindhi: this.Sindhi,
+          Total: 500,
+          Obtained: this.obtainedN,
+          Percentage: this.percent,
+          Grade: this.grade
+        };
+        this.postWork(this.selectC, tasko, "Result uploaded successfully!");
+      }
     }
-    else if (this.selectC == 'result-class10s') {
-      this.obtainedN = this.Eng + this.Urdu + this.Phy + this.Che + this.Isl;
-      console.log(this.obtainedN);
-      this.percent = (this.obtainedN / 500) * 100;
-      console.log(this.percent);
-      this.makeGrade();
-      var taskt = {
-        Id: this.id,
-        Name: this.name,
-        Eng: this.Eng,
-        Urdu: this.Urdu,
-        Phy: this.Phy,
-        Che: this.Che,
-        Isl: this.Isl,
-        Total: 500,
-        Obtained: this.obtainedN,
-        Percentage: this.percent,
-        Grade: this.grade
-      };
-      this.postWork(this.selectC, taskt, "Result uploaded successfully!");
-    }
-    else {
-      this.obtainedN = this.Eng + this.Urdu + this.Math + this.Sci + this.Sst + this.Isl + this.Draw + this.Sindhi;
-      this.percent = (this.obtainedN / 500) * 100;
-      this.makeGrade();
-      var tasko = {
-        Id: this.id,
-        Name: this.name,
-        Eng: this.Eng,
-        Urdu: this.Urdu,
-        Math: this.Math,
-        Sci: this.Sci,
-        Sst: this.Sst,
-        Isl: this.Isl,
-        Draw: this.Draw,
-        Sindhi: this.Sindhi,
-        Total: 500,
-        Obtained: this.obtainedN,
-        Percentage: this.percent,
-        Grade: this.grade
-      };
-      this.postWork(this.selectC, tasko, "Result uploaded successfully!");
-    }
-  }
-
-  doRefresh(event) {
-    this.route.navigate(['teacherUploadWork']);
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      event.target.complete();
-    }, 2000);
-  }
-
+  
 
 }

@@ -7,8 +7,10 @@
 
 <ion-content>
   <ion-item>
-    <ion-label stacked>Id:</ion-label>
-    <ion-input [(ngModel)]="id" ></ion-input>
+    <ion-label stacked>Student:</ion-label>
+    <ion-select [(ngModel)]="sSudent" (ionChange)="converrr()">
+      <ion-select-option *ngFor="let j of datasF" value="{{j.id}}">{{j.username}}</ion-select-option>
+    </ion-select>
   </ion-item>
   <ion-button expand="full" (click)="download()">Download Voucher</ion-button>
 </ion-content>

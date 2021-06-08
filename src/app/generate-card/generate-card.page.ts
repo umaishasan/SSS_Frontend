@@ -44,6 +44,7 @@ export class GenerateCardPage implements OnInit {
   }
 
   downloadCard() {
+    this.convertImg();
     for (let i = 0; i < this.generatedImage.length; i++) {
       console.log(this.generatedImage[i]);
       let result = this.file.createDir(this.file.externalDataDirectory, "SaveCard", true);

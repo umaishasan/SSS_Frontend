@@ -20,39 +20,39 @@
     <ion-list id="forStu">
       <ion-item>
         <ion-label position="floating">Username:</ion-label>
-        <ion-input type="text" [(ngModel)]="name" required></ion-input>
+        <ion-input type="text" [(ngModel)]="name" ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Id:</ion-label>
-        <ion-input type="number" [(ngModel)]="id" required></ion-input>
+        <ion-input type="number" [(ngModel)]="id" ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Age:</ion-label>
-        <ion-input type="number" [(ngModel)]="age" required></ion-input>
+        <ion-input type="number" [(ngModel)]="age" ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Gender:</ion-label>
-        <ion-select [(ngModel)]="Selectgender" required>
+        <ion-select [(ngModel)]="Selectgender" >
           <ion-select-option value="male">Male</ion-select-option>
           <ion-select-option value="female">Female</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-button expand="full" required>
+        <ion-button expand="full" >
           <input type="file" accept="image/png,image/jpeg" (change)="loadImageFromDevice($event)"/>
         </ion-button>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Father Name:</ion-label>
-        <ion-input type="text" [(ngModel)]="fatherName" required></ion-input>
+        <ion-input type="text" [(ngModel)]="fatherName" ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Class:</ion-label>
-        <ion-input type="text" [(ngModel)]="class" required></ion-input>
+        <ion-input type="text" [(ngModel)]="class" ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Section:</ion-label>
-        <ion-input type="text" [(ngModel)]="section" required></ion-input>
+        <ion-input type="text" [(ngModel)]="section" ></ion-input>
       </ion-item>
       <ion-button expand="full" (click)="submitStudent()">Submit</ion-button>
     </ion-list>
@@ -60,34 +60,35 @@
     <ion-list id="forAll">
       <ion-item>
         <ion-label position="floating">Username:</ion-label>
-        <ion-input type="text" [(ngModel)]="name" required></ion-input>
+        <ion-input type="text" [(ngModel)]="name" ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Id:</ion-label>
-        <ion-input type="number" [(ngModel)]="id" required></ion-input>
+        <ion-input type="number" [(ngModel)]="id" ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Gender:</ion-label>
-        <ion-select [(ngModel)]="Selectgender" required>
+        <ion-select [(ngModel)]="Selectgender" >
           <ion-select-option value="male">Male</ion-select-option>
           <ion-select-option value="female">Female</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Email:</ion-label>
-        <ion-input type="text" [(ngModel)]="email" required></ion-input>
+        <ion-input type="text" [(ngModel)]="email" ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Phone No:</ion-label>
-        <ion-input type="text" [(ngModel)]="phone" required></ion-input>
+        <ion-input type="text" [(ngModel)]="phone" ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Password:</ion-label>
-        <ion-input id="pass" type="password" [(ngModel)]="pass" required></ion-input>
+        <ion-input id="pass" [(ngModel)]="pass" [type]="ShowPassword ? 'text' : 'password'"></ion-input>
+        <ion-icon slot="end" [name]="passwordToggleIcon" (click)="passwordToggle()"></ion-icon>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Confirm Password:</ion-label>
-        <ion-input id="cpass" type="password" [(ngModel)]="cpass" (keyup)="checkCnfrmPass()" required></ion-input>
+        <ion-input id="cpass" type="password" [(ngModel)]="cpass" (keyup)="checkCnfrmPass()" ></ion-input>
       </ion-item>
       <ion-button type="submit" expand="full" (click)="submit()">Submit</ion-button>
     </ion-list>

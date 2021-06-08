@@ -14,7 +14,8 @@ export class EditprofilePage implements OnInit {
   phone: number;
   email: string;
   pass: string;
-
+  ShowPassword: boolean = false;
+  passwordToggleIcon: 'eye' | 'eye-off' = 'eye';
   dataa: any;
 
   constructor(public network: NetworkService,public toast: ToastedService,public saveData: ForSaveService) {
@@ -35,5 +36,15 @@ export class EditprofilePage implements OnInit {
       console.log(data);
     });
     this.toast.showToast('Profile update successfully!')
+  }
+
+  passwordToggle(){
+    this.ShowPassword = !this.ShowPassword
+    if(this.passwordToggleIcon == 'eye'){
+      this.passwordToggleIcon = 'eye-off';
+    }
+    else{
+      this.passwordToggleIcon = 'eye';
+    }
   }
 }

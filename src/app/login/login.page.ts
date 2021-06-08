@@ -16,8 +16,8 @@ export class LoginPage implements OnInit {
   pass: string;
   datas: any;
   slctCate: string;
-  passwordTogleIcon = 'eye';
-  showPassword = false;
+  passwordTogleIcon: 'eye' | 'eye-off' = 'eye';
+  showPassword: boolean = false;
 
   constructor(public route: Router,public saveData: ForSaveService,public toas: ToastedService,public network: NetworkService,public mnuCtrl: MenuController,public appComp: AppComponent) {
     this.mnuCtrl.enable(false);

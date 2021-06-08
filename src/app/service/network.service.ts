@@ -74,6 +74,16 @@ export class NetworkService {
     });
   }
 
+  getSpecificDataforFather(tableName, user) {
+    return new Promise(resolve => {
+      this.http.get(this.baseUrl + tableName + "?filter[where][fathername]=" + user).subscribe(data => {
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
   getDataForVoucher(tableName,value){
     return new Promise((resolve) =>{
       this.http.get(this.baseUrl + tableName + "?filter[where][and][0][id]="+value+"&filter[fields][Voucher]=true").subscribe(data =>{

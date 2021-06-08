@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { NetworkService } from '../service/network.service';
 import { ToastedService } from '../service/toasted.service';
 
+interface Claass{
+  class: string,
+  name: string
+}
 @Component({
   selector: 'app-make-classs',
   templateUrl: './make-classs.page.html',
@@ -12,7 +16,10 @@ export class MakeClasssPage implements OnInit {
   name: string;
   selectU:string;
   selectC: any;
-  classes: any[] = ["class1s","class2s","class3s","class4s","class5s","class6s","class7s","class8s","class9s","class10s"];
+  classes: Claass[] = [
+    {class:"class1s",name:"class1"},{class:"class2s",name:"class2"},{class:"class3s",name:"class3"},{class:"class4s",name:"class4"},{class:"class5s",name:"class5"},
+    {class:"class6s",name:"class6"},{class:"class7s",name:"class7"},{class:"class8s",name:"class8"},{class:"class9s",name:"class9"},{class:"class10s",name:"class10"}
+  ];
 
   constructor(public network:NetworkService,public toast:ToastedService) {
    }

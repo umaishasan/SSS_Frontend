@@ -6,9 +6,6 @@
 </ion-header>
 
 <ion-content>
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
   <ion-segment [(ngModel)]="elementType" (ionChange)="segmentsChanges(elementType)">
     <ion-segment-button value="home">
       <ion-label>Homework</ion-label>
@@ -150,13 +147,17 @@
 
   <div *ngIf="elementType=='result'">
     <ion-item>
-      <ion-label position="floating">Class:</ion-label>
+      <ion-label stacked>Class:</ion-label>
       <ion-select [(ngModel)]="selectC" (ionChange)=" AccordingtoClassSubjectForResult()">
         <ion-select-option *ngFor="let i of classesForResult;" value="{{i.id}}">{{i.name}}</ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-input type="number" [(ngModel)]="id" placeholder="Enter id"></ion-input>
-    <ion-input type="text" [(ngModel)]="name" placeholder="Enter name"></ion-input>
+    <ion-item>
+      <ion-label stacked>Student:</ion-label>
+      <ion-select [(ngModel)]="sSudent">
+        <ion-select-option *ngFor="let i of dataa" value="{{i.id}}">{{i.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
     <ion-input type="number" *ngIf="showSubjectONT" [(ngModel)]="Eng" placeholder="Enter English marks"></ion-input>
     <ion-input type="number" *ngIf="showSubjectONT" [(ngModel)]="Urdu" placeholder="Enter Urdu marks"></ion-input>
     <ion-input type="number" *ngIf="showSubjectON" [(ngModel)]="Math" placeholder="Enter Math marks"></ion-input>
