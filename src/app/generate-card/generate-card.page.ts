@@ -49,11 +49,12 @@ export class GenerateCardPage implements OnInit {
       let result = this.file.createDir(this.file.externalDataDirectory, "SaveCard", true);
       result.then(data => {
         this.dirPath = data.toURL();
-        alert("Directory at " + this.dirPath);
+        this.toast.alertMessage("Directory path", "Directory created at: " + this.dirPath);
         this.file.writeFile(this.dirPath, "Card.png", blob, { replace: true });
-        alert("File at " + this.dirPath);
+        this.toast.alertMessage("File path", "File created at: " + this.dirPath);
+        this.toast.showToast("File download successfully!");
       }).catch(err => {
-        alert("Error: " + err);
+        this.toast.alertMessage("Error", "Error: " + err);
       });
     }
   }

@@ -38,11 +38,14 @@ export class ClassedPage implements OnInit {
     this.resultdata = this.saveData.resultWork;
     this.segmentsChanges(this.elementType);
     this.callProfile = this.saveData.ForStuDataSave;
-    console.log(this.callProfile.id,this.callProfile.class);
+    console.log(this.callProfile.id, this.callProfile.class);
     this.AccordingtoClassSubjectForHome();
+    var arr = [];
     this.network.getDataById("class" + this.callProfile.class + "s", this.callProfile.id).then(data => {
-      this.studentClassData = data;
+      arr.push(data);
+      console.log("From Constructor of dataae: ", arr);
     });
+    this.studentClassData = arr;
   }
 
   ngOnInit() { }
@@ -87,13 +90,16 @@ export class ClassedPage implements OnInit {
   }
 
   openUrl() {
-    window.open('https://www.zoom.com', '_system', 'location=yes');
-    var task = {
-      Attendance: this.studentClassData.Attendance += this.attendance
-    };
-    this.network.putDataById("class" + this.callProfile.class + "s", this.callProfile.id, task).then(data => {
-      console.log(data);
-    });
+    for (let i = 0; i < this.studentClassData.length; i++) {
+      window.open('https://www.zoom.com', '_system', 'location=yes');
+      var task = {
+        Attendance: this.studentClassData[i].Attendance += this.attendance
+      };
+      console.log(task);
+      this.network.putDataById("class" + this.callProfile.class + "s", this.callProfile.id, task).then(data => {
+        console.log(data);
+      });
+    }
   }
 
   transferrr() {
@@ -114,7 +120,7 @@ export class ClassedPage implements OnInit {
     });
   }
 
-  DownloadHome(){
+  DownloadHome() {
     console.log(this.BufferVal);
     var Uintt = new Uint8Array(this.BufferVal);
     console.log(Uintt);
@@ -124,14 +130,15 @@ export class ClassedPage implements OnInit {
     console.log(blob);
     let result = this.file.createDir(this.file.externalDataDirectory, "SchoolHomework", true);
     result.then(data => {
-      var dirPath = data.toURL();
-      alert("Directory at " + dirPath);
-      this.file.writeFile(dirPath, "newHomework.docx", blob, { replace: true });
-      alert("File at " + dirPath);
+      this.dirPath = data.toURL();
+      this.toast.alertMessage("Directory path", "Directory created at: " + this.dirPath);
+      this.file.writeFile(this.dirPath, "newHomework.docx", blob, { replace: true });
+      this.toast.alertMessage("File path", "File created at: " + this.dirPath);
+      this.toast.showToast("File download successfully!");
     }).catch(err => {
-      alert("Error: " + err);
+      this.toast.alertMessage("Error", "Error: " + err);
     });
-    this.toast.showToast("File download successfully!");
+
   }
 
   fileUploads(event) {
@@ -148,7 +155,7 @@ export class ClassedPage implements OnInit {
       console.log("buffer: ", this.filesave);
     };
     reader.onerror = (error) => {
-      alert(error);
+      this.toast.alertMessage("Error", "Error: " + error);
     }
   }
 

@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'scanner-page',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {

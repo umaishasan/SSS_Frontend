@@ -63,7 +63,7 @@ export class TeacherUploadWorkPage implements OnInit {
   showSubjectONT: boolean = false;
   classesForResult: Classe[] = [{ id: "result-class1s", name: 'Class1' }, { id: "result-class2s", name: 'Class2' }, { id: "result-class3s", name: 'Class3' }, { id: "result-class4s", name: 'Class4' }, { id: "result-class5s", name: 'Class5' }, { id: "result-class6s", name: 'Class6' }, { id: "result-class7s", name: 'Class7' }, { id: "result-class8s", name: 'Class8' }, { id: "result-class9s", name: 'Class9' }, { id: "result-class10s", name: 'Class10' }];
   attendance: number = 1;
-  teacherClassData: any;
+  teacherClassData = [];
   meetId: string;
   assignment: any;
   dirPath: any;
@@ -91,6 +91,7 @@ export class TeacherUploadWorkPage implements OnInit {
           this.StudentList = arrr;
         }
       }
+      var arr = [];
     });
   }
 
@@ -102,22 +103,23 @@ export class TeacherUploadWorkPage implements OnInit {
   }
 
   openUrl() {
-    this.network.getDataById(this.selectCO, this.teacherId).then(data => {
-      this.teacherClassData = data;
-      console.log("call from openURL: ", this.teacherClassData);
-      window.open('https://www.zoom.com', '_system', 'location=yes');
-      var task = {
-        Attendance: this.teacherClassData.Attendance += this.attendance
-      };
-      this.network.putDataById(this.selectCO, this.teacherId, task).then(data => {
-        console.log(data);
-      });
-    });
+    for (let i = 0; i < this.teacherClassData.length; i++) {
+        var task = { Attendance: this.teacherClassData[i].Attendance += this.attendance };
+        console.log(task);
+        this.network.putDataById(this.selectCO, this.teacherId, task).then(data => {
+          console.log(data);
+        });
+    }
+    window.open('https://www.zoom.com', '_system', 'location=yes');
     this.toast.showToast("Class connected successfully!");
   }
 
   AccordingtoClassSubjectForHomeO() {
     console.log(this.selectCO);
+    this.network.getDataById(this.selectCO, this.teacherId).then(data => {
+      this.teacherClassData.push(data);
+      console.log("call from AccordingtoClassSubjectForHomeO: ", this.teacherClassData);
+    });
     if (this.selectCO == 'class9s') {
       this.showSubjectN = true;
       this.showSubjectT = false;
@@ -247,7 +249,7 @@ export class TeacherUploadWorkPage implements OnInit {
       console.log("buffer: ", this.filess);
     };
     reader.onerror = (error) => {
-      alert(error);
+      this.toast.alertMessage("Error", "Error: " + error);
     }
   }
 
@@ -287,13 +289,13 @@ export class TeacherUploadWorkPage implements OnInit {
     let result = this.file.createDir(this.file.externalDataDirectory, "SchoolWork", true);
     result.then(data => {
       var dirPath = data.toURL();
-      alert("Directory at " + dirPath);
+      this.toast.alertMessage("Directory path", "Directory created at: " + this.dirPath);
       this.file.writeFile(dirPath, "newHomework.docx", blob, { replace: true });
-      alert("File at " + dirPath);
+      this.toast.alertMessage("File path", "File created at: " + this.dirPath);
+      this.toast.showToast("File download successfully!");
     }).catch(err => {
-      alert("Error: " + err);
+      this.toast.alertMessage("Error", "Error: " + err);
     });
-    this.toast.showToast("File download successfully!");
   }
 
   uploadWork(table, task, message) {
@@ -437,72 +439,72 @@ export class TeacherUploadWorkPage implements OnInit {
   }
 
   submitResult() {
-      console.log(this.studentIdd.name,this.studentIdd.id);
-      if (this.selectC == 'result-class9s') {
-        this.obtainedN = this.Eng + this.Urdu + this.Math + this.Che + this.Pst;
-        console.log(this.obtainedN);
-        this.percent = (this.obtainedN / 500) * 100;
-        console.log(this.percent);
-        this.makeGrade();
-        var taskn = {
-          Id: this.studentIdd.id,
-          Name: this.studentIdd.name,
-          Eng: this.Eng,
-          Urdu: this.Urdu,
-          Math: this.Math,
-          Pst: this.Pst,
-          Che: this.Che,
-          Total: 500,
-          Obtained: this.obtainedN,
-          Percentage: this.percent,
-          Grade: this.grade
-        };
-        this.postWork(this.selectC, taskn, "Result uploaded successfully!");
-      }
-      else if (this.selectC == 'result-class10s') {
-        this.obtainedN = this.Eng + this.Urdu + this.Phy + this.Che + this.Isl;
-        console.log(this.obtainedN);
-        this.percent = (this.obtainedN / 500) * 100;
-        console.log(this.percent);
-        this.makeGrade();
-        var taskt = {
-          Id: this.studentIdd.id,
-          Name: this.studentIdd.name,
-          Eng: this.Eng,
-          Urdu: this.Urdu,
-          Phy: this.Phy,
-          Che: this.Che,
-          Isl: this.Isl,
-          Total: 500,
-          Obtained: this.obtainedN,
-          Percentage: this.percent,
-          Grade: this.grade
-        };
-        this.postWork(this.selectC, taskt, "Result uploaded successfully!");
-      }
-      else {
-        this.obtainedN = this.Eng + this.Urdu + this.Math + this.Sci + this.Sst + this.Isl + this.Draw + this.Sindhi;
-        this.percent = (this.obtainedN / 500) * 100;
-        this.makeGrade();
-        var tasko = {
-          Id: this.studentIdd.id,
-          Name: this.studentIdd.name,
-          Eng: this.Eng,
-          Urdu: this.Urdu,
-          Math: this.Math,
-          Sci: this.Sci,
-          Sst: this.Sst,
-          Isl: this.Isl,
-          Draw: this.Draw,
-          Sindhi: this.Sindhi,
-          Total: 500,
-          Obtained: this.obtainedN,
-          Percentage: this.percent,
-          Grade: this.grade
-        };
-        this.postWork(this.selectC, tasko, "Result uploaded successfully!");
-      }
+    console.log(this.studentIdd.name, this.studentIdd.id);
+    if (this.selectC == 'result-class9s') {
+      this.obtainedN = this.Eng + this.Urdu + this.Math + this.Che + this.Pst;
+      console.log(this.obtainedN);
+      this.percent = (this.obtainedN / 500) * 100;
+      console.log(this.percent);
+      this.makeGrade();
+      var taskn = {
+        Id: this.studentIdd.id,
+        Name: this.studentIdd.name,
+        Eng: this.Eng,
+        Urdu: this.Urdu,
+        Math: this.Math,
+        Pst: this.Pst,
+        Che: this.Che,
+        Total: 500,
+        Obtained: this.obtainedN,
+        Percentage: this.percent,
+        Grade: this.grade
+      };
+      this.postWork(this.selectC, taskn, "Result uploaded successfully!");
     }
-  
+    else if (this.selectC == 'result-class10s') {
+      this.obtainedN = this.Eng + this.Urdu + this.Phy + this.Che + this.Isl;
+      console.log(this.obtainedN);
+      this.percent = (this.obtainedN / 500) * 100;
+      console.log(this.percent);
+      this.makeGrade();
+      var taskt = {
+        Id: this.studentIdd.id,
+        Name: this.studentIdd.name,
+        Eng: this.Eng,
+        Urdu: this.Urdu,
+        Phy: this.Phy,
+        Che: this.Che,
+        Isl: this.Isl,
+        Total: 500,
+        Obtained: this.obtainedN,
+        Percentage: this.percent,
+        Grade: this.grade
+      };
+      this.postWork(this.selectC, taskt, "Result uploaded successfully!");
+    }
+    else {
+      this.obtainedN = this.Eng + this.Urdu + this.Math + this.Sci + this.Sst + this.Isl + this.Draw + this.Sindhi;
+      this.percent = (this.obtainedN / 500) * 100;
+      this.makeGrade();
+      var tasko = {
+        Id: this.studentIdd.id,
+        Name: this.studentIdd.name,
+        Eng: this.Eng,
+        Urdu: this.Urdu,
+        Math: this.Math,
+        Sci: this.Sci,
+        Sst: this.Sst,
+        Isl: this.Isl,
+        Draw: this.Draw,
+        Sindhi: this.Sindhi,
+        Total: 500,
+        Obtained: this.obtainedN,
+        Percentage: this.percent,
+        Grade: this.grade
+      };
+      this.postWork(this.selectC, tasko, "Result uploaded successfully!");
+    }
+  }
+
 
 }

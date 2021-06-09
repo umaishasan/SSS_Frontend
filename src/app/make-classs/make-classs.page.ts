@@ -30,7 +30,8 @@ export class MakeClasssPage implements OnInit {
     var task = {
       id: this.id,
       name: this.name,
-      user: this.selectU
+      user: this.selectU,
+      Attendance: 0
     };
     this.network.postData(this.selectC,task).then(data =>{
       console.log(data);

@@ -55,8 +55,10 @@ export class VoucherPage implements OnInit {
     let result = this.file.createDir(this.file.externalDataDirectory, "Voucher", true);
     result.then(data => {
       this.dirPath = data.toURL();
+      this.toast.alertMessage("Directory path", "Directory created at: " + this.dirPath);
       this.file.writeFile(this.dirPath, "Voucher.pdf", blob, { replace: false });
       this.toast.alertMessage("File path", "File created at: " + this.dirPath);
+      this.toast.showToast("File download successfully!");
     }).catch(err => {
       this.toast.alertMessage("File Error", err);
     });
