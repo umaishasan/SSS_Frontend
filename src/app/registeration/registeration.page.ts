@@ -41,7 +41,6 @@ export class RegisterationPage implements OnInit {
     reader.readAsDataURL(file);
     reader.onload = () => {
       this.imgString = reader.result.toString();
-      
     };
     reader.onerror = (error) => {
       console.log(error);
@@ -108,8 +107,8 @@ export class RegisterationPage implements OnInit {
     this.router.navigateByUrl('/generate-card');
   }
 
-  checkCnfrmPass() {
-    if (this.cpass === this.pass) {
+  checkCnfrmPass(event) {
+    if (event === this.cpass) {
       document.getElementById('cpass').style.color = 'green';
     }
     else {

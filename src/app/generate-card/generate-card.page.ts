@@ -20,44 +20,42 @@ export class GenerateCardPage implements OnInit {
   ngOnInit() { }
 
   showCard() {
+    var arr = [];
     this.network.getDataById('students', this.saveId).then(data => {
       this.StuData = data;
     });
-  }
-
-  convertImg() {
-    this.showCard();
-    var arr = [];
     domtoimage.toCanvas(document.getElementById('card')).then(function (canvas) {
-      var generatedImage = canvas.toDataURL("image/png");
+      var imagee = canvas.toDataURL("image/png");
       (window as any).global = window;
       // @ts-ignore
       window.Buffer = window.Buffer || require('buffer').Buffer;
-      var imgBuff = Buffer.from(generatedImage);
-      var imgUint = new Uint8Array(imgBuff);
-      var binaryArr = imgUint.buffer;
-      var blob = new Blob([binaryArr], { type: 'image/png' });
-      console.log("blob: ", blob);
-      arr.push(blob);
+      var imgBuff = Buffer.from(imagee);
+      console.log(imgBuff);
+      arr.push(imgBuff);
     });
     this.generatedImage = arr;
   }
 
   downloadCard() {
-    this.convertImg();
+    console.log(this.generatedImage);
     for (let i = 0; i < this.generatedImage.length; i++) {
       console.log(this.generatedImage[i]);
+      var imgUint = new Uint8Array(this.generatedImage[i]);
+      console.log(imgUint);
+      var binaryArr = imgUint.buffer;
+      console.log(binaryArr);
+      var blob = new Blob([binaryArr], { type: 'image/png' });
+      console.log("blob: ", blob);
       let result = this.file.createDir(this.file.externalDataDirectory, "SaveCard", true);
       result.then(data => {
-        var dirPath = data.toURL();
-        alert("Directory at " + dirPath);
-        this.file.writeFile(dirPath, "Card.png", this.generatedImage[i], { replace: true });
-        alert("File at " + dirPath);
+        this.dirPath = data.toURL();
+        alert("Directory at " + this.dirPath);
+        this.file.writeFile(this.dirPath, "Card.png", blob, { replace: true });
+        alert("File at " + this.dirPath);
       }).catch(err => {
         alert("Error: " + err);
       });
     }
-    this.toast.showToast("Card download successfully!");
   }
-  
+
 }

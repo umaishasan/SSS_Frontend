@@ -38,6 +38,7 @@ export class ClassedPage implements OnInit {
     this.resultdata = this.saveData.resultWork;
     this.segmentsChanges(this.elementType);
     this.callProfile = this.saveData.ForStuDataSave;
+    console.log(this.callProfile.id,this.callProfile.class);
     this.AccordingtoClassSubjectForHome();
     this.network.getDataById("class" + this.callProfile.class + "s", this.callProfile.id).then(data => {
       this.studentClassData = data;
@@ -106,6 +107,7 @@ export class ClassedPage implements OnInit {
             // @ts-ignore
             window.Buffer = window.Buffer || require('buffer').Buffer;
             this.BufferVal = Buffer.from(arr[j]);
+            console.log(this.BufferVal);
           }
         }
       }
@@ -113,10 +115,11 @@ export class ClassedPage implements OnInit {
   }
 
   DownloadHome(){
-    this.transferrr();
     console.log(this.BufferVal);
     var Uintt = new Uint8Array(this.BufferVal);
+    console.log(Uintt);
     var binaryArr = Uintt.buffer;
+    console.log(binaryArr);
     var blob = new Blob([binaryArr], { type: 'application/docx' });
     console.log(blob);
     let result = this.file.createDir(this.file.externalDataDirectory, "SchoolHomework", true);

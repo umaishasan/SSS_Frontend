@@ -350,6 +350,7 @@ export class VoucherCreaterPage implements OnInit {
         console.log(data);
       });
     });
+    this.toast.showToast("voucher created successfully!")
   }
 
   onChange() {

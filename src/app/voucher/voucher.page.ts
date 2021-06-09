@@ -52,7 +52,7 @@ export class VoucherPage implements OnInit {
     console.log("binaryArray: ", binaryArray);
     var blob = new Blob([binaryArray], { type: 'application/pdf' });
     console.log("blob: ", blob);
-    let result = this.file.createDir(this.file.externalRootDirectory, "Voucher", true);
+    let result = this.file.createDir(this.file.externalDataDirectory, "Voucher", true);
     result.then(data => {
       this.dirPath = data.toURL();
       this.file.writeFile(this.dirPath, "Voucher.pdf", blob, { replace: false });
@@ -60,7 +60,6 @@ export class VoucherPage implements OnInit {
     }).catch(err => {
       this.toast.alertMessage("File Error", err);
     });
-    this.toast.showToast("File download successfully!");
   }
 
 }

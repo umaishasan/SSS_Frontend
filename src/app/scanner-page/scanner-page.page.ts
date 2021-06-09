@@ -24,7 +24,7 @@ export class ScannerPagePage implements OnInit {
     { title: 'Class', url: '/classed', icon: 'book' }
   ];
 
-  constructor(public router: Router, public appComp: AppComponent,private barcodeScanner: BarcodeScanner, public network: NetworkService, public saveData: ForSaveService) {
+  constructor(public router: Router, public appComp: AppComponent, private barcodeScanner: BarcodeScanner, public network: NetworkService, public saveData: ForSaveService) {
     this.network.getData('students').then(data => {
       this.studentData = data;
       console.log(this.studentData);
@@ -51,7 +51,7 @@ export class ScannerPagePage implements OnInit {
     });
   }
 
-  ResultclassCall(ids,idd) {
+  ResultclassCall(ids, idd) {
     this.network.getData("result-class" + ids + "s").then(data => {
       this.forResult = data;
       for (let i = 0; i < this.forResult.length; i++) {

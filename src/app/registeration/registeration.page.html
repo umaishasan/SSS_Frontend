@@ -88,7 +88,7 @@
       </ion-item>
       <ion-item>
         <ion-label position="floating">Confirm Password:</ion-label>
-        <ion-input id="cpass" type="password" [(ngModel)]="cpass" (keyup)="checkCnfrmPass()" ></ion-input>
+        <ion-input id="cpass" type="password" [(ngModel)]="cpass" (keyup)="checkCnfrmPass(pass)" ></ion-input>
       </ion-item>
       <ion-button type="submit" expand="full" (click)="submit()">Submit</ion-button>
     </ion-list>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+import { MenuController, Platform } from '@ionic/angular';
 import { AppComponent } from '../app.component';
 import { ForSaveService } from '../service/for-save';
 import { NetworkService } from '../service/network.service';
@@ -18,41 +18,55 @@ export class LoginPage implements OnInit {
   slctCate: string;
   passwordTogleIcon: 'eye' | 'eye-off' = 'eye';
   showPassword: boolean = false;
+  backButtonSubscription;
 
-  constructor(public route: Router,public saveData: ForSaveService,public toas: ToastedService,public network: NetworkService,public mnuCtrl: MenuController,public appComp: AppComponent) {
+  constructor(public route: Router, public saveData: ForSaveService, private platform: Platform, public toas: ToastedService, public network: NetworkService, public mnuCtrl: MenuController, public appComp: AppComponent) {
     this.mnuCtrl.enable(false);
   }
 
   ngOnInit() { }
 
-  passwordTogle(){
+  ionViewWillEnter() {
+    let a = 0;
+    this.backButtonSubscription = this.platform.backButton.subscribe(async () => {
+      a++;
+      if (a == 2) { 
+      navigator['app'].exitApp();}
+    });
+  }
+
+  ionViewDidLeave() {
+    this.backButtonSubscription.unsubscribe();
+  }
+
+  passwordTogle() {
     this.showPassword = !this.showPassword;
-    if(this.passwordTogleIcon == 'eye'){
+    if (this.passwordTogleIcon == 'eye') {
       this.passwordTogleIcon = 'eye-off';
     }
-    else{
+    else {
       this.passwordTogleIcon = 'eye';
     }
   }
 
-  login(){
+  login() {
     this.network.loginData(this.slctCate, this.id).then(data => {
       this.datas = data;
       if (this.id == this.datas.id && this.pass == this.datas.password) {
-        this.route.navigateByUrl('/'+this.slctCate);
+        this.route.navigateByUrl('/' + this.slctCate);
         this.mnuCtrl.enable(true);
-        this.jumpPage(this.slctCate+'Page');
+        this.jumpPage(this.slctCate + 'Page');
         this.appComp.username = this.datas.username;
       }
-      else{
-        this.toas.alertMessage('Login Error','maybe incorrect username or password and may be you are not user!');
+      else {
+        this.toas.alertMessage('Login Error', 'maybe incorrect username or password and may be you are not user!');
       }
-    }).catch(e =>{
-      this.toas.alertMessage('Login Error','maybe incorrect username or password and may be you are not user!');
+    }).catch(e => {
+      this.toas.alertMessage('Login Error', 'maybe incorrect username or password and may be you are not user!');
     });
   }
 
-  jumpPage(pageCall){
+  jumpPage(pageCall) {
     if (pageCall == 'adminsPage') {
       pageCall = [
         { title: 'Home', url: '/admins', icon: 'home' },
@@ -72,7 +86,8 @@ export class LoginPage implements OnInit {
         { title: 'Home', url: '/canteens', icon: 'home' },
         { title: 'Edit Profile', url: '/editprofile', icon: 'create' },
         { title: 'Items', url: '/items', icon: 'cart' },
-        { title: 'Wallet', url: '/wallet', icon: 'cash' }
+        { title: 'Wallet', url: '/wallet', icon: 'cash' },
+        { title: 'Item sell', url: '/scanner-page2', icon: 'basket' }
       ];
       this.appComp.appPages = pageCall;
       this.saveData.dataSave = this.datas;
@@ -99,5 +114,5 @@ export class LoginPage implements OnInit {
       this.saveData.dataSave = this.datas;
     }
   }
-
+  
 }

@@ -36,19 +36,19 @@
       <!-- subject for 1 to 8 class -->
       <ion-item *ngIf="showSubjectO">
         <ion-label position="floating">Subject:</ion-label>
-        <ion-select [(ngModel)]="selectS">
+        <ion-select [(ngModel)]="selectS" (ionChange)="transferrr()">
           <ion-select-option *ngFor="let i of subjectOE;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
       </ion-item>
       <!-- subject for 9 class -->
       <ion-item *ngIf="showSubjectN">
         <ion-label position="floating">Subject:</ion-label>
-        <ion-select [(ngModel)]="selectS">
+        <ion-select [(ngModel)]="selectS" (ionChange)="transferrr()">
           <ion-select-option *ngFor="let i of subjectN;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
       </ion-item>
       <!-- subject for 10 class -->
-      <ion-item *ngIf="showSubjectT">
+      <ion-item *ngIf="showSubjectT" (ionChange)="transferrr()">
         <ion-label position="floating">Subject:</ion-label>
         <ion-select [(ngModel)]="selectS">
           <ion-select-option *ngFor="let i of subjectT;" value="{{i}}">{{i}}</ion-select-option>
