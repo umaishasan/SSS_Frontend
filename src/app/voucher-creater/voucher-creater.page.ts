@@ -41,7 +41,7 @@ export class VoucherCreaterPage implements OnInit {
     dueDate.setDate(issueDate.getDate() + 7);
     for (let i = 0; i < this.stuProfile.length; i++) {
       arrID = this.stuProfile[i].id;
-      this.number = this.tution + this.security + this.registration + this.fine + this.stuProfile[i].ItemAmount;
+      this.number = this.tution + this.security + this.registration + this.fine + this.stuProfile[i].SaveAmount;
       var docDefinition = {
         content: [
           {
@@ -182,7 +182,7 @@ export class VoucherCreaterPage implements OnInit {
                 text: 'Canteen Fee: ', fontSize: 12, margin: [0, 5, 0, 0], alignment: 'left',
               },
               {
-                text: this.stuProfile[i].ItemAmount + '/-', fontSize: 12, margin: [0, 5, 0, 0], alignment: 'right',
+                text: this.stuProfile[i].SaveAmount + '/-', fontSize: 12, margin: [0, 5, 0, 0], alignment: 'right',
               }
             ],
           },
@@ -342,15 +342,15 @@ export class VoucherCreaterPage implements OnInit {
         pageOrientation: 'portrait'
       };
     }
-    this.pdfObj = pdfmake.createPdf(docDefinition);
-    this.pdfObj.getBuffer((buffer) => {
-      console.log(buffer);
-      var task = { Voucher: buffer }
-      this.network.putDataById('students', arrID, task).then(data => {
-        console.log(data);
-      });
-    });
-    this.toast.showToast("voucher created successfully!")
+    this.pdfObj = pdfmake.createPdf(docDefinition).open();
+    // this.pdfObj.getBuffer((buffer) => {
+    //   console.log(buffer);
+    //   var task = { Voucher: buffer }
+    //   this.network.putDataById('students', arrID, task).then(data => {
+    //     console.log(data);
+    //   });
+    // });
+    // this.toast.showToast("voucher created successfully!")
   }
 
   onChange() {

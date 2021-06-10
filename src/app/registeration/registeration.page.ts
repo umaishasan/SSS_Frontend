@@ -96,7 +96,9 @@ export class RegisterationPage implements OnInit {
       class: this.class,
       section: this.section,
       qrString: this.qrData,
-      studentsPic: this.imgString
+      studentsPic: this.imgString,
+      ItemAmount: 0,
+      SaveAmount: 0
     };
     this.network.postDataForRegistration(this.selctUsr, task).then(data => {
       console.log(data);

@@ -7,13 +7,16 @@
 
 <ion-content>
   <ion-item>
-    <ion-label position="floating">Id:</ion-label>
-    <ion-input type="number" [(ngModel)]="ids"></ion-input>
+    <ion-label stacked>Student:</ion-label>
+    <ion-select [(ngModel)]="sSudent" (ionChange)="calDataByStuAmount()">
+      <ion-select-option *ngFor="let j of datasF" value="{{j.id}}">{{j.username}}</ion-select-option>
+    </ion-select>
   </ion-item>
   <ion-item>
     <ion-label position="floating">Items Select:</ion-label>
     <ion-select multiple="true" [(ngModel)]="itemSelection" (ionChange)="onChange(itemSelection)">
-      <ion-select-option *ngFor="let i of Itemsdatas" [disabled]="i.quantity==0" [value]="i.product_id">{{i.product_name}} ({{i.product_price}}/-)</ion-select-option>
+      <ion-select-option *ngFor="let i of Itemsdatas" [disabled]="i.quantity==0" [value]="i.product_id">
+        {{i.product_name}} ({{i.product_price}}/-)</ion-select-option>
     </ion-select>
   </ion-item>
   <div class="labelSetting">
@@ -22,5 +25,5 @@
   <div *ngFor="let j of nameArr">
     <ion-label>{{j}}</ion-label>
   </div>
-  <ion-button expand="full" (click)="select()">Select</ion-button>
+    <ion-button expand="full" (click)="select()">Select</ion-button>
 </ion-content>
