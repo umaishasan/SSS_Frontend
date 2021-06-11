@@ -7,41 +7,44 @@
 
 <ion-content no-bouncing>
   <div id="oneLine">
-    <ion-input type="number" placeholder="Enter id" [(ngModel)]="saveId"></ion-input>
+    <ion-select [(ngModel)]="selectStu" (ionChange)="onChangee()" placeholder="Select Student">
+      <ion-select-option *ngFor="let i of StuDataAll" value="{{i.id}}">{{i.username}}</ion-select-option>
+    </ion-select>
     <ion-button fill="clear" expand="full" (click)="showCard()">Show card</ion-button>
   </div>
+
   <div class="cardCntr">
-    <ion-card id="card" *ngIf="saveId">
+    <ion-card id="card" *ngIf="selectStu">
       <ion-card-content>
         <ion-card-title>Smart Schooling Sysytem</ion-card-title>
         <ion-avatar class="imgCentr">
-          <img [src]="StuData.studentsPic" alt=""/>
+          <img [src]="StuDataAllByid.studentsPic" alt=""/>
         </ion-avatar>
-        <ion-label class="forLabel">{{StuData.username}}</ion-label><br />
-        <ion-label class="forLabel">({{StuData.id}})</ion-label>
+        <ion-label class="forLabel">{{StuDataAllByid.username}}</ion-label><br />
+        <ion-label class="forLabel">({{StuDataAllByid.id}})</ion-label>
         <ion-list>
           <ion-row>
             <ion-col><ion-label class="forLabel">Father:</ion-label></ion-col>
-            <ion-col><ion-label class="forLabelLight">{{StuData.fathername}}</ion-label></ion-col>
+            <ion-col><ion-label class="forLabelLight">{{StuDataAllByid.fathername}}</ion-label></ion-col>
           </ion-row>
           <ion-row>
             <ion-col><ion-label class="forLabel">Gender:</ion-label></ion-col>
-            <ion-col><ion-label class="forLabelLight">{{StuData.gender}}</ion-label></ion-col>
+            <ion-col><ion-label class="forLabelLight">{{StuDataAllByid.gender}}</ion-label></ion-col>
           </ion-row>
           <ion-row>
             <ion-col><ion-label class="forLabel">Age:</ion-label></ion-col>
-            <ion-col><ion-label class="forLabelLight">{{StuData.age}}</ion-label></ion-col>
+            <ion-col><ion-label class="forLabelLight">{{StuDataAllByid.age}}</ion-label></ion-col>
           </ion-row>
           <ion-row>
             <ion-col><ion-label class="forLabel">Class:</ion-label></ion-col>
-            <ion-col><ion-label class="forLabelLight">{{StuData.class}}</ion-label></ion-col>
+            <ion-col><ion-label class="forLabelLight">{{StuDataAllByid.class}}</ion-label></ion-col>
           </ion-row>
           <ion-row>
             <ion-col><ion-label class="forLabel">Section:</ion-label></ion-col>
-            <ion-col><ion-label class="forLabelLight">{{StuData.section}}</ion-label></ion-col>
+            <ion-col><ion-label class="forLabelLight">{{StuDataAllByid.section}}</ion-label></ion-col>
           </ion-row>
         </ion-list>
-        <ngx-qrcode [value]="StuData.qrString"></ngx-qrcode>
+        <ngx-qrcode [value]="StuDataAllByid.qrString"></ngx-qrcode>
       </ion-card-content>
     </ion-card>
   </div>

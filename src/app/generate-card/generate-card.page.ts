@@ -10,28 +10,36 @@ import { File } from '@ionic-native/file/ngx';
   styleUrls: ['./generate-card.page.scss'],
 })
 export class GenerateCardPage implements OnInit {
-  StuData: any;
-  saveId: number;
+  StuDataAll: any;
+  StuDataAllByid: any;
+  selectStu: any;
   dirPath: string;
   generatedImage: any;
 
-  constructor(public network: NetworkService, public toast: ToastedService, private file: File) { }
+  constructor(public network: NetworkService, public toast: ToastedService, private file: File) {
+    this.network.getData('students').then(data => {
+      this.StuDataAll = data;
+      console.log(this.StuDataAll);
+    });
+  }
 
   ngOnInit() { }
 
-  showCard() {
+  onChangee() {
+    var sav;
+    for (let i = 0; i < this.StuDataAll.length; i++) {
+      if(this.StuDataAll[i].id == this.selectStu){
+        sav = this.StuDataAll[i];
+        this.StuDataAllByid = sav;
+      }
+    }
+  }
+
+  showCard() {  
     var arr = [];
-    this.network.getDataById('students', this.saveId).then(data => {
-      this.StuData = data;
-    });
     domtoimage.toCanvas(document.getElementById('card')).then(function (canvas) {
       var imagee = canvas.toDataURL("image/png");
-      (window as any).global = window;
-      // @ts-ignore
-      window.Buffer = window.Buffer || require('buffer').Buffer;
-      var imgBuff = Buffer.from(imagee);
-      console.log(imgBuff);
-      arr.push(imgBuff);
+      arr.push(imagee);
     });
     this.generatedImage = arr;
   }
@@ -39,13 +47,21 @@ export class GenerateCardPage implements OnInit {
   downloadCard() {
     console.log(this.generatedImage);
     for (let i = 0; i < this.generatedImage.length; i++) {
-      console.log(this.generatedImage[i]);
-      var imgUint = new Uint8Array(this.generatedImage[i]);
-      console.log(imgUint);
-      var binaryArr = imgUint.buffer;
-      console.log(binaryArr);
-      var blob = new Blob([binaryArr], { type: 'image/png' });
-      console.log("blob: ", blob);
+      var realImg = this.generatedImage[i].split(',');
+      console.log(realImg);
+      console.log(realImg[0]);
+      console.log(realImg[1]);
+      const bytes: string = atob(realImg[1]);
+      console.log(bytes);
+      const byteNumbers = new Array(bytes.length);
+      for (let i = 0; i < bytes.length; i++) {
+        byteNumbers[i] = bytes.charCodeAt(i);
+      }
+      console.log(byteNumbers);
+      const byteArray = new Uint8Array(byteNumbers);
+      console.log(byteArray);
+      const blob: Blob = new Blob([byteArray], { type: 'image/png' });
+      console.log(blob);
       let result = this.file.createDir(this.file.externalDataDirectory, "SaveCard", true);
       result.then(data => {
         this.dirPath = data.toURL();

@@ -55,10 +55,10 @@ ion-card-title{
 #oneLine{
     display: flex;
     align-items: center;
-    ion-input{
+    ion-select{
         width: 50%;
     }
     ion-button{
-        width: 40%;
+        width: 50%;
     }
 }

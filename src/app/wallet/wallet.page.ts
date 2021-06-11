@@ -14,7 +14,7 @@ export class WalletPage implements OnInit {
     console.log(value);
     this.amount = value.wallet;
     console.log(this.amount);
-   }
+  }
 
   ngOnInit() {  }
 
