@@ -6,9 +6,9 @@
 </ion-header>
 
 <ion-content>
-  <div>
+  <ion-card>
     <ion-label>Annoucement:</ion-label>
     <ion-textarea type="text" [(ngModel)]="annoucement"></ion-textarea>
-  </div>
-  <ion-button expand="full" (click)="goToAnnoucement()">Send</ion-button>
+  </ion-card>
+  <ion-button expand="full" shape="round" (click)="goToAnnoucement()">Send</ion-button>
 </ion-content>

@@ -6,29 +6,28 @@
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-label position="floating">Select user:</ion-label>
-    <ion-select [(ngModel)]="selectU">
-      <ion-select-option value="Student">Student</ion-select-option>
-      <ion-select-option value="Teacher">Teacher</ion-select-option>
-    </ion-select>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Id:</ion-label>
-    <ion-input type="number" [(ngModel)]="id"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Name:</ion-label>
-    <ion-input type="text" [(ngModel)]="name"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Class:</ion-label>
-    <ion-select [(ngModel)]="selectC">
-      <ion-select-option *ngFor="let i of classes;" value="{{i.class}}">{{i.name}}</ion-select-option>
-    </ion-select>
-  </ion-item>
+  <ion-card>
+    <ion-item>
+      <ion-select [(ngModel)]="selectU" placeholder="Select User">
+        <ion-select-option value="Student">Student</ion-select-option>
+        <ion-select-option value="Teacher">Teacher</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-input type="number" [(ngModel)]="id" placeholder="Enter Id"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="name" placeholder="Enter Name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-select [(ngModel)]="selectC" placeholder="Select Class">
+        <ion-select-option *ngFor="let i of classes;" value="{{i.class}}">{{i.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-card>
+
   <div class="samePlace">
-    <ion-button expand="full" (click)="submit()">Add</ion-button>
-    <ion-button expand="full" (click)="remove()">Remove</ion-button>
+    <ion-button shape="round" expand="full" (click)="submit()">Add</ion-button>
+    <ion-button shape="round" expand="full" (click)="remove()">Remove</ion-button>
   </div>
 </ion-content>

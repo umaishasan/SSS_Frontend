@@ -1,6 +1,6 @@
 ion-button{
+    width: 50%;
     margin: 10px;
-    padding: 5px;
 }
 
 .textArea{
@@ -9,18 +9,22 @@ ion-button{
 
 .forCenter{
     text-align: center;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid ghostwhite;
+}
+
+.forCenter2{
+    text-align: center;
 }
 
 .forGap{
     margin-top: 10px;
 }
 
-.twoBtnCntr{
-    width: 50%;
-}
-
 #forCntr{
     display: flex;
     align-items: center;
+}
+
+.twoBtnCntr{
+    width: 50%;
 }

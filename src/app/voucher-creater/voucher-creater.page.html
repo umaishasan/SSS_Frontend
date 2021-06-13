@@ -8,33 +8,29 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-item>
-    <ion-label stacked>Class:</ion-label>
-    <ion-select [(ngModel)]="sClass" (ionChange)="onChange()">
-      <ion-select-option *ngFor="let i of clase" value="{{i.clas}}">{{i.name}}</ion-select-option>
-    </ion-select>
-  </ion-item>
-  <ion-item>
-    <ion-label stacked>Student:</ion-label>
-    <ion-select [(ngModel)]="sSudent" (ionChange)="inChange()">
-      <ion-select-option *ngFor="let i of dataa" value="{{i.id}}">{{i.name}}</ion-select-option>
-    </ion-select>
-  </ion-item>
-  <ion-item>
-    <ion-label stacked>Tution Fee:</ion-label>
-    <ion-input type="number" [(ngModel)]="tution"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label stacked>Fine:</ion-label>
-    <ion-input type="number" [(ngModel)]="fine"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label stacked>Registration Fee:</ion-label>
-    <ion-input type="number" [(ngModel)]="registration"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label stacked>Security Fee:</ion-label>
-    <ion-input type="number" [(ngModel)]="security"></ion-input>
-  </ion-item>
-  <ion-button expand="full" (click)="createpdf()">Create Voucher</ion-button>
+  <ion-card>
+    <ion-item>
+      <ion-select [(ngModel)]="sClass" (ionChange)="onChange()" placeholder="Select Class">
+        <ion-select-option *ngFor="let i of clase" value="{{i.clas}}">{{i.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-select [(ngModel)]="sSudent" (ionChange)="inChange()" placeholder="Select Student">
+        <ion-select-option *ngFor="let i of dataa" value="{{i.id}}">{{i.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-input type="number" [(ngModel)]="tution" placeholder="Enter Tution Fee"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="number" [(ngModel)]="fine" placeholder="Enter Fine"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="number" [(ngModel)]="registration" placeholder="Enter Registration Fee"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="number" [(ngModel)]="security" placeholder="Enter Security Fee"></ion-input>
+    </ion-item>
+  </ion-card>
+  <ion-button expand="full" shape="round" (click)="createpdf()">Create Voucher</ion-button>
 </ion-content>

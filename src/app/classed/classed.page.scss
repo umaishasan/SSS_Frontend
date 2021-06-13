@@ -1,6 +1,10 @@
 .forCenter{
     text-align: center;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid ghostwhite;
+}
+
+.forCenter2{
+    text-align: center;
 }
 
 .forGap{
@@ -8,6 +12,6 @@
 }
 
 ion-button{
+    width: 50%;
     margin: 10px;
-    padding: 5px;
 }

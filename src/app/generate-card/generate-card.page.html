@@ -2,20 +2,22 @@
   <ion-toolbar>
     <ion-title>Card Generator</ion-title>
     <ion-menu-button slot="start"></ion-menu-button>
+    <ion-button slot="end" fill="clear" (click)="showCard()">Show</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content no-bouncing>
-  <div id="oneLine">
+  <ion-item>
+    <ion-icon slot="start" name="people"></ion-icon>
     <ion-select [(ngModel)]="selectStu" (ionChange)="onChangee()" placeholder="Select Student">
       <ion-select-option *ngFor="let i of StuDataAll" value="{{i.id}}">{{i.username}}</ion-select-option>
     </ion-select>
-    <ion-button fill="clear" expand="full" (click)="showCard()">Show card</ion-button>
-  </div>
+  </ion-item>
 
   <div class="cardCntr">
     <ion-card id="card" *ngIf="selectStu">
       <ion-card-content>
+        <img src="../../assets/fe.png" alt="" width="25px" height="25px"/>
         <ion-card-title>Smart Schooling Sysytem</ion-card-title>
         <ion-avatar class="imgCentr">
           <img [src]="StuDataAllByid.studentsPic" alt=""/>
@@ -48,5 +50,6 @@
       </ion-card-content>
     </ion-card>
   </div>
-  <ion-button expand="full" (click)="downloadCard()">Download</ion-button>
+
+  <ion-button expand="full" shape="round" (click)="downloadCard()">Download</ion-button>
 </ion-content>

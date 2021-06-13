@@ -16,11 +16,11 @@ export class AttendancePage implements OnInit {
   elementType: 'Teacher' | 'Student' = "Teacher";
   selectedVal: any;
   classs: Classs[] = [
-    { class: "class1s", name: "Class1", link: '/show-studentatten' }, { class: "class2s", name: "class2", link: '/show-studentatten' },
-    { class: "class3s", name: "Class3", link: '/show-studentatten' }, { class: "class4s", name: "class4", link: '/show-studentatten' },
-    { class: "class5s", name: "Class5", link: '/show-studentatten' }, { class: "class6s", name: "class6", link: '/show-studentatten' },
-    { class: "class7s", name: "Class7", link: '/show-studentatten' }, { class: "class8s", name: "class8", link: '/show-studentatten' },
-    { class: "class9s", name: "Class9", link: '/show-studentatten' }, { class: "class10s", name: "class10", link: '/show-studentatten' }
+    { class: "class1s", name: "Class1", link: '/show-studentatten' }, { class: "class2s", name: "Class2", link: '/show-studentatten' },
+    { class: "class3s", name: "Class3", link: '/show-studentatten' }, { class: "class4s", name: "Class4", link: '/show-studentatten' },
+    { class: "class5s", name: "Class5", link: '/show-studentatten' }, { class: "class6s", name: "Class6", link: '/show-studentatten' },
+    { class: "class7s", name: "Class7", link: '/show-studentatten' }, { class: "class8s", name: "Class8", link: '/show-studentatten' },
+    { class: "class9s", name: "Class9", link: '/show-studentatten' }, { class: "class10s", name: "Class10", link: '/show-studentatten' }
   ];
   className: any;
   saveSelectedval: any;

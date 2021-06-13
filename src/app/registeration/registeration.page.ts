@@ -29,21 +29,28 @@ export class RegisterationPage implements OnInit {
   qrData: string;
   class: string;
   section: string;
-  imgString: string;
+  canvasImg: any;
 
   constructor(public router: Router, public network: NetworkService, public toast: ToastedService) { }
 
   ngOnInit() { }
 
   loadImageFromDevice(event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      this.imgString = reader.result.toString();
-    };
-    reader.onerror = (error) => {
-      console.log(error);
+    var canvas = document.querySelector("canvas");
+    var ctx = canvas.getContext("2d");
+    var eventFile = event.target.files[0];
+    var reader = new FileReader();
+    var img = new Image(100,100);
+    reader.readAsDataURL(eventFile);
+    reader.onload = () =>{
+      var result = reader.result.toString();
+      console.log(result);
+      img.src = result;
+      img.onload = () =>{
+        ctx.drawImage(img,0,0,100,100);
+        console.log(canvas.toDataURL(),canvas.width,canvas.height);
+        this.canvasImg = canvas.toDataURL();
+      }
     };
   }
 
@@ -96,17 +103,17 @@ export class RegisterationPage implements OnInit {
       class: this.class,
       section: this.section,
       qrString: this.qrData,
-      studentsPic: this.imgString,
+      studentsPic: this.canvasImg,
       ItemAmount: 0,
       SaveAmount: 0
     };
     this.network.postDataForRegistration(this.selctUsr, task).then(data => {
       console.log(data);
+      this.toast.showToast('Successfully Registered!');
+      this.router.navigateByUrl('/generate-card');
     }).catch(e => {
-      this.toast.alertMessage("Registration Error", "Please fill all fields.")
+      this.toast.alertMessage("Registration Error","Please fill all fields and maybe picture is too large please.picture should be(200x200).")
     });
-    this.toast.showToast('Successfully Registered!');
-    this.router.navigateByUrl('/generate-card');
   }
 
   checkCnfrmPass(event) {

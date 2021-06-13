@@ -6,7 +6,7 @@
 
 ion-card{
     width: 258px; 
-    height: 480px;
+    height: 490px;
     margin: 10px;
     text-align: center;
 }
@@ -21,7 +21,7 @@ ion-card{
 }
 
 ion-list{
-    margin-top: 15px;
+    margin-top: 5px;
 }
 
 ion-label{
@@ -37,7 +37,6 @@ ion-avatar{
 }
 
 ion-button{
-    padding: 5px;
     margin: 10px;
 }
 
@@ -46,19 +45,8 @@ ion-button{
 }
 
 ion-card-title{
-    font-size: 17px;
+    font-size: 16px;
     font-weight: bold;
     border-bottom: 1px solid lightgray;
     margin-bottom: 5px;
-}
-
-#oneLine{
-    display: flex;
-    align-items: center;
-    ion-select{
-        width: 50%;
-    }
-    ion-button{
-        width: 50%;
-    }
 }

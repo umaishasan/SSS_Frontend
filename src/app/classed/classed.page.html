@@ -20,116 +20,99 @@
 
   <div *ngIf="elementType=='home'">
     <div class="forCenter">
-      <h2 class="forGap">Online Class</h2>
-      <ion-button expand="full" (click)="openUrl()">
+      <h4 class="forGap">Online Class</h4>
+      <ion-button shape="round" (click)="openUrl()">
         <ion-icon slot="start" name="link-outline"></ion-icon>Take Class
       </ion-button>
     </div>
     <div class="forCenter">
-      <h2 class="forGap">Download</h2>
+      <h4 class="forGap">Download</h4>
       <ion-item>
-        <ion-label position="floating">Teacher:</ion-label>
-        <ion-select [(ngModel)]="selectTeacher">
+        <ion-select [(ngModel)]="selectTeacher" placeholder="Select Teacher">
           <ion-select-option *ngFor="let i of homedata;" value="{{i.name}}">{{i.name}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <!-- subject for 1 to 8 class -->
       <ion-item *ngIf="showSubjectO">
-        <ion-label position="floating">Subject:</ion-label>
-        <ion-select [(ngModel)]="selectS" (ionChange)="transferrr()">
+        <ion-select [(ngModel)]="selectS" (ionChange)="transferrr()" placeholder="Select Subject">
           <ion-select-option *ngFor="let i of subjectOE;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <!-- subject for 9 class -->
       <ion-item *ngIf="showSubjectN">
-        <ion-label position="floating">Subject:</ion-label>
-        <ion-select [(ngModel)]="selectS" (ionChange)="transferrr()">
+        <ion-select [(ngModel)]="selectS" (ionChange)="transferrr()" placeholder="Select Subject">
           <ion-select-option *ngFor="let i of subjectN;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <!-- subject for 10 class -->
       <ion-item *ngIf="showSubjectT" (ionChange)="transferrr()">
-        <ion-label position="floating">Subject:</ion-label>
-        <ion-select [(ngModel)]="selectS">
+        <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
           <ion-select-option *ngFor="let i of subjectT;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-button expand="full" (click)="DownloadHome()">Submit</ion-button>
+      <ion-button shape="round" (click)="DownloadHome()">Download</ion-button>
     </div>
     <div class="forCenter">
-      <h2 class="forGap">Upload</h2>
-      <!-- subject for 1 to 8 class -->
+      <h4 class="forGap">Upload</h4>
       <ion-item *ngIf="showSubjectO">
-        <ion-label position="floating">Subject:</ion-label>
-        <ion-select [(ngModel)]="selectS">
+        <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
           <ion-select-option *ngFor="let i of subjectOE;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <!-- subject for 9 class -->
       <ion-item *ngIf="showSubjectN">
-        <ion-label position="floating">Subject:</ion-label>
-        <ion-select [(ngModel)]="selectS">
+        <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
           <ion-select-option *ngFor="let i of subjectN;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <!-- subject for 10 class -->
       <ion-item *ngIf="showSubjectT">
-        <ion-label position="floating">Subject:</ion-label>
-        <ion-select [(ngModel)]="selectS">
+        <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
           <ion-select-option *ngFor="let i of subjectT;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-button expand="full">
+      <ion-button expand="full" fill="clear" style="width: 100%;">
         <input type="file" id="file-input" (change)="fileUploads($event)">
       </ion-button>
-      <ion-button expand="full" (click)="uploadHome()">Submit</ion-button>
+      <ion-button shape="round" (click)="uploadHome()">Upload</ion-button>
     </div>
   </div>
 
   <div *ngIf="elementType=='quiz'">
-    <ion-item *ngIf="showSubjectO">
-      <ion-label position="floating">Subject:</ion-label>
-      <ion-select [(ngModel)]="selectS">
-        <ion-select-option *ngFor="let i of subjectOE;" value="{{i}}">{{i}}</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <!-- subject for 9 class -->
-    <ion-item *ngIf="showSubjectN">
-      <ion-label position="floating">Subject:</ion-label>
-      <ion-select [(ngModel)]="selectS">
-        <ion-select-option *ngFor="let i of subjectN;" value="{{i}}">{{i}}</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <!-- subject for 10 class -->
-    <ion-item *ngIf="showSubjectT">
-      <ion-label position="floating">Subject:</ion-label>
-      <ion-select [(ngModel)]="selectS">
-        <ion-select-option *ngFor="let i of subjectT;" value="{{i}}">{{i}}</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-card>
-      <ion-card-content *ngIf="selectS">
-        <ion-radio-group (ionChange)="checkk($event)" *ngFor="let q of quizdata">
-          <ion-list-header style="margin-top: 5px;">
-            <ion-label>Q{{q.QNo}}: {{q.Q}}</ion-label>
-          </ion-list-header>
-          <ion-item>
-            <ion-label>{{q.Option2}}</ion-label>
-            <ion-radio slot="start"></ion-radio>
-          </ion-item>
-          <ion-item>
-            <ion-label>{{q.Ans}}</ion-label>
-            <ion-radio slot="start" name="{{q.QNo}}" value="{{q.Ans}}"></ion-radio>
-          </ion-item>
-          <ion-item>
-            <ion-label>{{q.Option1}}</ion-label>
-            <ion-radio slot="start"></ion-radio>
-          </ion-item>
-        </ion-radio-group>
-      </ion-card-content>
-
-    </ion-card>
-    <ion-button expand="full" (click)="submitQuiz()">Submit</ion-button>
+    <div class="forCenter2">
+      <ion-item *ngIf="showSubjectO">
+        <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
+          <ion-select-option *ngFor="let i of subjectOE;" value="{{i}}">{{i}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="showSubjectN">
+        <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
+          <ion-select-option *ngFor="let i of subjectN;" value="{{i}}">{{i}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="showSubjectT">
+        <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
+          <ion-select-option *ngFor="let i of subjectT;" value="{{i}}">{{i}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-card>
+        <ion-card-content *ngIf="selectS">
+          <ion-radio-group (ionChange)="checkk($event)" *ngFor="let q of quizdata">
+            <ion-list-header style="margin-top: 5px;">
+              <ion-label>Q{{q.QNo}}: {{q.Q}}</ion-label>
+            </ion-list-header>
+            <ion-item>
+              <ion-label>{{q.Option2}}</ion-label>
+              <ion-radio slot="start"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>{{q.Ans}}</ion-label>
+              <ion-radio slot="start" name="{{q.QNo}}" value="{{q.Ans}}"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>{{q.Option1}}</ion-label>
+              <ion-radio slot="start"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-card-content>
+      </ion-card>
+      <ion-button shape="round" (click)="submitQuiz()">Submit</ion-button>
+    </div>
   </div>
 
   <div *ngIf="elementType=='result'">
