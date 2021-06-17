@@ -19,10 +19,10 @@ export class AnnoucementPage implements OnInit {
       id: 1,
       annoucement: this.annoucement
     };
-    this.network.putData('annoucements',1,task).then(data =>{
+    this.network.putData('annoucements',0,task).then(data =>{
       console.log(data);
+      this.toast.showToast("Announcement send successfully!");
     });
-    this.toast.showToast("Announcement send successfully!")
   }
 
 }

@@ -41,11 +41,7 @@ export class VoucherCreaterPage implements OnInit {
     dueDate.setDate(issueDate.getDate() + 7);
     for (let i = 0; i < this.stuProfile.length; i++) {
       arrID = this.stuProfile[i].id;
-      if (this.stuProfile[i].SaveAmount == 0) {
-        this.number = this.tution + this.security + this.registration + this.fine;
-      } else {
-        this.number = this.tution + this.security + this.registration + this.fine + this.stuProfile[i].SaveAmount;
-      }
+      this.number = this.tution + this.security + this.registration + this.fine;
       var docDefinition = {
         content: [
           {
@@ -177,16 +173,6 @@ export class VoucherCreaterPage implements OnInit {
               },
               {
                 text: this.security + '/-', fontSize: 12, margin: [0, 5, 0, 0], alignment: 'right',
-              }
-            ],
-          },
-          {
-            columns: [
-              {
-                text: 'Canteen Fee: ', fontSize: 12, margin: [0, 5, 0, 0], alignment: 'left',
-              },
-              {
-                text: this.stuProfile[i].SaveAmount + '/-', fontSize: 12, margin: [0, 5, 0, 0], alignment: 'right',
               }
             ],
           },

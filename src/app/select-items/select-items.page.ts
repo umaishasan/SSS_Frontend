@@ -22,6 +22,9 @@ export class SelectItemsPage implements OnInit {
   totalPrice: number = 0;
   nameArr: any[] = [];
 
+  canteenWallet: any;
+  parentWallet: any;
+
   constructor(private network: NetworkService, private toast: ToastedService, private saveData: ForSaveService) {
     this.idCall = this.saveData.pid;
     console.log("from select-item page id: ", this.idCall);
@@ -31,6 +34,18 @@ export class SelectItemsPage implements OnInit {
     this.network.getSpecificDataforFather('students', this.idCall).then(data => {
       this.datasF = data;
       console.log(this.datasF);
+    });
+    this.network.getDataForWallet('canteens', 1, "wallet").then(data => {
+      this.canteenWallet = data;
+    });
+    this.network.getDataForWalletParent('parents', this.idCall, "SaveAmount","DeductAmount").then(data => {
+      this.parentWallet = data;
+    });
+  }
+
+  puttingData(tableName,id,task){
+    this.network.putDataById(tableName, id, task).then(data => {
+      console.log("Succesfully update student itemAmount", data);
     });
   }
 
@@ -59,34 +74,36 @@ export class SelectItemsPage implements OnInit {
     for (let i = 0; i < e.length; i++) {
       this.callItemById(e[i]);
       var task = { quantity: this.ItemsdataById.quantity - 1 };
-      this.network.putDataById('items', e[i], task).then(data => {
-        console.log("Succesfully update items quantity", data);
-      });
+      this.puttingData("items",e[i],task);
       console.log(e[i]);
       arr.push(this.ItemsdataById.product_name);
+      this.nameArr = arr;
       this.totalPrice += this.ItemsdataById.product_price;
     }
     console.log(this.totalPrice);
-    this.nameArr = arr;
     var task2 = { ItemAmount: this.totalPrice };
     console.log(task2);
-    this.network.putDataById('students', this.stuItemAmount.id, task2).then(data => {
-      console.log("Succesfully update student itemAmount", data);
-    });
-    var savv = this.stuItemAmount.SaveAmount += this.totalPrice;
-    console.log(savv);
-    var tas = { SaveAmount: savv };
-    console.log(tas);
-    this.network.putDataById('students', this.stuItemAmount.id, tas).then(data => {
-      console.log("Succesfully update student itemAmount", data);
-    });
+    this.puttingData("students",this.stuItemAmount.id,task2);
+
+    for (let i = 0; i < this.canteenWallet.length; i++) {
+      var waletAdded = this.canteenWallet[i].wallet += this.totalPrice;
+      var task3 = { wallet: waletAdded };
+      console.log(task3);
+      this.puttingData("canteens",1,task3);
+    }
+
+    for(let i=0;i<this.parentWallet.length;i++){
+      var waletMinus: number = this.parentWallet[i].SaveAmount -= this.totalPrice;
+      var waletMinu: number = this.parentWallet[i].DeductAmount += this.totalPrice;
+      var task4 = {SaveAmount: waletMinus, DeductAmount: waletMinu};
+      console.log(task4);
+      this.puttingData("parents",this.idCall,task4);
+    }
   }
 
   select() {
-    var taskw = {selectedItems: this.nameArr};
-    this.network.putDataById('students', this.sSudent, taskw).then(data => {
-      console.log(data);
-    });
+    var taskw = { selectedItems: this.nameArr };
+    this.puttingData("students",this.stuItemAmount.id,taskw);
     this.toast.showToast("Items selected successfully!");
   }
 

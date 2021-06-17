@@ -6,5 +6,23 @@
 </ion-header>
 
 <ion-content>
-  <p *ngFor="let a of annouce">{{a.annoucement}}</p>
+  <ion-button shape="round" expand="full" (click)="showAnnounce()">Show Annoucement</ion-button>
+  <div *ngIf="showAnno" class="forShow">
+    <p *ngFor="let a of annouce">{{a.annoucement}}</p>
+  </div>
+  <ion-card>
+    <ion-item>
+      <ion-label>Class</ion-label>
+      <ion-select [(ngModel)]="sc" placeholder="Select Class">
+        <ion-select-option *ngFor="let i of classe" value="{{i.id}}">{{i.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>Dairy:</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-textarea type="text" [(ngModel)]="annoucement"></ion-textarea>
+    </ion-item>
+  </ion-card>
+  <ion-button expand="full" shape="round" (click)="goToAnnoucement()">Send</ion-button>
 </ion-content>

@@ -94,6 +94,22 @@ const routes: Routes = [
   {
     path: 'voucher-creater',
     loadChildren: () => import('./voucher-creater/voucher-creater.module').then( m => m.VoucherCreaterPageModule)
+  },
+  {
+    path: 'walletp',
+    loadChildren: () => import('./walletp/walletp.module').then( m => m.WalletpPageModule)
+  },
+  {
+    path: 'resultp',
+    loadChildren: () => import('./resultp/resultp.module').then( m => m.ResultpPageModule)
+  },
+  {
+    path: 'childs',
+    loadChildren: () => import('./childs/childs.module').then( m => m.ChildsPageModule)
+  },
+  {
+    path: 'dairy',
+    loadChildren: () => import('./dairy/dairy.module').then( m => m.DairyPageModule)
   }
 ];
 

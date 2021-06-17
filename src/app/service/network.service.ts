@@ -94,6 +94,36 @@ export class NetworkService {
     });
   }
 
+  getDataForWallet(tableName,id,columnName){
+    return new Promise((resolve) =>{
+      this.http.get(this.baseUrl + tableName + "?filter[where][and][0][id]="+id+"&filter[fields][" + columnName + "]=true").subscribe(data =>{
+        resolve(data);
+      },err =>{
+        console.log(err);
+      });
+    });
+  }
+
+  getDataForAnnouncement(tableName,id,columnName){
+    return new Promise((resolve) =>{
+      this.http.get(this.baseUrl + tableName + "?filter[where][and][0][id]="+id+"&filter[fields][" + columnName + "]=true").subscribe(data =>{
+        resolve(data);
+      },err =>{
+        console.log(err);
+      });
+    });
+  }
+
+  getDataForWalletParent(tableName,id,columnName1,columnName2){
+    return new Promise((resolve) =>{
+      this.http.get(this.baseUrl + tableName + "?filter[where][and][0][id]="+id+"&filter[fields][" + columnName1 + "]=true&filter[fields][" + columnName2 + "]=true").subscribe(data =>{
+        resolve(data);
+      },err =>{
+        console.log(err);
+      });
+    });
+  }
+
   postData(tableName, task) {
     return new Promise(resolve => {
       this.http.post(this.baseUrl + tableName, task).subscribe(data => {
@@ -157,18 +187,6 @@ export class NetworkService {
       });
     });
   }
-
-  // loginData(tableName, id) {
-  //   var checkUrlid = this.baseUrl + tableName + '/' + id;
-  //   return new Promise((resolve,reject) => {
-  //     this.http.get(checkUrlid).subscribe(data => {
-  //       resolve(data);
-  //     }, err => {
-  //       reject(err);
-  //       console.log(err);
-  //     });
-  //   });
-  // }
 
   loginData(tableName,email,password) {
     var checkUrlid = this.baseUrl + tableName +"?filter[where][and][0][email]="+email+"&filter[where][and][1][password]="+password;

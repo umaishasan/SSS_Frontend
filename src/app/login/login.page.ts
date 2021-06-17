@@ -105,7 +105,7 @@ export class LoginPage implements OnInit {
           { title: 'Home', url: '/admins', icon: 'home' },
           { title: 'Edit Profile', url: '/editprofile', icon: 'create' },
           { title: 'Registration', url: '/registeration', icon: 'person-add' },
-          { title: 'Generate Card', url: '/generate-card', icon: 'card' },
+          { title: 'Generate Card', url: '/generate-card', icon: 'id-card' },
           { title: 'Make Classes', url: '/make-classs', icon: 'build' },
           { title: 'Annoucement', url: '/annoucement', icon: 'megaphone' },
           { title: 'Attendance', url: '/attendance', icon: 'hand-left' },
@@ -118,7 +118,7 @@ export class LoginPage implements OnInit {
           { title: 'Home', url: '/canteens', icon: 'home' },
           { title: 'Edit Profile', url: '/editprofile', icon: 'create' },
           { title: 'Items', url: '/items', icon: 'cart' },
-          { title: 'Wallet', url: '/wallet', icon: 'cash' },
+          { title: 'Wallet', url: '/wallet', icon: 'wallet' },
           { title: 'Item sell', url: '/scanner-page2', icon: 'basket' }
         ];
         this.appComp.appPages = pageCall;
@@ -129,6 +129,10 @@ export class LoginPage implements OnInit {
           { title: 'Edit Profile', url: '/editprofile', icon: 'create' },
           { title: 'Select Items', url: '/select-items', icon: 'list' },
           { title: 'Voucher', url: '/voucher', icon: 'document' },
+          { title: 'Wallet', url: '/walletp', icon: 'wallet' },
+          { title: 'Results', url: '/resultp', icon: 'medal' },
+          { title: 'Childs', url: '/childs', icon: 'people' },
+          { title: 'Dairy', url: '/dairy', icon: 'clipboard' }
         ];
         this.appComp.appPages = pageCall;
       }

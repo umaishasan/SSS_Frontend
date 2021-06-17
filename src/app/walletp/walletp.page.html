@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Wallet</ion-title>
+    <ion-menu-button slot="start"></ion-menu-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <div class="ForWallet">
+      <ion-label>Current Amount: {{amountc}}</ion-label><br>
+      <ion-label>Deduct Amount: {{amountd}}</ion-label>
+    </div>
+    <div class="forGap">
+      <ion-item>
+        <ion-input type="number" placeholder="Enter Amount" [(ngModel)]="adamount"></ion-input>
+      </ion-item>
+      <ion-button shape="round" expand="full" (click)="addAmount()">Add Amount</ion-button>
+    </div>
+  </ion-card>
+</ion-content>

@@ -6,7 +6,6 @@ import { Injectable } from '@angular/core';
 export class ForSaveService {
   //profile data
   pid: any;
-  amount: any;
   ema: any;
   ForStuDataSave: any;
 

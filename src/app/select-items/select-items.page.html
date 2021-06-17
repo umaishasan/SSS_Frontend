@@ -7,11 +7,13 @@
 
 <ion-content>
   <ion-item>
-    <ion-select [(ngModel)]="sSudent" (ionChange)="calDataByStuAmount()" placeholder="Select Student">
+    <ion-label>Child</ion-label>
+    <ion-select [(ngModel)]="sSudent" (ionChange)="calDataByStuAmount()" placeholder="Select Child">
       <ion-select-option *ngFor="let j of datasF" value="{{j.id}}">{{j.username}}</ion-select-option>
     </ion-select>
   </ion-item>
   <ion-item>
+    <ion-label>Items</ion-label>
     <ion-select multiple="true" [(ngModel)]="itemSelection" (ionChange)="onChange(itemSelection)" placeholder="Select Items">
       <ion-select-option *ngFor="let i of Itemsdatas" [disabled]="i.quantity==0" [value]="i.product_id">
         {{i.product_name}} ({{i.product_price}}/-)</ion-select-option>

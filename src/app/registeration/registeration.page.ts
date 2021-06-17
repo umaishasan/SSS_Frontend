@@ -124,7 +124,8 @@ export class RegisterationPage implements OnInit {
         email: this.email,
         phone: this.phone,
         password: this.pass,
-        SaveAmount: 0
+        SaveAmount: 0,
+        DeductAmount: 0
       };
       var sk = {email: this.email,password: this.pass,user: this.selctUsr,name: this.name};
       this.postData(this.selctUsr, ta, "Registration Error", "Successfully Registered!");

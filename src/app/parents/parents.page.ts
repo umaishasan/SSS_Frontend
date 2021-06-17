@@ -20,7 +20,6 @@ export class ParentsPage implements OnInit {
       for(let i=0;i<arr.length;i++){
         if(arr[i].email === this.VerifyEmail){
           this.save.pid = arr[i].id;
-          this.save.amount = arr[i].SaveAmount;
           this.datas.push(arr[i]);
         }
       }

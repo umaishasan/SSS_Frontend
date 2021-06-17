@@ -6,16 +6,19 @@
 
 <ion-content>
   <ion-card>
+    <div class="forGap">
       <ion-item>
-        <ion-icon slot="start" name="mail"></ion-icon> 
+        <ion-icon slot="start" name="mail"></ion-icon>
         <ion-input type="email" [(ngModel)]="email" placeholder="Enter Email"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-icon slot="start" name="key"></ion-icon>
-        <ion-input [(ngModel)]="pass" [type]="showPassword ? 'text' : 'password'" placeholder="Enter Password"></ion-input>
+        <ion-icon slot="start" name="lock-closed"></ion-icon>
+        <ion-input [(ngModel)]="pass" [type]="showPassword ? 'text' : 'password'" placeholder="Enter Password">
+        </ion-input>
         <ion-icon slot="end" [name]="passwordTogleIcon" (click)="passwordTogle()"></ion-icon>
       </ion-item>
-    <ion-button expand="full" shape="round" (click)="login()">Login</ion-button>
+      <ion-button expand="full" shape="round" (click)="login()">Login</ion-button>
+    </div>
     <p class="stuLogin">For student login: <a href="#" (click)="scanCode()">click here</a></p>
   </ion-card>
 </ion-content>

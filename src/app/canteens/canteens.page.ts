@@ -21,7 +21,6 @@ export class CanteensPage implements OnInit {
         console.log(arr[i].email);
         if(arr[i].email === this.VerifyEmail){
           this.save.pid = arr[i].id;
-          this.save.amount = arr[i].wallet;
           this.datas.push(arr[i]);
         }
       }

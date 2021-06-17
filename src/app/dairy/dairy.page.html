@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Voucher</ion-title>
+    <ion-title>Dairy</ion-title>
     <ion-menu-button slot="start"></ion-menu-button>
   </ion-toolbar>
 </ion-header>
@@ -12,5 +12,8 @@
       <ion-select-option *ngFor="let j of datasF" value="{{j.id}}">{{j.username}}</ion-select-option>
     </ion-select>
   </ion-item>
-  <ion-button expand="full" shape="round" (click)="download()">Download Voucher</ion-button>
+  <div *ngIf="sSudent" class="forGa">
+    <p><b>Dairy:</b></p>
+    <p *ngFor="let a of annouce">{{a.annoucement}}</p>
+  </div>
 </ion-content>
