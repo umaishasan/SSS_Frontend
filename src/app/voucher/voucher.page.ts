@@ -18,14 +18,13 @@ export class VoucherPage implements OnInit {
   dirPath: any;
   datasF: any;
   datasD: any;
-  nameCall: any;
+  idCall: any;
   sSudent: any;
 
-  constructor(public network: NetworkService, public toast: ToastedService, private saveData: ForSaveService, private file: File) {
-    var datas = this.saveData.dataSave;
-    this.nameCall = datas.username;
-    console.log("from voucher page name: ", this.nameCall);
-    this.network.getSpecificDataforFather('students', this.nameCall).then(data => {
+  constructor(private network: NetworkService, private toast: ToastedService, private saveData: ForSaveService, private file: File) {
+    this.idCall = this.saveData.pid;
+    console.log("from voucher page id: ", this.idCall);
+    this.network.getSpecificDataforFather('students', this.idCall).then(data => {
       this.datasF = data;
       console.log(this.datasF);
     });

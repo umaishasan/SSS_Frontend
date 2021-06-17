@@ -71,10 +71,9 @@ export class TeacherUploadWorkPage implements OnInit {
   StudentSelect: any;
   BufferVal: any;
 
-  constructor(public network: NetworkService, public route: Router, public saveData: ForSaveService, public toast: ToastedService, private file: File) {
+  constructor(private network: NetworkService, private route: Router, private saveData: ForSaveService, private toast: ToastedService, private file: File) {
     this.segmentsChanges(this.elementType);
-    var teacher = this.saveData.dataSave;
-    this.teacherId = teacher.id;
+    this.teacherId = this.saveData.pid;
     console.log("call from Upload works", this.teacherId);
   }
 

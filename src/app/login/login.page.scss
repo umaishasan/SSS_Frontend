@@ -1,10 +1,10 @@
 ion-card{
-    margin-top: 30%;
-}
-
-ion-select{
-    margin: 10px;
-    padding: 5px;
+    --background: #f4f5f8;
+    margin-top: 50%;
+    margin-bottom: 50%;
+    ion-item{
+        --background: #f4f5f8;
+    }
 }
 
 ion-input{
@@ -15,3 +15,11 @@ ion-input{
 ion-button{
     margin: 15px;
 }
+
+.stuLogin{
+    margin: 10px;
+}
+
+// .stuLogin a{
+//     text-decoration: none;
+// }

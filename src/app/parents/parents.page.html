@@ -1,24 +1,24 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Parent</ion-title>
-      <ion-menu-button slot="start"></ion-menu-button>
+    <ion-menu-button slot="start"></ion-menu-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngFor="let i of datas">
   <ion-item>
-    <ion-label><b>Name:</b> {{datas.username}}</ion-label>
+    <ion-label><b>Name:</b> {{i.name}}</ion-label>
   </ion-item>
   <ion-item>
-    <ion-label><b>Id:</b> {{datas.id}}</ion-label>
+    <ion-label><b>Id:</b> {{i.id}}</ion-label>
   </ion-item>
   <ion-item>
-    <ion-label><b>Gender:</b> {{datas.gender}}</ion-label>
+    <ion-label><b>Gender:</b> {{i.gender}}</ion-label>
   </ion-item>
   <ion-item>
-    <ion-label><b>Email:</b> {{datas.email}}</ion-label>
+    <ion-label><b>Email:</b> {{i.email}}</ion-label>
   </ion-item>
   <ion-item>
-    <ion-label><b>Phone:</b> {{datas.phone}}</ion-label>
+    <ion-label><b>Phone:</b> {{i.phone}}</ion-label>
   </ion-item>
 </ion-content>

@@ -21,8 +21,7 @@ export class MakeClasssPage implements OnInit {
     {class:"class6s",name:"class6"},{class:"class7s",name:"class7"},{class:"class8s",name:"class8"},{class:"class9s",name:"class9"},{class:"class10s",name:"class10"}
   ];
 
-  constructor(public network:NetworkService,public toast:ToastedService) {
-   }
+  constructor(private network:NetworkService,private toast:ToastedService) { }
 
   ngOnInit() { }
 

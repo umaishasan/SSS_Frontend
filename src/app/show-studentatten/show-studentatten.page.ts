@@ -10,7 +10,7 @@ export class ShowStudentattenPage implements OnInit {
   classNmae: any;
   classiName: any;
 
-  constructor(public route: Router) {
+  constructor(private route: Router) {
     if(this.route.getCurrentNavigation().extras.state){
       const param = this.route.getCurrentNavigation().extras.state;
       this.classNmae = param;

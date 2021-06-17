@@ -60,10 +60,6 @@ const routes: Routes = [
     loadChildren: () => import('./registeration/registeration.module').then( m => m.RegisterationPageModule)
   },
   {
-    path: 'scanner-page',
-    loadChildren: () => import('./scanner-page/scanner-page.module').then( m => m.ScannerPagePageModule)
-  },
-  {
     path: 'scanner-page2',
     loadChildren: () => import('./scanner-page2/scanner-page2.module').then( m => m.ScannerPage2PageModule)
   },

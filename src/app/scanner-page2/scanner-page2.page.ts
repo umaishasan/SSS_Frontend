@@ -14,7 +14,7 @@ export class ScannerPage2Page implements OnInit {
   canteenData: any;
   showAmount: any;
 
-  constructor(public network: NetworkService, private barcodeScanner: BarcodeScanner) {
+  constructor(private network: NetworkService, private barcodeScanner: BarcodeScanner) {
     this.network.getData('canteens').then(data => {
       this.canteenData = data;
       console.log(this.canteenData);

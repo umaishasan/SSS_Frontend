@@ -9,7 +9,7 @@ import { ForSaveService } from '../service/for-save';
 export class StudentPage implements OnInit {
   getDataStudent: any;
 
-  constructor(public saveData: ForSaveService) {
+  constructor(private saveData: ForSaveService) {
     this.getDataStudent = this.saveData.ForStuDataSave;
     console.log("from student class student data:", this.getDataStudent);
   }

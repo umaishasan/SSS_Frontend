@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Registration</ion-title>
     <ion-menu-button slot="start"></ion-menu-button>
   </ion-toolbar>
@@ -8,7 +8,7 @@
 <ion-content>
   <ion-card>
     <ion-item>
-      <ion-icon slot="start" name="people"></ion-icon>
+      <ion-label>User</ion-label>
       <ion-select [(ngModel)]="selctUsr" (focus)="userSelect()" placeholder="Select User">
         <ion-select-option value="teachers">Teacher</ion-select-option>
         <ion-select-option value="parents">Parent</ion-select-option>
@@ -27,12 +27,10 @@
         <ion-input type="text" [(ngModel)]="name" placeholder="Enter Name"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input type="number" [(ngModel)]="id" placeholder="Enter Id"></ion-input>
-      </ion-item>
-      <ion-item>
         <ion-input type="number" [(ngModel)]="age" placeholder="Enter Age"></ion-input>
       </ion-item>
       <ion-item>
+        <ion-label>Gender</ion-label>
         <ion-select [(ngModel)]="Selectgender" placeholder="Select Gender">
           <ion-select-option value="male">Male</ion-select-option>
           <ion-select-option value="female">Female</ion-select-option>
@@ -44,13 +42,16 @@
         </ion-button>
       </ion-item>
       <ion-item>
-        <ion-input type="text" [(ngModel)]="fatherName" placeholder="Enter Father Name"></ion-input>
-      </ion-item>
-      <ion-item>
         <ion-input type="text" [(ngModel)]="class" placeholder="Enter Class"></ion-input>
       </ion-item>
       <ion-item>
         <ion-input type="text" [(ngModel)]="section" placeholder="Enter Section"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Parent</ion-label>
+        <ion-select [(ngModel)]="selectParent" (ionChange)="prnts()">
+          <ion-select-option *ngFor="let i of AllParent" value="{{i.id}}">{{i.name}}</ion-select-option>
+        </ion-select>
       </ion-item>
       <ion-button expand="full" shape="round" (click)="submitStudent()">Submit</ion-button>
     </div>
@@ -60,16 +61,14 @@
         <ion-input type="text" [(ngModel)]="name" placeholder="Enter Name"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input type="number" [(ngModel)]="id" placeholder="Enter Id"></ion-input>
-      </ion-item>
-      <ion-item>
+        <ion-label>Gender</ion-label>
         <ion-select [(ngModel)]="Selectgender" placeholder="Select Gender">
           <ion-select-option value="male">Male</ion-select-option>
           <ion-select-option value="female">Female</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-input type="text" [(ngModel)]="email" placeholder="Enter Email"></ion-input>
+        <ion-input type="email" [(ngModel)]="email" placeholder="Enter Email"></ion-input>
       </ion-item>
       <ion-item>
         <ion-input type="text" [(ngModel)]="phone" placeholder="Enter Phone No."></ion-input>

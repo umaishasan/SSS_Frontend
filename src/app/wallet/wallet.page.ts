@@ -9,10 +9,8 @@ import { ForSaveService } from '../service/for-save';
 export class WalletPage implements OnInit {
   amount: any;
 
-  constructor(public saveData: ForSaveService) {
-    var value = this.saveData.dataSave;
-    console.log(value);
-    this.amount = value.wallet;
+  constructor(private saveData: ForSaveService) {
+    this.amount = this.saveData.amount;
     console.log(this.amount);
   }
 

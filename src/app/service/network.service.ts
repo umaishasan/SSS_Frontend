@@ -8,8 +8,8 @@ export class NetworkService {
   baseUrl: string = "";
 
   constructor(public http: HttpClient) {
-    this.baseUrl = "https://anda-sss.herokuapp.com/";
-    // this.baseUrl = 'http://[::1]:3000/';
+    // this.baseUrl = "https://anda-sss.herokuapp.com/";
+    this.baseUrl = 'http://[::1]:3000/';
   }
 
   getData(tableName) {
@@ -74,9 +74,9 @@ export class NetworkService {
     });
   }
 
-  getSpecificDataforFather(tableName, user) {
+  getSpecificDataforFather(tableName, fatherId) {
     return new Promise(resolve => {
-      this.http.get(this.baseUrl + tableName + "?filter[where][fathername]=" + user).subscribe(data => {
+      this.http.get(this.baseUrl + tableName + "?filter[where][parentID]=" + fatherId).subscribe(data => {
         resolve(data);
       }, err => {
         console.log(err);
@@ -158,8 +158,20 @@ export class NetworkService {
     });
   }
 
-  loginData(tableName, id) {
-    var checkUrlid = this.baseUrl + tableName + '/' + id;
+  // loginData(tableName, id) {
+  //   var checkUrlid = this.baseUrl + tableName + '/' + id;
+  //   return new Promise((resolve,reject) => {
+  //     this.http.get(checkUrlid).subscribe(data => {
+  //       resolve(data);
+  //     }, err => {
+  //       reject(err);
+  //       console.log(err);
+  //     });
+  //   });
+  // }
+
+  loginData(tableName,email,password) {
+    var checkUrlid = this.baseUrl + tableName +"?filter[where][and][0][email]="+email+"&filter[where][and][1][password]="+password;
     return new Promise((resolve,reject) => {
       this.http.get(checkUrlid).subscribe(data => {
         resolve(data);

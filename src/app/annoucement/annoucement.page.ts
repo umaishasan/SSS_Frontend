@@ -10,7 +10,7 @@ import { ToastedService } from '../service/toasted.service';
 export class AnnoucementPage implements OnInit {
   annoucement:string;
 
-  constructor(public network: NetworkService,public toast: ToastedService) { }
+  constructor(private network: NetworkService,private toast: ToastedService) { }
 
   ngOnInit() {  }
 

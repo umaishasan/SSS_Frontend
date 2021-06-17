@@ -15,9 +15,9 @@ export class ItemModalPage implements OnInit {
   quantity: number;
 
   constructor(
-    public modalCtrl:ModalController,
-    public toast: ToastedService,
-    public network:NetworkService) { }
+    private modalCtrl:ModalController,
+    private toast: ToastedService,
+    private network:NetworkService) { }
 
   ngOnInit() { }
 

@@ -26,7 +26,7 @@ export class AttendancePage implements OnInit {
   saveSelectedval: any;
   saveSelectedvalById: any;
 
-  constructor(public navCtrl: NavController,public network: NetworkService) {
+  constructor(private navCtrl: NavController,private network: NetworkService) {
     this.segmentChanged(this.elementType);
   }
 

@@ -9,7 +9,7 @@ import { NetworkService } from '../service/network.service';
 export class CheckAnnoucementPage implements OnInit {
   annouce: any;
   
-  constructor(public network: NetworkService) {
+  constructor(private network: NetworkService) {
     this.network.getData('annoucements').then(data =>{
       this.annouce = data;
     });

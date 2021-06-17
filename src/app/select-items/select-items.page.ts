@@ -11,7 +11,7 @@ import { ForSaveService } from '../service/for-save';
 export class SelectItemsPage implements OnInit {
   sSudent: any;
   datasF: any;
-  nameCall: any;
+  idCall: any;
   stuItemAmount: any;
 
   itemSelection: any;
@@ -22,14 +22,13 @@ export class SelectItemsPage implements OnInit {
   totalPrice: number = 0;
   nameArr: any[] = [];
 
-  constructor(public network: NetworkService, public toast: ToastedService, private saveData: ForSaveService) {
-    var datas = this.saveData.dataSave;
-    this.nameCall = datas.username;
-    console.log("from voucher page name: ", this.nameCall);
+  constructor(private network: NetworkService, private toast: ToastedService, private saveData: ForSaveService) {
+    this.idCall = this.saveData.pid;
+    console.log("from select-item page id: ", this.idCall);
     this.network.getData('items').then(data => {
       this.Itemsdatas = data;
     });
-    this.network.getSpecificDataforFather('students', this.nameCall).then(data => {
+    this.network.getSpecificDataforFather('students', this.idCall).then(data => {
       this.datasF = data;
       console.log(this.datasF);
     });

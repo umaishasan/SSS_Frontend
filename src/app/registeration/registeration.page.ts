@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { NetworkService } from '../service/network.service';
 import { ToastedService } from '../service/toasted.service';
 
@@ -16,7 +15,6 @@ export class RegisterationPage implements OnInit {
   cpass: string;
 
   //for common
-  id: number;
   name: string;
   Selectgender: string;
   selctUsr: string;
@@ -25,30 +23,73 @@ export class RegisterationPage implements OnInit {
 
   //for stu
   age: number;
-  fatherName: string;
+  selectParent: any;
+  AllParent: any;
+  parentID: any;
+  studentRegisterd = [];
+  studentID: any[] = [];
+  studentName: any[] = [];
   qrData: string;
   class: string;
   section: string;
   canvasImg: any;
 
-  constructor(public router: Router, public network: NetworkService, public toast: ToastedService) { }
+  constructor(private network: NetworkService, private toast: ToastedService) {
+    this.network.getData('parents').then(data =>{
+      console.log(data);
+      this.AllParent = data;
+    });
+  }
+
+  postData(tableName, task, messageHeader, message) {
+    this.network.postDataForRegistration(tableName, task).then(data => {
+      console.log(data);
+      this.toast.showToast(message);
+    }).catch(e => {
+      this.toast.alertMessage(messageHeader, e)
+    });
+  }
 
   ngOnInit() { }
+
+  prnts() {
+    console.log(this.selectParent);
+    for (let i = 0; i < this.AllParent.length; i++) {
+      if (this.selectParent == this.AllParent[i].id) {
+        this.parentID = this.AllParent[i];
+      }
+    }
+    var task = {
+      username: this.name,
+      parentNAME: this.parentID.name,
+      parentID: this.parentID.id,
+      gender: this.Selectgender,
+      age: this.age,
+      class: this.class,
+      section: this.section,
+      studentsPic: this.canvasImg,
+      ItemAmount: 0
+    };
+    this.network.postDataForRegistration("students", task).then(data => {
+      this.studentRegisterd.push(data);
+      console.log(this.studentRegisterd);
+    });
+  }
 
   loadImageFromDevice(event) {
     var canvas = document.querySelector("canvas");
     var ctx = canvas.getContext("2d");
     var eventFile = event.target.files[0];
     var reader = new FileReader();
-    var img = new Image(100,100);
+    var img = new Image(100, 100);
     reader.readAsDataURL(eventFile);
-    reader.onload = () =>{
+    reader.onload = () => {
       var result = reader.result.toString();
       console.log(result);
       img.src = result;
-      img.onload = () =>{
-        ctx.drawImage(img,0,0,100,100);
-        console.log(canvas.toDataURL(),canvas.width,canvas.height);
+      img.onload = () => {
+        ctx.drawImage(img, 0, 0, 100, 100);
+        console.log(canvas.toDataURL(), canvas.width, canvas.height);
         this.canvasImg = canvas.toDataURL();
       }
     };
@@ -65,55 +106,66 @@ export class RegisterationPage implements OnInit {
     }
   }
 
-  generateQRCode() {
+  generateQRCode(id) {
     var combine = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+=-\\|}]{[';:\"/?.>,<~`0123456789";
     var stringLength = combine.length;
     var result = '';
     for (var i = 0; i < 15; i++) {
       result += combine.charAt(Math.floor(Math.random() * stringLength));
     }
-    this.qrData = result + this.id;
+    this.qrData = result + id;
   }
 
   submit() {
-    var task = {
-      id: this.id,
-      username: this.name,
-      gender: this.Selectgender,
-      email: this.email,
-      phone: this.phone,
-      password: this.pass
-    };
-    this.network.postDataForRegistration(this.selctUsr, task).then(data => {
-      console.log(data);
-    }).catch(e => {
-      this.toast.alertMessage("Registration Error", "Please fill all the fields.")
-    });
-    this.toast.showToast('Successfully Registered!');
+    if (this.selctUsr == 'parents') {
+      var ta = {
+        name: this.name,
+        gender: this.Selectgender,
+        email: this.email,
+        phone: this.phone,
+        password: this.pass,
+        SaveAmount: 0
+      };
+      var sk = {email: this.email,password: this.pass,user: this.selctUsr,name: this.name};
+      this.postData(this.selctUsr, ta, "Registration Error", "Successfully Registered!");
+      this.postData("all-users", sk, "Registration Error", "Successfully Registered!");
+    } else if (this.selctUsr == 'canteens') {
+      var ts = {
+        name: this.name,
+        gender: this.Selectgender,
+        email: this.email,
+        phone: this.phone,
+        password: this.pass,
+        wallet: 0
+      };
+      var sk = {email: this.email,password: this.pass,user: this.selctUsr,name: this.name};
+      this.postData(this.selctUsr, ts, "Registration Error", "Successfully Registered!");
+      this.postData("all-users", sk, "Registration Error", "Successfully Registered!");
+    } else {
+      var tk = {
+        name: this.name,
+        gender: this.Selectgender,
+        email: this.email,
+        phone: this.phone,
+        password: this.pass
+      };
+      var sk = {email: this.email,password: this.pass,user: this.selctUsr,name: this.name};
+      this.postData(this.selctUsr, tk, "Registration Error", "Successfully Registered!");
+      this.postData("all-users", sk, "Registration Error", "Successfully Registered!");
+    }
   }
 
   submitStudent() {
-    this.generateQRCode();
-    var task = {
-      id: this.id,
-      username: this.name,
-      fathername: this.fatherName,
-      gender: this.Selectgender,
-      age: this.age,
-      class: this.class,
-      section: this.section,
-      qrString: this.qrData,
-      studentsPic: this.canvasImg,
-      ItemAmount: 0,
-      SaveAmount: 0
-    };
-    this.network.postDataForRegistration(this.selctUsr, task).then(data => {
-      console.log(data);
-      this.toast.showToast('Successfully Registered!');
-      this.router.navigateByUrl('/generate-card');
-    }).catch(e => {
-      this.toast.alertMessage("Registration Error","Please fill all fields and maybe picture is too large please.picture should be(200x200).")
-    });
+    for (let i = 0; i < this.studentRegisterd.length; i++) {
+      console.log(this.studentRegisterd[i]);
+      console.log(this.studentRegisterd[i].id, this.studentRegisterd[i].username);
+      this.generateQRCode(this.studentRegisterd[i].id);
+      var taskk = { qrString: this.qrData };
+      this.network.putDataById("students", this.studentRegisterd[i].id, taskk).then(data => {
+        console.log(data);
+      });
+    }
+    this.toast.showToast('Successfully Registered!');
   }
 
   checkCnfrmPass(event) {
@@ -127,10 +179,10 @@ export class RegisterationPage implements OnInit {
 
   passwordToggle() {
     this.ShowPassword = !this.ShowPassword;
-    if(this.passwordToggleIcon == 'eye'){
+    if (this.passwordToggleIcon == 'eye') {
       this.passwordToggleIcon = 'eye-off';
     }
-    else{
+    else {
       this.passwordToggleIcon = 'eye';
     }
   }

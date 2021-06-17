@@ -16,7 +16,7 @@ export class GenerateCardPage implements OnInit {
   dirPath: string;
   generatedImage: any;
 
-  constructor(public network: NetworkService, public toast: ToastedService, private file: File) {
+  constructor(private network: NetworkService, private toast: ToastedService, private file: File) {
     this.network.getData('students').then(data => {
       this.StuDataAll = data;
       console.log(this.StuDataAll);

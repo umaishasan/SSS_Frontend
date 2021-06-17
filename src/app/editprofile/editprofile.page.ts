@@ -18,9 +18,8 @@ export class EditprofilePage implements OnInit {
   passwordToggleIcon: 'eye' | 'eye-off' = 'eye';
   dataa: any;
 
-  constructor(public network: NetworkService,public toast: ToastedService,public saveData: ForSaveService) {
-    this.dataa = this.saveData.dataSave
-    this.id = this.dataa.id;
+  constructor(private network: NetworkService,private toast: ToastedService,private saveData: ForSaveService) {
+    this.id = this.saveData.pid;
     console.log("call from edit profile",this.id);
    }
 
@@ -32,7 +31,7 @@ export class EditprofilePage implements OnInit {
       phone: this.phone,
       password: this.pass
     };
-    this.network.putDataById(this.slctCate,this.id,task).then(data =>{
+    this.network.putDataById("all-users",this.id,task).then(data =>{
       console.log(data);
     });
     this.toast.showToast('Profile update successfully!')

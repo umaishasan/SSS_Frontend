@@ -11,7 +11,7 @@ import { ItemModalPage } from './item-modal/item-modal.page';
 export class ItemsPage implements OnInit {
   itemData: any;
 
-  constructor(public modalController: ModalController,public network: NetworkService){
+  constructor(private modalController: ModalController,private network: NetworkService){
     this.network.getData('items').then(data =>{
       this.itemData = data;
     });

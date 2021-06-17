@@ -32,7 +32,7 @@ export class ClassedPage implements OnInit {
   score: number = 0;
   BufferVal: any;
 
-  constructor(public saveData: ForSaveService, public network: NetworkService, public toast: ToastedService, private file: File) {
+  constructor(private saveData: ForSaveService, private network: NetworkService, private toast: ToastedService, private file: File) {
     this.homedata = this.saveData.homeWork;
     this.quizdata = this.saveData.quizWork;
     this.resultdata = this.saveData.resultWork;
