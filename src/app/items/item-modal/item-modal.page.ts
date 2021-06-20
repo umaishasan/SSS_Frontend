@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { NetworkService } from 'src/app/service/network.service';
 import { ToastedService } from 'src/app/service/toasted.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-item-modal',
@@ -14,10 +15,16 @@ export class ItemModalPage implements OnInit {
   price: number;
   quantity: number;
 
-  constructor(
-    private modalCtrl:ModalController,
-    private toast: ToastedService,
-    private network:NetworkService) { }
+  ItemForm: FormGroup;
+
+  constructor(private modalCtrl:ModalController,private toast: ToastedService,private network:NetworkService) { 
+    this.ItemForm = new FormGroup({
+      Id: new FormControl('', Validators.required),
+      Name: new FormControl('', Validators.required),
+      Price: new FormControl(null, Validators.required),
+      Quantity: new FormControl('', Validators.required),
+    });
+  }
 
   ngOnInit() { }
 
@@ -34,8 +41,8 @@ export class ItemModalPage implements OnInit {
     };
     this.network.postData('items',item).then(data =>{
       console.log(data);
+      this.toast.showToast('Item successfully added!');
     });
-    this.toast.showToast('Item successfully added!');
   }
 
   Update(){
@@ -47,15 +54,20 @@ export class ItemModalPage implements OnInit {
     };
     this.network.putData('items',this.id,item).then(data =>{
       console.log(data);
+      this.toast.showToast('Successfully updated!');
+    }).catch(err =>{
+      this.toast.alertMessage("Update Error","Id and Item should be provide.");
     });
-    this.toast.showToast('Successfully updated!');
+    
   }
 
   Delete(){
     this.network.delData('items',this.id).then(data =>{
       console.log(data);
+      this.toast.showToast('Successfully deleted!');
+    }).catch(err =>{
+      this.toast.alertMessage("Delete Error","Id should be provide.");
     });
-    this.toast.showToast('Successfully deleted!');
   }
 
 }

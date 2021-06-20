@@ -4,84 +4,117 @@
     <ion-menu-button slot="start"></ion-menu-button>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
+  <ion-item>
+    <ion-label>User</ion-label>
+    <ion-select [(ngModel)]="selctUsr" (focus)="userSelect()" placeholder="Select User">
+      <ion-select-option value="teachers">Teacher</ion-select-option>
+      <ion-select-option value="parents">Parent</ion-select-option>
+      <ion-select-option value="canteens">Canteen</ion-select-option>
+      <ion-select-option value="students">Student</ion-select-option>
+    </ion-select>
+  </ion-item>
   <ion-card>
-    <ion-item>
-      <ion-label>User</ion-label>
-      <ion-select [(ngModel)]="selctUsr" (focus)="userSelect()" placeholder="Select User">
-        <ion-select-option value="teachers">Teacher</ion-select-option>
-        <ion-select-option value="parents">Parent</ion-select-option>
-        <ion-select-option value="canteens">Canteen</ion-select-option>
-        <ion-select-option value="students">Student</ion-select-option>
-      </ion-select>
-    </ion-item>
-
-    <div id="forStu">
+    <form [formGroup]="RegisterFormStu" id="forStu" (ngSubmit)="submitStudent()">
       <div id="forCardCntr">
         <ion-card class="forIonCard">
           <canvas width="100" height="100"></canvas>
         </ion-card>
       </div>
       <ion-item>
-        <ion-input type="text" [(ngModel)]="name" placeholder="Enter Name"></ion-input>
+        <ion-input type="text" formControlName="Name" [(ngModel)]="name" placeholder="Enter Name"></ion-input>
       </ion-item>
+      <span *ngIf="RegisterFormStu.get('Name').hasError('required') && RegisterFormStu.get('Name').touched">name should
+        not be empty</span>
       <ion-item>
-        <ion-input type="number" [(ngModel)]="age" placeholder="Enter Age"></ion-input>
+        <ion-input type="number" formControlName="Age" [(ngModel)]="age" placeholder="Enter Age"></ion-input>
       </ion-item>
+      <span *ngIf="RegisterFormStu.get('Age').hasError('required') && RegisterFormStu.get('Age').touched">age should not
+        be empty</span>
       <ion-item>
         <ion-label>Gender</ion-label>
-        <ion-select [(ngModel)]="Selectgender" placeholder="Select Gender">
+        <ion-select [(ngModel)]="Selectgender" formControlName="SelectGender" placeholder="Select Gender">
           <ion-select-option value="male">Male</ion-select-option>
           <ion-select-option value="female">Female</ion-select-option>
         </ion-select>
       </ion-item>
+      <span
+        *ngIf="RegisterFormStu.get('SelectGender').hasError('required') && RegisterFormStu.get('SelectGender').touched">Gender
+        should not be empty</span>
       <ion-item>
         <ion-button expand="full" fill="clear">
           <input type="file" accept="image/png,image/jpeg" (change)="loadImageFromDevice($event)" />
         </ion-button>
       </ion-item>
       <ion-item>
-        <ion-input type="text" [(ngModel)]="class" placeholder="Enter Class"></ion-input>
+        <ion-input type="number" formControlName="Class" [(ngModel)]="class" placeholder="Enter Class"></ion-input>
       </ion-item>
+      <span *ngIf="RegisterFormStu.get('Class').hasError('required') && RegisterFormStu.get('Class').touched">class
+        should not be empty</span>
       <ion-item>
-        <ion-input type="text" [(ngModel)]="section" placeholder="Enter Section"></ion-input>
+        <ion-input type="text" formControlName="Section" [(ngModel)]="section" placeholder="Enter Section"></ion-input>
       </ion-item>
+      <span
+        *ngIf="RegisterFormStu.get('Section').hasError('required') && RegisterFormStu.get('Section').touched">section
+        should not be empty</span>
       <ion-item>
         <ion-label>Parent</ion-label>
-        <ion-select [(ngModel)]="selectParent" (ionChange)="prnts()">
+        <ion-select [(ngModel)]="selectParent" formControlName="SelectParent" (ionChange)="prnts()">
           <ion-select-option *ngFor="let i of AllParent" value="{{i.id}}">{{i.name}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-button expand="full" shape="round" (click)="submitStudent()">Submit</ion-button>
-    </div>
+      <span
+        *ngIf="RegisterFormStu.get('SelectParent').hasError('required') && RegisterFormStu.get('SelectParent').touched">Parent
+        should not be empty</span>
+      <ion-button type="submit" expand="full" shape="round" [disabled]="!RegisterFormStu.valid">Submit</ion-button>
+    </form>
 
-    <div id="forAll">
+    <form id="forAll" [formGroup]="RegisterFormAll" (ngSubmit)="submit()">
       <ion-item>
-        <ion-input type="text" [(ngModel)]="name" placeholder="Enter Name"></ion-input>
+        <ion-input type="text" formControlName="Name" [(ngModel)]="name" placeholder="Enter Name"></ion-input>
       </ion-item>
+      <span *ngIf="RegisterFormAll.get('Name').hasError('required') && RegisterFormAll.get('Name').touched">Name
+        should not be empty</span>
       <ion-item>
         <ion-label>Gender</ion-label>
-        <ion-select [(ngModel)]="Selectgender" placeholder="Select Gender">
+        <ion-select [(ngModel)]="Selectgender" formControlName="SelectGender" placeholder="Select Gender">
           <ion-select-option value="male">Male</ion-select-option>
           <ion-select-option value="female">Female</ion-select-option>
         </ion-select>
       </ion-item>
+      <span *ngIf="RegisterFormAll.get('SelectGender').hasError('required') && RegisterFormAll.get('SelectGender').touched">Gender
+        should not be empty</span>
       <ion-item>
-        <ion-input type="email" [(ngModel)]="email" placeholder="Enter Email"></ion-input>
+        <ion-input type="email" formControlName="Email" [(ngModel)]="email" placeholder="Enter Email"></ion-input>
       </ion-item>
+      <span *ngIf="RegisterFormAll.get('Email').hasError('required') && RegisterFormAll.get('Email').touched">Email
+        should not be empty</span>
+      <span *ngIf="RegisterFormAll.get('Email').hasError('pattern') && RegisterFormAll.get('Email').touched">Email
+        should be valid</span>
       <ion-item>
-        <ion-input type="text" [(ngModel)]="phone" placeholder="Enter Phone No."></ion-input>
+        <ion-input type="text" formControlName="Phone" [(ngModel)]="phone" placeholder="Enter Phone No."></ion-input>
       </ion-item>
+      <span *ngIf="RegisterFormAll.get('Phone').hasError('required') && RegisterFormAll.get('Phone').touched">Phone
+        should not be empty</span>
       <ion-item>
-        <ion-input id="pass" [(ngModel)]="pass" [type]="ShowPassword ? 'text' : 'password'" placeholder="Enter Password"></ion-input>
+        <ion-input id="pass" formControlName="Password" [(ngModel)]="pass" [type]="ShowPassword ? 'text' : 'password'"
+          placeholder="Enter Password"></ion-input>
         <ion-icon slot="end" [name]="passwordToggleIcon" (click)="passwordToggle()"></ion-icon>
       </ion-item>
+      <span
+        *ngIf="RegisterFormAll.get('Password').hasError('required') && RegisterFormAll.get('Password').touched">Password
+        should not be empty</span>
+      <span
+        *ngIf="RegisterFormAll.get('Password').hasError('maxLength') && RegisterFormAll.get('Password').touched">Password
+        has minimum 8 character</span>
       <ion-item>
-        <ion-input id="cpass" type="password" [(ngModel)]="cpass" (keyup)="checkCnfrmPass(pass)" placeholder="Enter Confirm Password"></ion-input>
+        <ion-input id="cpass" formControlName="ConfirmPassword" type="password" [(ngModel)]="cpass"
+          (keyup)="checkCnfrmPass($event)" placeholder="Enter Confirm Password"></ion-input>
       </ion-item>
-      <ion-button shape="round" expand="full" (click)="submit()">Submit</ion-button>
-    </div>
+      <span
+        *ngIf="RegisterFormAll.get('ConfirmPassword').hasError('required') && RegisterFormAll.get('ConfirmPassword').touched">Confirm Password
+        should be match</span>
+      <ion-button type="submit" shape="round" expand="full" [disabled]="!RegisterFormAll.valid">Submit</ion-button>
+    </form>
   </ion-card>
-
 </ion-content>

@@ -147,10 +147,11 @@ export class NetworkService {
 
   putData(tableName, id, task) {
     var table = tableName + '/' + id;
-    return new Promise(resolve => {
+    return new Promise((resolve,reject) => {
       this.http.put(this.baseUrl + table, task).subscribe(data => {
         resolve(data);
       }, err => {
+        reject(err);
         console.log(err);
       });
     });
@@ -179,23 +180,21 @@ export class NetworkService {
 
   delData(tableName, id) {
     var table = tableName + '/' + id;
-    return new Promise(resolve => {
+    return new Promise((resolve,reject) => {
       this.http.delete(this.baseUrl + table).subscribe(data => {
         resolve(data);
       }, err => {
+        reject(err);
         console.log(err);
       });
     });
   }
 
-  loginData(tableName,email,password) {
-    var checkUrlid = this.baseUrl + tableName +"?filter[where][and][0][email]="+email+"&filter[where][and][1][password]="+password;
-    return new Promise((resolve,reject) => {
+  loginData(tableName,email) {
+    var checkUrlid = this.baseUrl + tableName +"/"+email;
+    return new Promise((resolve) => {
       this.http.get(checkUrlid).subscribe(data => {
         resolve(data);
-      }, err => {
-        reject(err);
-        console.log(err);
       });
     });
   }

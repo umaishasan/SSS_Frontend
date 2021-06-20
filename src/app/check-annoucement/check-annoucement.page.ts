@@ -21,7 +21,7 @@ export class CheckAnnoucementPage implements OnInit {
   { id: 8, name: 'Class8' },{ id: 9, name: 'Class9' },{ id: 10, name: 'Class10' }];
   
   constructor(private network: NetworkService,private toast: ToastedService) {
-    this.network.getData('annoucements').then(data =>{
+    this.network.getDataById('annoucements',0).then(data =>{
       this.annouce = data;
     });
   }

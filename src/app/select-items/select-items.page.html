@@ -14,16 +14,19 @@
   </ion-item>
   <ion-item>
     <ion-label>Items</ion-label>
-    <ion-select multiple="true" [(ngModel)]="itemSelection" (ionChange)="onChange(itemSelection)" placeholder="Select Items">
+    <ion-select multiple="true" [(ngModel)]="itemSelection" (ionChange)="onChange(itemSelection)"
+      placeholder="Select Items">
       <ion-select-option *ngFor="let i of Itemsdatas" [disabled]="i.quantity==0" [value]="i.product_id">
         {{i.product_name}} ({{i.product_price}}/-)</ion-select-option>
     </ion-select>
   </ion-item>
-  <div class="labelSetting">
-    <ion-label>Total Price: {{totalPrice}}</ion-label>
+  <div class="babDiv" *ngIf="babDivshow">
+    <div class="labelSetting">
+      <ion-label>Total Price: {{totalPrice}}</ion-label>
+    </div>
+    <div *ngFor="let j of nameArr">
+      <ion-label>{{j}}</ion-label>
+    </div>
   </div>
-  <div *ngFor="let j of nameArr">
-    <ion-label>{{j}}</ion-label>
-  </div>
-    <ion-button expand="full" shape="round" (click)="select()">Select</ion-button>
+  <ion-button expand="full" shape="round" (click)="select()">Select</ion-button>
 </ion-content>

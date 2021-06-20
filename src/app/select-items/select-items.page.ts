@@ -24,6 +24,7 @@ export class SelectItemsPage implements OnInit {
 
   canteenWallet: any;
   parentWallet: any;
+  babDivshow: boolean = false;
 
   constructor(private network: NetworkService, private toast: ToastedService, private saveData: ForSaveService) {
     this.idCall = this.saveData.pid;
@@ -99,6 +100,7 @@ export class SelectItemsPage implements OnInit {
       console.log(task4);
       this.puttingData("parents",this.idCall,task4);
     }
+    this.babDivshow = true;
   }
 
   select() {

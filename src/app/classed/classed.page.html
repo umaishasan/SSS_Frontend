@@ -27,22 +27,26 @@
     </div>
     <div class="forCenter">
       <h4 class="forGap">Download</h4>
-      <ion-item>
+      <ion-item class="fixclor">
+        <ion-label>Teacher</ion-label>
         <ion-select [(ngModel)]="selectTeacher" placeholder="Select Teacher">
           <ion-select-option *ngFor="let i of homedata;" value="{{i.name}}">{{i.name}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-item *ngIf="showSubjectO">
+      <ion-item *ngIf="showSubjectO" class="fixclor">
+        <ion-label>Subject</ion-label>
         <ion-select [(ngModel)]="selectS" (ionChange)="transferrr()" placeholder="Select Subject">
           <ion-select-option *ngFor="let i of subjectOE;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-item *ngIf="showSubjectN">
+      <ion-item *ngIf="showSubjectN" class="fixclor">
+        <ion-label>Subject</ion-label>
         <ion-select [(ngModel)]="selectS" (ionChange)="transferrr()" placeholder="Select Subject">
           <ion-select-option *ngFor="let i of subjectN;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-item *ngIf="showSubjectT" (ionChange)="transferrr()">
+      <ion-item *ngIf="showSubjectT" (ionChange)="transferrr()" class="fixclor">
+        <ion-label>Subject</ion-label>
         <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
           <ion-select-option *ngFor="let i of subjectT;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
@@ -51,17 +55,20 @@
     </div>
     <div class="forCenter">
       <h4 class="forGap">Upload</h4>
-      <ion-item *ngIf="showSubjectO">
+      <ion-item *ngIf="showSubjectO" class="fixclor">
+        <ion-label>Subject</ion-label>
         <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
           <ion-select-option *ngFor="let i of subjectOE;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-item *ngIf="showSubjectN">
+      <ion-item *ngIf="showSubjectN" class="fixclor">
+        <ion-label>Subject</ion-label>
         <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
           <ion-select-option *ngFor="let i of subjectN;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-item *ngIf="showSubjectT">
+      <ion-item *ngIf="showSubjectT" class="fixclor">
+        <ion-label>Subject</ion-label>
         <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
           <ion-select-option *ngFor="let i of subjectT;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
@@ -75,17 +82,20 @@
 
   <div *ngIf="elementType=='quiz'">
     <div class="forCenter2">
-      <ion-item *ngIf="showSubjectO">
+      <ion-item *ngIf="showSubjectO" class="fixclor">
+        <ion-label>Subject</ion-label>
         <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
           <ion-select-option *ngFor="let i of subjectOE;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-item *ngIf="showSubjectN">
+      <ion-item *ngIf="showSubjectN" class="fixclor">
+        <ion-label>Subject</ion-label>
         <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
           <ion-select-option *ngFor="let i of subjectN;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-item *ngIf="showSubjectT">
+      <ion-item *ngIf="showSubjectT" class="fixclor">
+        <ion-label>Subject</ion-label>
         <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
           <ion-select-option *ngFor="let i of subjectT;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
@@ -96,15 +106,15 @@
             <ion-list-header style="margin-top: 5px;">
               <ion-label>Q{{q.QNo}}: {{q.Q}}</ion-label>
             </ion-list-header>
-            <ion-item>
+            <ion-item class="fixclor">
               <ion-label>{{q.Option2}}</ion-label>
               <ion-radio slot="start"></ion-radio>
             </ion-item>
-            <ion-item>
+            <ion-item class="fixclor">
               <ion-label>{{q.Ans}}</ion-label>
               <ion-radio slot="start" name="{{q.QNo}}" value="{{q.Ans}}"></ion-radio>
             </ion-item>
-            <ion-item>
+            <ion-item class="fixclor">
               <ion-label>{{q.Option1}}</ion-label>
               <ion-radio slot="start"></ion-radio>
             </ion-item>

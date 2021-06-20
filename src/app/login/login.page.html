@@ -3,7 +3,6 @@
     <ion-title style="text-align: center;">Login</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
   <ion-card>
     <div class="forGap">
@@ -19,6 +18,8 @@
       </ion-item>
       <ion-button expand="full" shape="round" (click)="login()">Login</ion-button>
     </div>
-    <p class="stuLogin">For student login: <a href="#" (click)="scanCode()">click here</a></p>
+    <ion-item lines="none" routerDirection="root" (click)="scanCode()">
+      <ion-label>For student login: click here</ion-label>
+    </ion-item>
   </ion-card>
 </ion-content>

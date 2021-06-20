@@ -6,29 +6,39 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <form [formGroup]="voucherForm" (ngSubmit)="createpdf()">
   <ion-card>
     <ion-item>
-      <ion-select [(ngModel)]="sClass" (ionChange)="onChange()" placeholder="Select Class">
+      <ion-label>Class</ion-label>
+      <ion-select [(ngModel)]="sClass" formControlName="Class" (ionChange)="onChange()" placeholder="Select Class">
         <ion-select-option *ngFor="let i of clase" value="{{i.clas}}">{{i.name}}</ion-select-option>
       </ion-select>
     </ion-item>
+    <span *ngIf="voucherForm.get('Class').hasError('required') && voucherForm.get('Class').touched">Class should not be empty</span>
     <ion-item>
-      <ion-select [(ngModel)]="sSudent" (ionChange)="inChange()" placeholder="Select Student">
+      <ion-label>Student</ion-label>
+      <ion-select [(ngModel)]="sSudent" formControlName="Student" (ionChange)="inChange()" placeholder="Select Student">
         <ion-select-option *ngFor="let i of dataa" value="{{i.id}}">{{i.name}}</ion-select-option>
       </ion-select>
     </ion-item>
+    <span *ngIf="voucherForm.get('Student').hasError('required') && voucherForm.get('Student').touched">Student should not be empty</span>
     <ion-item>
-      <ion-input type="number" [(ngModel)]="tution" placeholder="Enter Tution Fee"></ion-input>
+      <ion-input type="number" [(ngModel)]="tution" formControlName="Tution" placeholder="Enter Tution Fee"></ion-input>
     </ion-item>
+    <span *ngIf="voucherForm.get('Tution').hasError('required') && voucherForm.get('Tution').touched">Tution fee should not be empty</span>
     <ion-item>
-      <ion-input type="number" [(ngModel)]="fine" placeholder="Enter Fine"></ion-input>
+      <ion-input type="number" [(ngModel)]="fine" formControlName="Fine" placeholder="Enter Fine"></ion-input>
     </ion-item>
+    <span *ngIf="voucherForm.get('Fine').hasError('required') && voucherForm.get('Fine').touched">Fine should not be empty</span>
     <ion-item>
-      <ion-input type="number" [(ngModel)]="registration" placeholder="Enter Registration Fee"></ion-input>
+      <ion-input type="number" [(ngModel)]="registration" formControlName="Registration" placeholder="Enter Registration Fee"></ion-input>
     </ion-item>
+    <span *ngIf="voucherForm.get('Registration').hasError('required') && voucherForm.get('Registration').touched">Registration fee should not be empty</span>
     <ion-item>
-      <ion-input type="number" [(ngModel)]="security" placeholder="Enter Security Fee"></ion-input>
+      <ion-input type="number" [(ngModel)]="security" formControlName="Security" placeholder="Enter Security Fee"></ion-input>
     </ion-item>
+    <span *ngIf="voucherForm.get('Security').hasError('required') && voucherForm.get('Security').touched">Security fee should not be empty</span>
   </ion-card>
-  <ion-button expand="full" shape="round" (click)="createpdf()">Create Voucher</ion-button>
+  <ion-button expand="full" shape="round" [disabled]="!voucherForm.valid">Create Voucher</ion-button>
+</form>
 </ion-content>

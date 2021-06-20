@@ -8,22 +8,28 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-item>
-      <ion-input type="number" [(ngModel)]="id" placeholder="Enter Product Id"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="text" [(ngModel)]="name" placeholder="Enter Product Name"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="number" [(ngModel)]="price" placeholder="Enter Product Price"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="number" [(ngModel)]="quantity" placeholder="Enter Product Quantity"></ion-input>
-    </ion-item>
-  </ion-card>
+  <form [formGroup]="ItemForm" (ngSubmit)="Add()">
+    <ion-card>
+      <ion-item>
+        <ion-input type="number" formControlName="Id" [(ngModel)]="id" placeholder="Enter Product Id"></ion-input>
+      </ion-item>
+      <span *ngIf="ItemForm.get('Id').hasError('required') && ItemForm.get('Id').touched">Product id should not be empty</span>
+      <ion-item>
+        <ion-input type="text" formControlName="Name" [(ngModel)]="name" placeholder="Enter Product Name"></ion-input>
+      </ion-item>
+      <span *ngIf="ItemForm.get('Name').hasError('required') && ItemForm.get('Name').touched">Product name should not be empty</span>
+      <ion-item>
+        <ion-input type="number" formControlName="Price" [(ngModel)]="price" placeholder="Enter Product Price"></ion-input>
+      </ion-item>
+      <span *ngIf="ItemForm.get('Price').hasError('required') && ItemForm.get('Price').touched">Price should not be empty</span>
+      <ion-item>
+        <ion-input type="number" formControlName="Quantity" [(ngModel)]="quantity" placeholder="Enter Product Quantity"></ion-input>
+      </ion-item>
+      <span *ngIf="ItemForm.get('Quantity').hasError('required') && ItemForm.get('Quantity').touched">Quantity should not be empty</span>
+    </ion-card>
+  </form>
   <div class="cntrBtn">
-    <ion-button shape="round" class="btn" (click)="Add()">Add</ion-button>
+    <ion-button shape="round" class="btn" [disabled]="!ItemForm.valid">Add</ion-button>
     <ion-button shape="round" class="btn" (click)="Update()">Update</ion-button>
     <ion-button shape="round" class="btn" (click)="Delete()">Delete</ion-button>
   </div>

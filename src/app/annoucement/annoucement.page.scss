@@ -13,3 +13,14 @@ ion-label{
     font-size: 15px;
     margin: 15px;
 }
+
+ion-content{
+    --background: linear-gradient(rgba(202, 199, 199, 0.671),rgba(0, 0, 0, 0.897));
+}
+
+ion-card{
+    --background: #f4f5f8;
+    ion-item{
+        --background: #f4f5f8;
+    }
+}

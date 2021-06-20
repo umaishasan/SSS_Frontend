@@ -3,6 +3,7 @@ import { NetworkService } from '../service/network.service';
 import { ToastedService } from '../service/toasted.service';
 import pdfmake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { FormGroup,FormControl,Validators } from '@angular/forms';
 
 pdfmake.vfs = pdfFonts.pdfMake.vfs;
 interface Classs {
@@ -29,8 +30,18 @@ export class VoucherCreaterPage implements OnInit {
   stuProfile: any;
   pdfObj = null;
 
+  voucherForm: FormGroup;
 
-  constructor(private network: NetworkService, private toast: ToastedService) { }
+  constructor(private network: NetworkService, private toast: ToastedService) { 
+    this.voucherForm = new FormGroup({
+      Class: new FormControl(null,Validators.required),
+      Student: new FormControl(null,Validators.required),
+      Tution: new FormControl('',Validators.required),
+      Fine: new FormControl('',Validators.required),
+      Registration: new FormControl('',Validators.required),
+      Security: new FormControl('',Validators.required)
+    });
+  }
 
   ngOnInit() { }
 
@@ -364,4 +375,5 @@ export class VoucherCreaterPage implements OnInit {
     });
     this.stuProfile = arrr;
   }
+
 }

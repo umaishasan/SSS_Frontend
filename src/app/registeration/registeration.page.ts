@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NetworkService } from '../service/network.service';
 import { ToastedService } from '../service/toasted.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-registeration',
@@ -34,12 +35,34 @@ export class RegisterationPage implements OnInit {
   section: string;
   canvasImg: any;
 
+  RegisterFormStu: FormGroup;
+  RegisterFormAll: FormGroup;
+
   constructor(private network: NetworkService, private toast: ToastedService) {
-    this.network.getData('parents').then(data =>{
+    this.network.getData('parents').then(data => {
       console.log(data);
       this.AllParent = data;
     });
+    this.RegisterFormStu = new FormGroup({
+      Name: new FormControl('', Validators.required),
+      Age: new FormControl('', Validators.required),
+      SelectGender: new FormControl(null, Validators.required),
+      Class: new FormControl('', Validators.required),
+      Section: new FormControl('', Validators.required),
+      SelectParent: new FormControl(null, Validators.required)
+    });
+
+    this.RegisterFormAll = new FormGroup({
+      Name: new FormControl('', Validators.required),
+      Email: new FormControl('', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
+      Phone: new FormControl('', Validators.required),
+      SelectGender: new FormControl(null, Validators.required),
+      Password: new FormControl('', [Validators.required, Validators.maxLength(8)]),
+      ConfirmPassword: new FormControl('', Validators.required)
+    });
   }
+
+  ngOnInit() { }
 
   postData(tableName, task, messageHeader, message) {
     this.network.postDataForRegistration(tableName, task).then(data => {
@@ -49,8 +72,6 @@ export class RegisterationPage implements OnInit {
       this.toast.alertMessage(messageHeader, e)
     });
   }
-
-  ngOnInit() { }
 
   prnts() {
     console.log(this.selectParent);
@@ -107,7 +128,7 @@ export class RegisterationPage implements OnInit {
   }
 
   generateQRCode(id) {
-    var combine = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+=-\\|}]{[';:\"/?.>,<~`0123456789";
+    var combine = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+=-|}]{[';:/?.>,<~`0123456789";
     var stringLength = combine.length;
     var result = '';
     for (var i = 0; i < 15; i++) {
@@ -127,7 +148,7 @@ export class RegisterationPage implements OnInit {
         SaveAmount: 0,
         DeductAmount: 0
       };
-      var sk = {email: this.email,password: this.pass,user: this.selctUsr,name: this.name};
+      var sk = { email: this.email, password: this.pass, user: this.selctUsr, name: this.name };
       this.postData(this.selctUsr, ta, "Registration Error", "Successfully Registered!");
       this.postData("all-users", sk, "Registration Error", "Successfully Registered!");
     } else if (this.selctUsr == 'canteens') {
@@ -139,7 +160,7 @@ export class RegisterationPage implements OnInit {
         password: this.pass,
         wallet: 0
       };
-      var sk = {email: this.email,password: this.pass,user: this.selctUsr,name: this.name};
+      var sk = { email: this.email, password: this.pass, user: this.selctUsr, name: this.name };
       this.postData(this.selctUsr, ts, "Registration Error", "Successfully Registered!");
       this.postData("all-users", sk, "Registration Error", "Successfully Registered!");
     } else {
@@ -150,7 +171,7 @@ export class RegisterationPage implements OnInit {
         phone: this.phone,
         password: this.pass
       };
-      var sk = {email: this.email,password: this.pass,user: this.selctUsr,name: this.name};
+      var sk = { email: this.email, password: this.pass, user: this.selctUsr, name: this.name };
       this.postData(this.selctUsr, tk, "Registration Error", "Successfully Registered!");
       this.postData("all-users", sk, "Registration Error", "Successfully Registered!");
     }
@@ -170,7 +191,8 @@ export class RegisterationPage implements OnInit {
   }
 
   checkCnfrmPass(event) {
-    if (event === this.cpass) {
+    event = this.pass;
+    if (this.cpass === event) {
       document.getElementById('cpass').style.color = 'green';
     }
     else {

@@ -6,3 +6,27 @@ ion-item {
     --border-width: 0;
     --inner-border-width: 0;
 }
+
+ion-content{
+    --background: linear-gradient(rgba(202, 199, 199, 0.671),rgba(0, 0, 0, 0.897));
+}
+
+.cardCntr{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ion-card{
+    width: 100%;
+    margin: 25px;
+    --background: #f4f5f8;
+    ion-card-title{
+        text-align: center;
+        font-weight: bold;
+        border-bottom: 0.5px solid grey;
+    }
+    ion-item{
+        --background: #f4f5f8;
+    }
+}

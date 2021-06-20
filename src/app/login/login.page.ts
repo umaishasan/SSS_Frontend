@@ -32,11 +32,6 @@ export class LoginPage implements OnInit {
   forQuiz: any;
   forResult: any;
 
-  studentPage = [
-    { title: 'Home', url: '/student', icon: 'home' },
-    { title: 'Class', url: '/classed', icon: 'book' }
-  ];
-
   constructor(
      private route: Router,
      private saveData: ForSaveService, 
@@ -83,19 +78,21 @@ export class LoginPage implements OnInit {
   }
 
   login() {
-    this.network.loginData("all-users", this.email, this.pass).then(data => {
+    this.network.loginData("all-users", this.email).then(data => {
       this.datasforAll = data;
-      for(let i=0;i<this.datasforAll.length;i++){
-        console.log(this.datasforAll[i].name);
-        this.route.navigateByUrl('/' + this.datasforAll[i].user);
+      console.log(this.datasforAll);
+      console.log(this.datasforAll.email);
+      if (this.email == this.datasforAll.email && this.pass == this.datasforAll.password) {
+        console.log(this.datasforAll.name);
+        this.route.navigateByUrl('/' + this.datasforAll.user);
         this.mnuCtrl.enable(true);
-        this.jumpPage(this.datasforAll[i].user + 'Page');
-        this.saveData.ema = this.datasforAll[i].email;
-        this.appComp.username = this.datasforAll[i].name;
-
+        this.jumpPage(this.datasforAll.user + 'Page');
+        this.saveData.ema = this.datasforAll.email;
+        this.appComp.username = this.datasforAll.name;
       }
-    }).catch(err =>{
-      this.toas.alertMessage("Login Error","Incorrect Email or Password!");
+      else{
+        this.toas.alertMessage("Login Error","Incorrest Email or Password!");
+      }
     });
   }
 
@@ -145,6 +142,13 @@ export class LoginPage implements OnInit {
         ];
         this.appComp.appPages = pageCall;
       }
+      else if(pageCall == 'studentPage'){
+        pageCall = [
+          { title: 'Home', url: '/student', icon: 'home' },
+          { title: 'Class', url: '/classed', icon: 'book' }
+        ];
+        this.appComp.appPages = pageCall;
+      }
   }
 
   HomeclassCall(ids) {
@@ -176,7 +180,6 @@ export class LoginPage implements OnInit {
     });
   }
 
-  //real
   scanCode() {
     this.barcodeScanner.scan().then(code => {
       this.scanned = code.text;
@@ -184,7 +187,8 @@ export class LoginPage implements OnInit {
         this.studentDataById = this.studentData[i];
         if (this.scanned === this.studentDataById.qrString) {
           this.route.navigateByUrl('/student');
-          this.appComp.appPages = this.studentPage;
+          this.mnuCtrl.enable(true);
+          this.jumpPage('studentPage');
           this.appComp.username = this.studentDataById.username;
           this.saveData.ForStuDataSave = this.studentDataById;
           this.HomeclassCall(this.studentDataById.class);

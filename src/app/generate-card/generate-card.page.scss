@@ -50,3 +50,7 @@ ion-card-title{
     border-bottom: 1px solid lightgray;
     margin-bottom: 5px;
 }
+
+ion-content{
+    --background: linear-gradient(rgba(202, 199, 199, 0.671),rgba(0, 0, 0, 0.897));
+}

@@ -12,8 +12,12 @@
       <ion-select-option *ngFor="let j of datasF" value="{{j.id}}">{{j.username}}</ion-select-option>
     </ion-select>
   </ion-item>
-  <div *ngIf="sSudent" class="forGa">
-    <p><b>Dairy:</b></p>
-    <p *ngFor="let a of annouce">{{a.annoucement}}</p>
+  <div *ngIf="divi">
+    <div class="forGi">
+      <p><b>Dairy:</b></p>
+    </div>
+    <div *ngIf="sSudent" class="forGa">
+      <p *ngFor="let a of annouce">{{a.annoucement}}</p>
+    </div>
   </div>
 </ion-content>

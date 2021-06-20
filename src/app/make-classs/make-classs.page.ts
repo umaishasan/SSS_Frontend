@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NetworkService } from '../service/network.service';
 import { ToastedService } from '../service/toasted.service';
+import { FormGroup,FormControl,Validators } from '@angular/forms';
 
 interface Claass{
   class: string,
@@ -21,7 +22,16 @@ export class MakeClasssPage implements OnInit {
     {class:"class6s",name:"class6"},{class:"class7s",name:"class7"},{class:"class8s",name:"class8"},{class:"class9s",name:"class9"},{class:"class10s",name:"class10"}
   ];
 
-  constructor(private network:NetworkService,private toast:ToastedService) { }
+  makeClass: FormGroup;
+
+  constructor(private network:NetworkService,private toast:ToastedService) {
+    this.makeClass = new FormGroup({
+      SelectUser: new FormControl(null,Validators.required),
+      Id: new FormControl('',Validators.required),
+      Name: new FormControl('',Validators.required),
+      SelectClass: new FormControl(null,Validators.required)
+    });
+  }
 
   ngOnInit() { }
 

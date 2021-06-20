@@ -8,7 +8,7 @@
 <ion-content>
   <ion-button shape="round" expand="full" (click)="showAnnounce()">Show Annoucement</ion-button>
   <div *ngIf="showAnno" class="forShow">
-    <p *ngFor="let a of annouce">{{a.annoucement}}</p>
+    <p>{{annouce.annoucement}}</p>
   </div>
   <ion-card>
     <ion-item>

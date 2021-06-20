@@ -4,13 +4,23 @@ ion-button{
 
 .forShow{
     border: 1px solid black;
+    background: whitesmoke;
 }
 
 ion-card{
     margin-top: 20px;
     height: 220px;
+    --background: #f4f5f8;
     ion-textarea{
         height: 100px;
         border: 1px solid black;
     }
+    ion-item{
+        --background: #f4f5f8;
+    }
 }
+
+ion-content{
+    --background: linear-gradient(rgba(202, 199, 199, 0.671),rgba(0, 0, 0, 0.897));
+}
+

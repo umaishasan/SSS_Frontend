@@ -7,3 +7,11 @@ ion-button{
     font-size: 25px;
     border-bottom: 1px solid black;
 }
+
+ion-content{
+    --background: linear-gradient(rgba(202, 199, 199, 0.671),rgba(0, 0, 0, 0.897));
+}
+
+ion-item{
+    --background: #f4f5f8;
+}

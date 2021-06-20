@@ -7,3 +7,19 @@ ion-button{
     width: 45%;
     margin: 10px;
 }
+
+span{
+    color: red;
+    font-size: x-small;
+}
+
+ion-content{
+    --background: linear-gradient(rgba(202, 199, 199, 0.671),rgba(0, 0, 0, 0.897));
+}
+
+ion-card{
+    --background: #f4f5f8;
+    ion-item{
+        --background: #f4f5f8;
+    }
+}

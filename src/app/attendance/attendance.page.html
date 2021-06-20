@@ -16,24 +16,20 @@
   </ion-segment>
 
   <div *ngIf="elementType=='Teacher'">
-    <ion-list>
       <ion-radio-group (ionChange)="classSelect($event)">
         <ion-item *ngFor="let i of classs">
           <ion-label>{{i.name}}</ion-label>
           <ion-radio slot="end" mode="ios" value="{{i.class}}"></ion-radio>
         </ion-item>
       </ion-radio-group>
-    </ion-list>
   </div>
 
   <div *ngIf="elementType=='Student'">
-    <ion-list>
       <ion-radio-group (ionChange)="classSelect($event)">
         <ion-item *ngFor="let i of classs">
           <ion-label>{{i.name}}</ion-label>
           <ion-radio slot="end" mode="ios" value="{{i.class}}"></ion-radio>
         </ion-item>
       </ion-radio-group>
-    </ion-list>
   </div>
 </ion-content>

@@ -17,6 +17,7 @@ export class DairyPage implements OnInit {
   datasF: any;
   sSudent: any;
   classs: any;
+  divi: boolean = false;
 
   constructor(private network: NetworkService, private saveData: ForSaveService) { 
     this.idCall = this.saveData.pid;
@@ -39,6 +40,7 @@ export class DairyPage implements OnInit {
         });
       }
     }
+    this.divi = true;
   }
 
 }

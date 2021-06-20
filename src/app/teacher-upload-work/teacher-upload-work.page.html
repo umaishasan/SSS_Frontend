@@ -22,6 +22,7 @@
     <div class="forCenter">
       <h4 class="forGap">Online Class</h4>
       <ion-item>
+        <ion-label>Class</ion-label>
         <ion-select [(ngModel)]="selectCO" (ionChange)=" AccordingtoClassSubjectForHomeO()" placeholder="Select Class">
           <ion-select-option *ngFor="let i of classesForHome;" value="{{i.id}}">{{i.name}}</ion-select-option>
         </ion-select>
@@ -33,21 +34,25 @@
     <div class="forCenter">
       <h4 class="forGap">Upload</h4>
       <ion-item>
+        <ion-label>Class</ion-label>
         <ion-select [(ngModel)]="selectCU" (ionChange)=" AccordingtoClassSubjectForHomeU()" placeholder="Select Class">
           <ion-select-option *ngFor="let i of classesForHome;" value="{{i.id}}">{{i.name}}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item *ngIf="showSubjectO">
+        <ion-label>Subject</ion-label>
         <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
           <ion-select-option *ngFor="let i of subjectOE;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item *ngIf="showSubjectN">
+        <ion-label>Subject</ion-label>
         <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
           <ion-select-option *ngFor="let i of subjectN;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item *ngIf="showSubjectT">
+        <ion-label>Subject</ion-label>
         <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
           <ion-select-option *ngFor="let i of subjectT;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
@@ -60,26 +65,31 @@
     <div class="forCenter">
       <h4 class="forGap">Download</h4>
       <ion-item>
+        <ion-label>Class</ion-label>
         <ion-select [(ngModel)]="selectCD" (ionChange)="AccordingtoClassSubjectForHomeD()" placeholder="Select Class">
           <ion-select-option *ngFor="let i of classesForHome;" value="{{i.id}}">{{i.name}}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item *ngIf="showSubjectO">
+        <ion-label>Subject</ion-label>
         <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
           <ion-select-option *ngFor="let i of subjectOE;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item *ngIf="showSubjectN">
+        <ion-label>Subject</ion-label>
         <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
           <ion-select-option *ngFor="let i of subjectN;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item *ngIf="showSubjectT">
+        <ion-label>Subject</ion-label>
         <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
           <ion-select-option *ngFor="let i of subjectT;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item *ngIf="selectCD">
+        <ion-label>Student</ion-label>
         <ion-select [(ngModel)]="StudentSelect" placeholder="Select Student">
           <ion-select-option *ngFor="let i of StudentList" value="{{i.id}}">{{i.name}}</ion-select-option>
         </ion-select>
@@ -91,21 +101,25 @@
   <div *ngIf="elementType=='quiz'">
     <ion-card>
       <ion-item>
+        <ion-label>Class</ion-label>
         <ion-select [(ngModel)]="selectC" (ionChange)=" AccordingtoClassSubjectForQuiz()" placeholder="Select Class">
           <ion-select-option *ngFor="let i of classesForQuiz;" value="{{i.id}}">{{i.name}}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item *ngIf="showSubjectO">
+        <ion-label>Student</ion-label>
         <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
           <ion-select-option *ngFor="let i of subjectOE;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item *ngIf="showSubjectN">
+        <ion-label>Student</ion-label>
         <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
           <ion-select-option *ngFor="let i of subjectN;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item *ngIf="showSubjectT">
+        <ion-label>Student</ion-label>
         <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
           <ion-select-option *ngFor="let i of subjectT;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
@@ -125,11 +139,13 @@
   <div *ngIf="elementType=='result'">
     <ion-card>
       <ion-item>
+        <ion-label>Class</ion-label>
         <ion-select [(ngModel)]="selectC" (ionChange)=" AccordingtoClassSubjectForResult()" placeholder="Select Class">
           <ion-select-option *ngFor="let i of classesForResult;" value="{{i.id}}">{{i.name}}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
+        <ion-label>Student</ion-label>
         <ion-select [(ngModel)]="sSudent" placeholder="Select Student">
           <ion-select-option *ngFor="let i of dataa" value="{{i.id}}">{{i.name}}</ion-select-option>
         </ion-select>

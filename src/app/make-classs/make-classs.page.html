@@ -4,32 +4,36 @@
     <ion-menu-button slot="start"></ion-menu-button>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-  <ion-card>
-    <ion-item>
-      <ion-label>User</ion-label>
-      <ion-select [(ngModel)]="selectU" placeholder="Select User">
-        <ion-select-option value="Student">Student</ion-select-option>
-        <ion-select-option value="Teacher">Teacher</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-input type="number" [(ngModel)]="id" placeholder="Enter Id"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="text" [(ngModel)]="name" placeholder="Enter Name"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Class</ion-label>
-      <ion-select [(ngModel)]="selectC" placeholder="Select Class">
-        <ion-select-option *ngFor="let i of classes;" value="{{i.class}}">{{i.name}}</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </ion-card>
-
+  <form [formGroup]="makeClass" (ngSubmit)="submit()">
+    <ion-card>
+      <ion-item>
+        <ion-label>User</ion-label>
+        <ion-select [(ngModel)]="selectU" formControlName="SelectUser" placeholder="Select User">
+          <ion-select-option value="Student">Student</ion-select-option>
+          <ion-select-option value="Teacher">Teacher</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <span *ngIf="makeClass.get('SelectUser').hasError('required') && makeClass.get('SelectUser').touched">User should not be empty</span>
+      <ion-item>
+        <ion-input type="number" [(ngModel)]="id" formControlName="Id" placeholder="Enter Id"></ion-input>
+      </ion-item>
+      <span *ngIf="makeClass.get('Id').hasError('required') && makeClass.get('Id').touched">Id should not be empty</span>
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="name" formControlName="Name" placeholder="Enter Name"></ion-input>
+      </ion-item>
+      <span *ngIf="makeClass.get('Name').hasError('required') && makeClass.get('Name').touched">Name should not be empty</span>
+      <ion-item>
+        <ion-label>Class</ion-label>
+        <ion-select [(ngModel)]="selectC" formControlName="SelectClass" placeholder="Select Class">
+          <ion-select-option *ngFor="let i of classes;" value="{{i.class}}">{{i.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <span *ngIf="makeClass.get('SelectClass').hasError('required') && makeClass.get('SelectClass').touched">Class should not be empty</span>
+    </ion-card>
+  </form>
   <div class="samePlace">
-    <ion-button shape="round" expand="full" (click)="submit()">Add</ion-button>
+    <ion-button type="submit" shape="round" expand="full" [disabled]="!makeClass.valid">Add</ion-button>
     <ion-button shape="round" expand="full" (click)="remove()">Remove</ion-button>
   </div>
 </ion-content>

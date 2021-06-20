@@ -6,21 +6,26 @@
 </ion-header>
 
 <ion-content>
-  <div *ngFor="let datas of datas">
-    <ion-item>
-      <ion-label><b>Name:</b> {{datas.name}}</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label><b>Id:</b> {{datas.id}}</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label><b>Gender:</b> {{datas.gender}}</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label><b>Email:</b> {{datas.email}}</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label><b>Phone:</b> {{datas.phone}}</ion-label>
-    </ion-item>
+  <div *ngFor="let datas of datas" class="cardCntr">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Profile</ion-card-title>
+      </ion-card-header>
+      <ion-item>
+        <ion-label><b>Name:</b> {{datas.name}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label><b>Id:</b> {{datas.id}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label><b>Gender:</b> {{datas.gender}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label><b>Email:</b> {{datas.email}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label><b>Phone:</b> {{datas.phone}}</ion-label>
+      </ion-item>
+    </ion-card>
   </div>
 </ion-content>
