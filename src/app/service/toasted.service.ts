@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ToastedService {
+  isLoading: boolean = false;
 
-  constructor(public toastController: ToastController,public alrtCtrl: AlertController,) { }
+  constructor(public toastController: ToastController,public alrtCtrl: AlertController,public loadCtrl: LoadingController) { }
 
   async showToast(messages) {
     const toast = await this.toastController.create({
@@ -24,6 +25,25 @@ export class ToastedService {
       buttons: ['OK']
     });
     await err.present();
+  }
+
+  async loadControlShow(time){
+    this.isLoading = true;
+    return await this.loadCtrl.getTop().then(hasload =>{
+      if(!hasload){
+        this.loadCtrl.create({
+          spinner: 'crescent',
+          message: 'please wait...',
+          translucent: true,
+          duration: time
+        }).then(loading => loading.present());
+      }
+    });
+  }
+
+  async loadControlDismiss(){
+    this.isLoading = false;
+    return await this.loadCtrl.dismiss().then(() => console.log('dismissed'));
   }
 
 }

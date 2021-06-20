@@ -45,6 +45,7 @@ export class VoucherPage implements OnInit {
 
   download() {
     console.log(this.Voucher.data);
+    this.toast.loadControlShow(5000);
     let utf8 = new Uint8Array(this.Voucher.data);
     console.log("utf8: ", utf8);
     let binaryArray = utf8.buffer;
@@ -54,6 +55,7 @@ export class VoucherPage implements OnInit {
     let result = this.file.createDir(this.file.externalDataDirectory, "Voucher", true);
     result.then(data => {
       this.dirPath = data.toURL();
+      this.toast.loadControlDismiss();
       this.toast.alertMessage("Directory path", "Directory created at: " + this.dirPath);
       this.file.writeFile(this.dirPath, "Voucher.pdf", blob, { replace: false });
       this.toast.alertMessage("File path", "File created at: " + this.dirPath);

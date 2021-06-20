@@ -46,6 +46,7 @@ export class GenerateCardPage implements OnInit {
 
   downloadCard() {
     console.log(this.generatedImage);
+    this.toast.loadControlShow(5000);
     for (let i = 0; i < this.generatedImage.length; i++) {
       var realImg = this.generatedImage[i].split(',');
       console.log(realImg);
@@ -65,6 +66,7 @@ export class GenerateCardPage implements OnInit {
       let result = this.file.createDir(this.file.externalDataDirectory, "SaveCard", true);
       result.then(data => {
         this.dirPath = data.toURL();
+        this.toast.loadControlDismiss();
         this.toast.alertMessage("Directory path", "Directory created at: " + this.dirPath);
         this.file.writeFile(this.dirPath, "Card.png", blob, { replace: true });
         this.toast.alertMessage("File path", "File created at: " + this.dirPath);

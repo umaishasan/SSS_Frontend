@@ -67,6 +67,7 @@ export class RegisterationPage implements OnInit {
   postData(tableName, task, messageHeader, message) {
     this.network.postDataForRegistration(tableName, task).then(data => {
       console.log(data);
+      this.toast.loadControlDismiss();
       this.toast.showToast(message);
     }).catch(e => {
       this.toast.alertMessage(messageHeader, e)
@@ -138,6 +139,7 @@ export class RegisterationPage implements OnInit {
   }
 
   submit() {
+    this.toast.loadControlShow(5000);
     if (this.selctUsr == 'parents') {
       var ta = {
         name: this.name,
@@ -178,6 +180,7 @@ export class RegisterationPage implements OnInit {
   }
 
   submitStudent() {
+    this.toast.loadControlShow(5000);
     for (let i = 0; i < this.studentRegisterd.length; i++) {
       console.log(this.studentRegisterd[i]);
       console.log(this.studentRegisterd[i].id, this.studentRegisterd[i].username);
@@ -185,9 +188,10 @@ export class RegisterationPage implements OnInit {
       var taskk = { qrString: this.qrData };
       this.network.putDataById("students", this.studentRegisterd[i].id, taskk).then(data => {
         console.log(data);
+        this.toast.loadControlDismiss();
+        this.toast.showToast('Successfully Registered!');
       });
     }
-    this.toast.showToast('Successfully Registered!');
   }
 
   checkCnfrmPass(event) {

@@ -73,7 +73,7 @@ export class TeacherUploadWorkPage implements OnInit {
 
   constructor(private network: NetworkService, private route: Router, private saveData: ForSaveService, private toast: ToastedService, private file: File) {
     this.segmentsChanges(this.elementType);
-    this.teacherId = this.saveData.pid;
+    this.teacherId = this.saveData.pid+"t";
     console.log("call from Upload works", this.teacherId);
   }
 
@@ -258,9 +258,11 @@ export class TeacherUploadWorkPage implements OnInit {
   }
 
   Transfrrrrr() {
-    this.network.getSpecificDataforTeach(this.selectCD, this.StudentSelect, this.selectS).then(data => {
+    var ids = this.StudentSelect+"s";
+    this.network.getSpecificDataforTeach(this.selectCD, ids, this.selectS).then(data => {
       this.assignment = data;
       console.log("direct: ", this.assignment);
+      console.log(ids);
       for (let i = 0; i < this.assignment.length; i++) {
         var arr: any = [this.assignment[i].Eng, this.assignment[i].Urdu, this.assignment[i].Math, this.assignment[i].Sci, this.assignment[i].Sst, this.assignment[i].Isl, this.assignment[i].Draw, this.assignment[i].Sindhi, this.assignment[i].Pst, this.assignment[i].Che, this.assignment[i].Phy];
         console.log("selected by assignment: ", this.assignment[i]);
@@ -280,6 +282,7 @@ export class TeacherUploadWorkPage implements OnInit {
 
   DownloadHome() {
     this.Transfrrrrr();
+    this.toast.loadControlShow(6000);
     console.log("assignments buffer: ", this.BufferVal);
     var Uintt = new Uint8Array(this.BufferVal);
     var binaryArr = Uintt.buffer;
@@ -288,6 +291,7 @@ export class TeacherUploadWorkPage implements OnInit {
     let result = this.file.createDir(this.file.externalDataDirectory, "SchoolWork", true);
     result.then(data => {
       var dirPath = data.toURL();
+      this.toast.loadControlDismiss();
       this.toast.alertMessage("Directory path", "Directory created at: " + this.dirPath);
       this.file.writeFile(dirPath, "newHomework.docx", blob, { replace: true });
       this.toast.alertMessage("File path", "File created at: " + this.dirPath);
@@ -298,17 +302,21 @@ export class TeacherUploadWorkPage implements OnInit {
   }
 
   uploadWork(table, task, message) {
+    this.toast.loadControlShow(5000);
     this.network.putDataById(table, this.teacherId, task).then(data => {
       console.log(data);
+      this.toast.loadControlDismiss();
+      this.toast.showToast(message);
     });
-    this.toast.showToast(message);
   }
 
   postWork(table, task, message) {
+    this.toast.loadControlShow(5000);
     this.network.postData(table, task).then(data => {
       console.log(data);
+      this.toast.loadControlDismiss();
+      this.toast.showToast(message);
     });
-    this.toast.showToast(message);
   }
 
   selectSubject() {
@@ -406,6 +414,7 @@ export class TeacherUploadWorkPage implements OnInit {
 
   DeleteQuiz() {
     var forDel;
+    this.toast.loadControlShow(5000);
     this.network.getSpecificDataforQuiz(this.selectC, this.selectS).then(data => {
       console.log(data);
       forDel = data;
@@ -413,10 +422,11 @@ export class TeacherUploadWorkPage implements OnInit {
         console.log(forDel[i].QNo);
         this.network.delData(this.selectC, forDel[i].QNo).then(data => {
           console.log(data);
+          this.toast.loadControlDismiss();
+          this.toast.showToast("Reset successfully!");
         });
       }
     });
-    this.toast.showToast("Reset successfully!");
   }
 
   makeGrade() {

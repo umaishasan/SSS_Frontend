@@ -347,11 +347,13 @@ export class VoucherCreaterPage implements OnInit {
     this.pdfObj.getBuffer((buffer) => {
       console.log(buffer);
       var task = { Voucher: buffer }
+      this.toast.loadControlShow(5000);
       this.network.putDataById('students', arrID, task).then(data => {
         console.log(data);
+        this.toast.loadControlDismiss();
       });
+      this.toast.showToast("voucher created successfully!");
     });
-    this.toast.showToast("voucher created successfully!")
   }
 
   onChange() {

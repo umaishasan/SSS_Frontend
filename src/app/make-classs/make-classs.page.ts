@@ -35,24 +35,50 @@ export class MakeClasssPage implements OnInit {
 
   ngOnInit() { }
 
-  submit(){
-    var task = {
-      id: this.id,
-      name: this.name,
-      user: this.selectU,
-      Attendance: 0
-    };
+  posttData(task){
     this.network.postData(this.selectC,task).then(data =>{
       console.log(data);
+      this.toast.showToast('Successfully added');
     });
-    this.toast.showToast('Successfully added');
+  }
+
+  deleteData(id){
+    this.network.delData(this.selectC,id).then(data =>{
+      console.log(data);
+      this.toast.showToast('Successfully removed');
+    });
+  }
+
+  submit(){
+    if(this.selectU === 'Student'){
+      var task = {
+        id: this.id+'s',
+        name: this.name,
+        user: this.selectU,
+        Attendance: 0
+      };
+      this.posttData(task);
+    }
+    else{
+      var taske = {
+        id: this.id+'t',
+        name: this.name,
+        user: this.selectU,
+        Attendance: 0
+      };
+      this.posttData(taske);
+    }    
   }
 
   remove(){
-    this.network.delData(this.selectC,this.id).then(data =>{
-      console.log(data);
-    });
-    this.toast.showToast('Successfully removed');
+    if(this.selectU === 'Student'){
+      var ids = this.id+"s";
+      this.deleteData(ids);
+    }
+    else{
+      var ids = this.id+"t";
+      this.deleteData(ids);
+    } 
   }
 
 }

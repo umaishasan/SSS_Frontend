@@ -31,9 +31,9 @@
       </ion-item>
       <span *ngIf="makeClass.get('SelectClass').hasError('required') && makeClass.get('SelectClass').touched">Class should not be empty</span>
     </ion-card>
+    <div class="samePlace">
+      <ion-button type="submit" shape="round" expand="full" [disabled]="!makeClass.valid">Add</ion-button>
+      <ion-button type="submit" shape="round" expand="full" (click)="remove()">Remove</ion-button>
+    </div>
   </form>
-  <div class="samePlace">
-    <ion-button type="submit" shape="round" expand="full" [disabled]="!makeClass.valid">Add</ion-button>
-    <ion-button shape="round" expand="full" (click)="remove()">Remove</ion-button>
-  </div>
 </ion-content>

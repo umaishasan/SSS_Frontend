@@ -38,10 +38,10 @@ export class ClassedPage implements OnInit {
     this.resultdata = this.saveData.resultWork;
     this.segmentsChanges(this.elementType);
     this.callProfile = this.saveData.ForStuDataSave;
-    console.log(this.callProfile.id, this.callProfile.class);
+    console.log(this.callProfile.id+"s", this.callProfile.class);
     this.AccordingtoClassSubjectForHome();
     var arr = [];
-    this.network.getDataById("class" + this.callProfile.class + "s", this.callProfile.id).then(data => {
+    this.network.getDataById("class" + this.callProfile.class + "s", this.callProfile.id+"s").then(data => {
       arr.push(data);
       console.log("From Constructor of dataae: ", arr);
     });
@@ -96,7 +96,7 @@ export class ClassedPage implements OnInit {
         Attendance: this.studentClassData[i].Attendance += this.attendance
       };
       console.log(task);
-      this.network.putDataById("class" + this.callProfile.class + "s", this.callProfile.id, task).then(data => {
+      this.network.putDataById("class" + this.callProfile.class + "s", this.callProfile.id+"s", task).then(data => {
         console.log(data);
       });
     }
@@ -121,6 +121,7 @@ export class ClassedPage implements OnInit {
   }
 
   DownloadHome() {
+    this.toast.loadControlShow(5000);
     console.log(this.BufferVal);
     var Uintt = new Uint8Array(this.BufferVal);
     console.log(Uintt);
@@ -131,6 +132,7 @@ export class ClassedPage implements OnInit {
     let result = this.file.createDir(this.file.externalDataDirectory, "SchoolHomework", true);
     result.then(data => {
       this.dirPath = data.toURL();
+      this.toast.loadControlDismiss();
       this.toast.alertMessage("Directory path", "Directory created at: " + this.dirPath);
       this.file.writeFile(this.dirPath, "newHomework.docx", blob, { replace: true });
       this.toast.alertMessage("File path", "File created at: " + this.dirPath);
@@ -160,10 +162,19 @@ export class ClassedPage implements OnInit {
   }
 
   uploadWork(table, task, message) {
+    this.network.putDataById(table, this.callProfile.id+"s", task).then(data => {
+      console.log(data);
+      this.toast.loadControlDismiss();
+      this.toast.showToast(message);
+    });
+  }
+
+  uploadWorkForResult(table, task, message) {
     this.network.putDataById(table, this.callProfile.id, task).then(data => {
       console.log(data);
+      this.toast.loadControlDismiss();
+      this.toast.showToast(message);
     });
-    this.toast.showToast(message);
   }
 
   selectSubject() {
@@ -248,15 +259,17 @@ export class ClassedPage implements OnInit {
   }
 
   uploadHome() {
+    this.toast.loadControlShow(5000);
     console.log("from button submit:", this.filesave);
     this.selectSubject();
   }
 
   submitQuiz() {
+    this.toast.loadControlShow(5000);
     console.log(this.score);
     var task = {
       QuizScore: this.score
     };
-    this.uploadWork("result-class" + this.callProfile.class + "s", task, "Quiz uploaded successfully!");
+    this.uploadWorkForResult("result-class" + this.callProfile.class + "s", task, "Quiz uploaded successfully!");
   }
 }
