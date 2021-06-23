@@ -8,7 +8,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-item *ngFor="let items of itemData">
+  <ion-item *ngFor="let items of itemData" [hidden]="items.quantity==0">
     <ion-label>{{items.product_name}}</ion-label>
     <ion-label style="text-align: right;">{{items.product_price}}/-</ion-label>
   </ion-item>

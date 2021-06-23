@@ -3,6 +3,10 @@ import { NetworkService } from '../service/network.service';
 import { ToastedService } from '../service/toasted.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+interface Calss{
+  id: number,
+  name: string
+}
 @Component({
   selector: 'app-registeration',
   templateUrl: './registeration.page.html',
@@ -31,9 +35,11 @@ export class RegisterationPage implements OnInit {
   studentID: any[] = [];
   studentName: any[] = [];
   qrData: string;
-  class: string;
-  section: string;
+  selectclass: any;
+  selectsection: any;
   canvasImg: any;
+  clas: Calss[] = [{id: 1,name: 'Class1'},{id: 2,name: 'Class2'},{id: 3,name: 'Class3'},{id: 4,name: 'Class4'},{id: 5,name: 'Class5'},
+  {id: 6,name: 'Class6'},{id: 7,name: 'Class7'},{id: 8,name: 'Class8'},{id: 9,name: 'Class9'},{id: 10,name: 'Class10'},]
 
   RegisterFormStu: FormGroup;
   RegisterFormAll: FormGroup;
@@ -47,8 +53,8 @@ export class RegisterationPage implements OnInit {
       Name: new FormControl('', Validators.required),
       Age: new FormControl('', Validators.required),
       SelectGender: new FormControl(null, Validators.required),
-      Class: new FormControl('', Validators.required),
-      Section: new FormControl('', Validators.required),
+      SelectClass: new FormControl(null, Validators.required),
+      SelectSection: new FormControl(null, Validators.required),
       SelectParent: new FormControl(null, Validators.required)
     });
 
@@ -87,8 +93,8 @@ export class RegisterationPage implements OnInit {
       parentID: this.parentID.id,
       gender: this.Selectgender,
       age: this.age,
-      class: this.class,
-      section: this.section,
+      class: this.selectclass,
+      section: this.selectsection,
       studentsPic: this.canvasImg,
       ItemAmount: 0
     };

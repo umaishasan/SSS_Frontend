@@ -47,15 +47,22 @@
         </ion-button>
       </ion-item>
       <ion-item>
-        <ion-input type="number" formControlName="Class" [(ngModel)]="class" placeholder="Enter Class"></ion-input>
+        <ion-label>Class</ion-label>
+        <ion-select [(ngModel)]="selectclass" formControlName="SelectClass">
+          <ion-select-option *ngFor="let i of clas" value="{{i.id}}">{{i.name}}</ion-select-option>
+        </ion-select>
       </ion-item>
-      <span *ngIf="RegisterFormStu.get('Class').hasError('required') && RegisterFormStu.get('Class').touched">class
+      <span *ngIf="RegisterFormStu.get('SelectClass').hasError('required') && RegisterFormStu.get('SelectClass').touched">class
         should not be empty</span>
       <ion-item>
-        <ion-input type="text" formControlName="Section" [(ngModel)]="section" placeholder="Enter Section"></ion-input>
+        <ion-label>Section</ion-label>
+        <ion-select [(ngModel)]="selectsection" formControlName="SelectSection">
+          <ion-select-option value="A">A</ion-select-option>
+          <ion-select-option value="B">B</ion-select-option>
+        </ion-select>
       </ion-item>
       <span
-        *ngIf="RegisterFormStu.get('Section').hasError('required') && RegisterFormStu.get('Section').touched">section
+        *ngIf="RegisterFormStu.get('SelectSection').hasError('required') && RegisterFormStu.get('SelectSection').touched">section
         should not be empty</span>
       <ion-item>
         <ion-label>Parent</ion-label>
