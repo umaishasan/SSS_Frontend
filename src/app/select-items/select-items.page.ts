@@ -45,7 +45,7 @@ export class SelectItemsPage implements OnInit {
   }
 
   puttingData(tableName,id,task){
-    this.network.putDataById(tableName, id, task).then(data => {
+    this.network.putDataById(tableName, id, task,'Uploading Error','Please try again!').then(data => {
       console.log("Succesfully update student itemAmount", data);
     });
   }

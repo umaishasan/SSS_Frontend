@@ -42,7 +42,7 @@ export class ScannerPage2Page implements OnInit {
         console.log(this.canteenData[i]);
         console.log(this.canteenData[i].id,this.canteenData[i].username,this.canteenData[i].wallet);
         var tsk = {wallet: this.canteenData[i].wallet += this.showAmount}
-        this.network.putDataById('canteens',this.canteenData[i].id,tsk).then(data =>{
+        this.network.putDataById('canteens',this.canteenData[i].id,tsk,'Uploading Error','Please try again!').then(data =>{
           console.log(data);
         });
       }

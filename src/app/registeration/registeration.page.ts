@@ -70,13 +70,11 @@ export class RegisterationPage implements OnInit {
 
   ngOnInit() { }
 
-  postData(tableName, task, messageHeader, message) {
-    this.network.postDataForRegistration(tableName, task).then(data => {
+  postData(tableName, task, message) {
+    this.network.postDataForRegistration(tableName, task,'Registration Error','Please try again!').then(data => {
       console.log(data);
       this.toast.loadControlDismiss();
       this.toast.showToast(message);
-    }).catch(e => {
-      this.toast.alertMessage(messageHeader, e)
     });
   }
 
@@ -87,18 +85,20 @@ export class RegisterationPage implements OnInit {
         this.parentID = this.AllParent[i];
       }
     }
+    console.log(this.parentID.id,this.parentID.name);
     var task = {
       username: this.name,
       parentNAME: this.parentID.name,
       parentID: this.parentID.id,
       gender: this.Selectgender,
       age: this.age,
-      class: this.selectclass,
+      class: parseInt(this.selectclass),
       section: this.selectsection,
       studentsPic: this.canvasImg,
       ItemAmount: 0
     };
-    this.network.postDataForRegistration("students", task).then(data => {
+    console.log(task);
+    this.network.postDataForRegistration("students", task,'Registration Error','Please try again!').then(data => {
       this.studentRegisterd.push(data);
       console.log(this.studentRegisterd);
     });
@@ -157,8 +157,8 @@ export class RegisterationPage implements OnInit {
         DeductAmount: 0
       };
       var sk = { email: this.email, password: this.pass, user: this.selctUsr, name: this.name };
-      this.postData(this.selctUsr, ta, "Registration Error", "Successfully Registered!");
-      this.postData("all-users", sk, "Registration Error", "Successfully Registered!");
+      this.postData(this.selctUsr, ta, "Successfully Registered!");
+      this.postData("all-users", sk, "Successfully Registered!");
     } else if (this.selctUsr == 'canteens') {
       var ts = {
         name: this.name,
@@ -169,8 +169,8 @@ export class RegisterationPage implements OnInit {
         wallet: 0
       };
       var sk = { email: this.email, password: this.pass, user: this.selctUsr, name: this.name };
-      this.postData(this.selctUsr, ts, "Registration Error", "Successfully Registered!");
-      this.postData("all-users", sk, "Registration Error", "Successfully Registered!");
+      this.postData(this.selctUsr, ts, "Successfully Registered!");
+      this.postData("all-users", sk, "Successfully Registered!");
     } else {
       var tk = {
         name: this.name,
@@ -180,8 +180,8 @@ export class RegisterationPage implements OnInit {
         password: this.pass
       };
       var sk = { email: this.email, password: this.pass, user: this.selctUsr, name: this.name };
-      this.postData(this.selctUsr, tk, "Registration Error", "Successfully Registered!");
-      this.postData("all-users", sk, "Registration Error", "Successfully Registered!");
+      this.postData(this.selctUsr, tk, "Successfully Registered!");
+      this.postData("all-users", sk, "Successfully Registered!");
     }
   }
 
@@ -192,7 +192,7 @@ export class RegisterationPage implements OnInit {
       console.log(this.studentRegisterd[i].id, this.studentRegisterd[i].username);
       this.generateQRCode(this.studentRegisterd[i].id);
       var taskk = { qrString: this.qrData };
-      this.network.putDataById("students", this.studentRegisterd[i].id, taskk).then(data => {
+      this.network.putDataById("students", this.studentRegisterd[i].id, taskk,'Uploading Error','Please try again!').then(data => {
         console.log(data);
         this.toast.loadControlDismiss();
         this.toast.showToast('Successfully Registered!');

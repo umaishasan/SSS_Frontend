@@ -31,7 +31,7 @@ export class EditprofilePage implements OnInit {
       phone: this.phone,
       password: this.pass
     };
-    this.network.putDataById("all-users",this.id,task).then(data =>{
+    this.network.putDataById("all-users",this.id,task,'Uploading Error','Please try again!').then(data =>{
       console.log(data);
     });
     this.toast.showToast('Profile update successfully!')

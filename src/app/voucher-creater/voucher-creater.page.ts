@@ -348,7 +348,7 @@ export class VoucherCreaterPage implements OnInit {
       console.log(buffer);
       var task = { Voucher: buffer }
       this.toast.loadControlShow(5000);
-      this.network.putDataById('students', arrID, task).then(data => {
+      this.network.putDataById('students', arrID, task,'Uploading Error','Please try again!').then(data => {
         console.log(data);
         this.toast.loadControlDismiss();
       });

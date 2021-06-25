@@ -14,15 +14,19 @@ export class ItemModalPage implements OnInit {
   name: string;
   price: number;
   quantity: number;
+  itemss: any;
 
   ItemForm: FormGroup;
 
   constructor(private modalCtrl:ModalController,private toast: ToastedService,private network:NetworkService) { 
     this.ItemForm = new FormGroup({
-      Id: new FormControl('', Validators.required),
       Name: new FormControl('', Validators.required),
       Price: new FormControl(null, Validators.required),
       Quantity: new FormControl('', Validators.required),
+    });
+    this.network.getData('items').then(data =>{
+      this.itemss = data;
+      console.log(this.itemss);
     });
   }
 
@@ -34,40 +38,46 @@ export class ItemModalPage implements OnInit {
   
   Add(){
     var item = {
-      product_id: this.id,
       product_name: this.name,
       product_price: this.price,
       quantity: this.quantity
     };
-    this.network.postData('items',item).then(data =>{
+    this.network.postData('items',item,'Item added Error','Please try again!').then(data =>{
       console.log(data);
       this.toast.showToast('Item successfully added!');
     });
   }
 
   Update(){
-    var item = {
-      product_id: this.id,
-      product_name: this.name,
-      product_price: this.price,
-      quantity: this.quantity
-    };
-    this.network.putData('items',this.id,item).then(data =>{
-      console.log(data);
-      this.toast.showToast('Successfully updated!');
-    }).catch(err =>{
-      this.toast.alertMessage("Update Error","Id and Item should be provide.");
-    });
-    
+    for(let i=0;i<this.itemss.length;i++){
+      if(this.itemss[i].product_name === this.name){
+        console.log(this.itemss[i]);
+        console.log(this.itemss[i].product_id);
+        var item = {
+          product_name: this.name,
+          product_price: this.price,
+          quantity: this.quantity
+        };
+        this.network.putData('items',this.itemss[i].product_id,item,'Update Error','You may select invalid item.').then(data =>{
+          console.log(data);
+          this.toast.showToast('Successfully updated!');
+        });
+      }
+    }
   }
 
   Delete(){
-    this.network.delData('items',this.id).then(data =>{
-      console.log(data);
-      this.toast.showToast('Successfully deleted!');
-    }).catch(err =>{
-      this.toast.alertMessage("Delete Error","Id should be provide.");
-    });
+    for(let i=0;i<this.itemss.length;i++){
+      if(this.itemss[i].product_name === this.name){
+        console.log(this.itemss[i]);
+        console.log(this.itemss[i].product_id);
+        this.network.delData('items',this.itemss[i].product_id,'Deleting Error','You may entered invalid item.').then(data =>{
+          console.log(data);
+          this.toast.showToast('Successfully deleted!');
+        });
+      }
+    }
+
   }
 
 }

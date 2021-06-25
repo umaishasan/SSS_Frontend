@@ -35,7 +35,7 @@ export class CheckAnnoucementPage implements OnInit {
   goToAnnoucement(){
     var id: number = parseInt(this.sc);
     var task = {id: id,annoucement: this.annoucement};
-    this.network.putData('annoucements',this.sc,task).then(data =>{
+    this.network.putData('annoucements',this.sc,task,'Sending Error','Please try again!').then(data =>{
       console.log(data);
       this.toast.showToast("Announcement send successfully!");
     });

@@ -8,12 +8,8 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="ItemForm" (ngSubmit)="Add()">
+  <form [formGroup]="ItemForm">
     <ion-card>
-      <ion-item>
-        <ion-input type="number" formControlName="Id" [(ngModel)]="id" placeholder="Enter Product Id"></ion-input>
-      </ion-item>
-      <span *ngIf="ItemForm.get('Id').hasError('required') && ItemForm.get('Id').touched">Product id should not be empty</span>
       <ion-item>
         <ion-input type="text" formControlName="Name" [(ngModel)]="name" placeholder="Enter Product Name"></ion-input>
       </ion-item>
@@ -27,10 +23,10 @@
       </ion-item>
       <span *ngIf="ItemForm.get('Quantity').hasError('required') && ItemForm.get('Quantity').touched">Quantity should not be empty</span>
     </ion-card>
+    <div class="cntrBtn">
+      <ion-button shape="round" class="btn" [disabled]="!ItemForm.valid" (click)="Add()">Add</ion-button>
+      <ion-button shape="round" class="btn" (click)="Update()">Update</ion-button>
+      <ion-button shape="round" class="btn" (click)="Delete()">Delete</ion-button>
+    </div>
   </form>
-  <div class="cntrBtn">
-    <ion-button shape="round" class="btn" [disabled]="!ItemForm.valid">Add</ion-button>
-    <ion-button shape="round" class="btn" (click)="Update()">Update</ion-button>
-    <ion-button shape="round" class="btn" (click)="Delete()">Delete</ion-button>
-  </div>
 </ion-content>

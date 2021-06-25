@@ -76,14 +76,14 @@ export class MakeClasssPage implements OnInit {
   ngOnInit() { }
 
   posttData(task){
-    this.network.postData(this.selectC,task).then(data =>{
+    this.network.postData(this.selectC,task,'Class Making Error','Please try again and fills all fields.').then(data =>{
       console.log(data);
       this.toast.showToast('Successfully added');
     });
   }
 
   deleteData(id){
-    this.network.delData(this.selectC,id).then(data =>{
+    this.network.delData(this.selectC,id,'Delete Error','Invalid selection of class or student/teacher').then(data =>{
       console.log(data);
       this.toast.showToast('Successfully removed');
     });

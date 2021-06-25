@@ -105,7 +105,7 @@ export class TeacherUploadWorkPage implements OnInit {
     for (let i = 0; i < this.teacherClassData.length; i++) {
         var task = { Attendance: this.teacherClassData[i].Attendance += this.attendance };
         console.log(task);
-        this.network.putDataById(this.selectCO, this.teacherId, task).then(data => {
+        this.network.putDataById(this.selectCO, this.teacherId, task,'Uploading Error','Please try again!').then(data => {
           console.log(data);
         });
     }
@@ -303,7 +303,7 @@ export class TeacherUploadWorkPage implements OnInit {
 
   uploadWork(table, task, message) {
     this.toast.loadControlShow(5000);
-    this.network.putDataById(table, this.teacherId, task).then(data => {
+    this.network.putDataById(table, this.teacherId, task,'Uploading Error','Please try again!').then(data => {
       console.log(data);
       this.toast.loadControlDismiss();
       this.toast.showToast(message);
@@ -312,7 +312,7 @@ export class TeacherUploadWorkPage implements OnInit {
 
   postWork(table, task, message) {
     this.toast.loadControlShow(5000);
-    this.network.postData(table, task).then(data => {
+    this.network.postData(table, task,'Uploading Error','Please try again and fills all fields.').then(data => {
       console.log(data);
       this.toast.loadControlDismiss();
       this.toast.showToast(message);
@@ -403,7 +403,7 @@ export class TeacherUploadWorkPage implements OnInit {
   submitQuiz() {
     var task = {
       Subject: this.selectS,
-      QNo: this.qno,
+      QNo: this.qno+this.selectS,
       Q: this.ques,
       Option1: this.op1,
       Option2: this.op2,
@@ -420,7 +420,7 @@ export class TeacherUploadWorkPage implements OnInit {
       forDel = data;
       for (let i = 0; i < forDel.length; i++) {
         console.log(forDel[i].QNo);
-        this.network.delData(this.selectC, forDel[i].QNo).then(data => {
+        this.network.delData(this.selectC, forDel[i].QNo,'Deleting Error','You may select invalid Q.No or subject.').then(data => {
           console.log(data);
           this.toast.loadControlDismiss();
           this.toast.showToast("Reset successfully!");

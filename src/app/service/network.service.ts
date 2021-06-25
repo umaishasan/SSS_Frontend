@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ToastedService } from './toasted.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class NetworkService {
   baseUrl: string = "";
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient,public alrt: ToastedService) {
     // this.baseUrl = "https://anda-sss.herokuapp.com/";
     this.baseUrl = 'http://[::1]:3000/';
   }
@@ -124,45 +125,47 @@ export class NetworkService {
     });
   }
 
-  postData(tableName, task) {
+  postData(tableName, task,ErrorMessageHeading,ErrorMessage) {
     return new Promise(resolve => {
       this.http.post(this.baseUrl + tableName, task).subscribe(data => {
         resolve(data);
       }, err => {
+        this.alrt.alertMessage(ErrorMessageHeading,ErrorMessage);
         console.log(err);
       });
     });
   }
 
-  postDataForRegistration(tableName, task) {
-    return new Promise((resolve,reject) => {
+  postDataForRegistration(tableName, task,ErrorMessageHeading,ErrorMessage) {
+    return new Promise(resolve => {
       this.http.post(this.baseUrl + tableName, task).subscribe(data => {
         resolve(data);
       }, err => {
-        reject(err);
+        this.alrt.alertMessage(ErrorMessageHeading,ErrorMessage);
         console.log(err);
       });
     });
   }
 
-  putData(tableName, id, task) {
+  putData(tableName, id, task,ErrorMessageHeading,ErrorMessage) {
     var table = tableName + '/' + id;
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve) => {
       this.http.put(this.baseUrl + table, task).subscribe(data => {
         resolve(data);
       }, err => {
-        reject(err);
+        this.alrt.alertMessage(ErrorMessageHeading,ErrorMessage);
         console.log(err);
       });
     });
   }
 
-  putDataById(tableName, id, task) {
+  putDataById(tableName, id, task,ErrorMessageHeading,ErrorMessage) {
     var table = tableName + '/' + id;
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.http.patch(this.baseUrl + table, task).subscribe(data => {
         resolve(data);
       }, err => {
+        this.alrt.alertMessage(ErrorMessageHeading,ErrorMessage);
         console.log(err);
       });
     });
@@ -178,13 +181,13 @@ export class NetworkService {
     });
   }
 
-  delData(tableName, id) {
+  delData(tableName, id,ErrorMessageHeading,ErrorMessage) {
     var table = tableName + '/' + id;
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve) => {
       this.http.delete(this.baseUrl + table).subscribe(data => {
         resolve(data);
       }, err => {
-        reject(err);
+        this.alrt.alertMessage(ErrorMessageHeading,ErrorMessage);
         console.log(err);
       });
     });
@@ -195,6 +198,9 @@ export class NetworkService {
     return new Promise((resolve) => {
       this.http.get(checkUrlid).subscribe(data => {
         resolve(data);
+      },err =>{
+        this.alrt.alertMessage('Login Error',"Incorrest Email or Password!");
+        console.log(err);
       });
     });
   }

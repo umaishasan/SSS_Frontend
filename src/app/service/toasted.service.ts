@@ -19,7 +19,6 @@ export class ToastedService {
 
   async alertMessage(header,message) {
     const err = await this.alrtCtrl.create({
-      cssClass: '.my-custom-class',
       header: header,
       message: message,
       buttons: ['OK']

@@ -96,7 +96,7 @@ export class ClassedPage implements OnInit {
         Attendance: this.studentClassData[i].Attendance += this.attendance
       };
       console.log(task);
-      this.network.putDataById("class" + this.callProfile.class + "s", this.callProfile.id+"s", task).then(data => {
+      this.network.putDataById("class" + this.callProfile.class + "s", this.callProfile.id+"s", task,'Uploading Error','Please try again!').then(data => {
         console.log(data);
       });
     }
@@ -162,7 +162,7 @@ export class ClassedPage implements OnInit {
   }
 
   uploadWork(table, task, message) {
-    this.network.putDataById(table, this.callProfile.id+"s", task).then(data => {
+    this.network.putDataById(table, this.callProfile.id+"s", task,'Uploading Error','Please try again!').then(data => {
       console.log(data);
       this.toast.loadControlDismiss();
       this.toast.showToast(message);
@@ -170,7 +170,7 @@ export class ClassedPage implements OnInit {
   }
 
   uploadWorkForResult(table, task, message) {
-    this.network.putDataById(table, this.callProfile.id, task).then(data => {
+    this.network.putDataById(table, this.callProfile.id, task,'Uploading Error','Please try again!').then(data => {
       console.log(data);
       this.toast.loadControlDismiss();
       this.toast.showToast(message);
