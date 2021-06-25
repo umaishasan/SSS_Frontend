@@ -4,6 +4,7 @@ import { File } from '@ionic-native/file/ngx';
 import { ForSaveService } from '../service/for-save';
 import { NetworkService } from '../service/network.service';
 import { ToastedService } from '../service/toasted.service';
+import { ViewChild, ElementRef, Renderer2 } from '@angular/core';
 
 interface Classe {
   id: string,
@@ -15,6 +16,12 @@ interface Classe {
   styleUrls: ['./teacher-upload-work.page.scss'],
 })
 export class TeacherUploadWorkPage implements OnInit {
+  @ViewChild('overlapAnimateO', { read: ElementRef }) overlapAnimateO: ElementRef;
+  @ViewChild('overlapAnimateU', { read: ElementRef }) overlapAnimateU: ElementRef;
+  @ViewChild('overlapAnimateD', { read: ElementRef }) overlapAnimateD: ElementRef;
+  arrowToggleiconO: 'chevron-down' | 'chevron-up' = 'chevron-down';
+  arrowToggleiconU: 'chevron-down' | 'chevron-up' = 'chevron-down';
+  arrowToggleiconD: 'chevron-down' | 'chevron-up' = 'chevron-down';
   //common
   elementType: 'home' | 'quiz' | 'result' = "home";
   teacherId: any;
@@ -71,9 +78,9 @@ export class TeacherUploadWorkPage implements OnInit {
   StudentSelect: any;
   BufferVal: any;
 
-  constructor(private network: NetworkService, private route: Router, private saveData: ForSaveService, private toast: ToastedService, private file: File) {
+  constructor(private network: NetworkService, private renderer: Renderer2, private route: Router, private saveData: ForSaveService, private toast: ToastedService, private file: File) {
     this.segmentsChanges(this.elementType);
-    this.teacherId = this.saveData.pid+"t";
+    this.teacherId = this.saveData.pid + "t";
     console.log("call from Upload works", this.teacherId);
   }
 
@@ -103,11 +110,11 @@ export class TeacherUploadWorkPage implements OnInit {
 
   openUrl() {
     for (let i = 0; i < this.teacherClassData.length; i++) {
-        var task = { Attendance: this.teacherClassData[i].Attendance += this.attendance };
-        console.log(task);
-        this.network.putDataById(this.selectCO, this.teacherId, task,'Uploading Error','Please try again!').then(data => {
-          console.log(data);
-        });
+      var task = { Attendance: this.teacherClassData[i].Attendance += this.attendance };
+      console.log(task);
+      this.network.putDataById(this.selectCO, this.teacherId, task, 'Uploading Error', 'Please try again!').then(data => {
+        console.log(data);
+      });
     }
     window.open('https://www.zoom.com', '_system', 'location=yes');
     this.toast.showToast("Class connected successfully!");
@@ -258,7 +265,7 @@ export class TeacherUploadWorkPage implements OnInit {
   }
 
   Transfrrrrr() {
-    var ids = this.StudentSelect+"s";
+    var ids = this.StudentSelect + "s";
     this.network.getSpecificDataforTeach(this.selectCD, ids, this.selectS).then(data => {
       this.assignment = data;
       console.log("direct: ", this.assignment);
@@ -303,7 +310,7 @@ export class TeacherUploadWorkPage implements OnInit {
 
   uploadWork(table, task, message) {
     this.toast.loadControlShow(5000);
-    this.network.putDataById(table, this.teacherId, task,'Uploading Error','Please try again!').then(data => {
+    this.network.putDataById(table, this.teacherId, task, 'Uploading Error', 'Please try again!').then(data => {
       console.log(data);
       this.toast.loadControlDismiss();
       this.toast.showToast(message);
@@ -312,7 +319,7 @@ export class TeacherUploadWorkPage implements OnInit {
 
   postWork(table, task, message) {
     this.toast.loadControlShow(5000);
-    this.network.postData(table, task,'Uploading Error','Please try again and fills all fields.').then(data => {
+    this.network.postData(table, task, 'Uploading Error', 'Please try again and fills all fields.').then(data => {
       console.log(data);
       this.toast.loadControlDismiss();
       this.toast.showToast(message);
@@ -403,7 +410,7 @@ export class TeacherUploadWorkPage implements OnInit {
   submitQuiz() {
     var task = {
       Subject: this.selectS,
-      QNo: this.qno+this.selectS,
+      QNo: this.qno + this.selectS,
       Q: this.ques,
       Option1: this.op1,
       Option2: this.op2,
@@ -420,7 +427,7 @@ export class TeacherUploadWorkPage implements OnInit {
       forDel = data;
       for (let i = 0; i < forDel.length; i++) {
         console.log(forDel[i].QNo);
-        this.network.delData(this.selectC, forDel[i].QNo,'Deleting Error','You may select invalid Q.No or subject.').then(data => {
+        this.network.delData(this.selectC, forDel[i].QNo, 'Deleting Error', 'You may select invalid Q.No or subject.').then(data => {
           console.log(data);
           this.toast.loadControlDismiss();
           this.toast.showToast("Reset successfully!");
@@ -515,5 +522,38 @@ export class TeacherUploadWorkPage implements OnInit {
     }
   }
 
+  arrowTogleO() {
+    if (this.arrowToggleiconO == 'chevron-down') {
+      this.arrowToggleiconO = 'chevron-up';
+      console.log('online div show', this.overlapAnimateO.nativeElement);
+      this.renderer.setStyle(this.overlapAnimateO.nativeElement, 'display', 'block');
+      this.renderer.setStyle(this.overlapAnimateO.nativeElement, 'animation', 'fade-in 1s');
+    } else {
+      this.arrowToggleiconO = 'chevron-down';
+      this.renderer.setStyle(this.overlapAnimateO.nativeElement, 'display', 'none');
+    }
+  }
+  arrowTogleU() {
+    if (this.arrowToggleiconU == 'chevron-down') {
+      this.arrowToggleiconU = 'chevron-up';
+      console.log('online div show', this.overlapAnimateU.nativeElement);
+      this.renderer.setStyle(this.overlapAnimateU.nativeElement, 'display', 'block');
+      this.renderer.setStyle(this.overlapAnimateU.nativeElement, 'animation', 'fade-in 1s');
+    } else {
+      this.arrowToggleiconU = 'chevron-down';
+      this.renderer.setStyle(this.overlapAnimateU.nativeElement, 'display', 'none');
+    }
+  }
+  arrowTogleD() {
+    if (this.arrowToggleiconD == 'chevron-down') {
+      this.arrowToggleiconD = 'chevron-up';
+      console.log('online div show', this.overlapAnimateD.nativeElement);
+      this.renderer.setStyle(this.overlapAnimateD.nativeElement, 'display', 'block');
+      this.renderer.setStyle(this.overlapAnimateD.nativeElement, 'animation', 'fade-in 1s');
+    } else {
+      this.arrowToggleiconD = 'chevron-down';
+      this.renderer.setStyle(this.overlapAnimateD.nativeElement, 'display', 'none');
+    }
+  }
 
 }

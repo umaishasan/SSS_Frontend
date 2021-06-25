@@ -20,63 +20,73 @@
 
   <div *ngIf="elementType=='home'">
     <div class="forCenter">
-      <h4 class="forGap">Online Class</h4>
-      <ion-button shape="round" (click)="openUrl()">
-        <ion-icon slot="start" name="link-outline"></ion-icon>Take Class
-      </ion-button>
+      <h4 class="forGap" (click)="arrowTogleO()">Online Class <ion-icon size="small" [name]="arrowToggleiconO">
+        </ion-icon>
+      </h4>
+      <div class="foranimate" #overlapAnimateO>
+        <ion-button shape="round" (click)="openUrl()">
+          <ion-icon slot="start" name="link-outline"></ion-icon>Take Class
+        </ion-button>
+      </div>
     </div>
     <div class="forCenter">
-      <h4 class="forGap">Download</h4>
-      <ion-item class="fixclor">
-        <ion-label>Teacher</ion-label>
-        <ion-select [(ngModel)]="selectTeacher" placeholder="Select Teacher">
-          <ion-select-option *ngFor="let i of homedata;" value="{{i.name}}">{{i.name}}</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item *ngIf="showSubjectO" class="fixclor">
-        <ion-label>Subject</ion-label>
-        <ion-select [(ngModel)]="selectS" (ionChange)="transferrr()" placeholder="Select Subject">
-          <ion-select-option *ngFor="let i of subjectOE;" value="{{i}}">{{i}}</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item *ngIf="showSubjectN" class="fixclor">
-        <ion-label>Subject</ion-label>
-        <ion-select [(ngModel)]="selectS" (ionChange)="transferrr()" placeholder="Select Subject">
-          <ion-select-option *ngFor="let i of subjectN;" value="{{i}}">{{i}}</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item *ngIf="showSubjectT" (ionChange)="transferrr()" class="fixclor">
-        <ion-label>Subject</ion-label>
-        <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
-          <ion-select-option *ngFor="let i of subjectT;" value="{{i}}">{{i}}</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-button shape="round" (click)="DownloadHome()">Download</ion-button>
+      <h4 class="forGap" (click)="arrowTogleD()">Download <ion-icon size="small" [name]="arrowToggleiconD"></ion-icon>
+      </h4>
+      <div class="foranimate" #overlapAnimateD>
+        <ion-item class="fixclor">
+          <ion-label>Teacher</ion-label>
+          <ion-select [(ngModel)]="selectTeacher" placeholder="Select Teacher">
+            <ion-select-option *ngFor="let i of homedata;" value="{{i.name}}">{{i.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="showSubjectO" class="fixclor">
+          <ion-label>Subject</ion-label>
+          <ion-select [(ngModel)]="selectS" (ionChange)="transferrr()" placeholder="Select Subject">
+            <ion-select-option *ngFor="let i of subjectOE;" value="{{i}}">{{i}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="showSubjectN" class="fixclor">
+          <ion-label>Subject</ion-label>
+          <ion-select [(ngModel)]="selectS" (ionChange)="transferrr()" placeholder="Select Subject">
+            <ion-select-option *ngFor="let i of subjectN;" value="{{i}}">{{i}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="showSubjectT" (ionChange)="transferrr()" class="fixclor">
+          <ion-label>Subject</ion-label>
+          <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
+            <ion-select-option *ngFor="let i of subjectT;" value="{{i}}">{{i}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-button shape="round" (click)="DownloadHome()">Download</ion-button>
+      </div>
     </div>
     <div class="forCenter">
-      <h4 class="forGap">Upload</h4>
-      <ion-item *ngIf="showSubjectO" class="fixclor">
-        <ion-label>Subject</ion-label>
-        <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
-          <ion-select-option *ngFor="let i of subjectOE;" value="{{i}}">{{i}}</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item *ngIf="showSubjectN" class="fixclor">
-        <ion-label>Subject</ion-label>
-        <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
-          <ion-select-option *ngFor="let i of subjectN;" value="{{i}}">{{i}}</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item *ngIf="showSubjectT" class="fixclor">
-        <ion-label>Subject</ion-label>
-        <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
-          <ion-select-option *ngFor="let i of subjectT;" value="{{i}}">{{i}}</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-button expand="full" fill="clear" style="width: 100%;">
-        <input type="file" id="file-input" (change)="fileUploads($event)">
-      </ion-button>
-      <ion-button shape="round" (click)="uploadHome()">Upload</ion-button>
+      <h4 class="forGap" (click)="arrowTogleU()">Upload <ion-icon size="small" [name]="arrowToggleiconU"></ion-icon>
+      </h4>
+      <div class="foranimate" #overlapAnimateU>
+        <ion-item *ngIf="showSubjectO" class="fixclor">
+          <ion-label>Subject</ion-label>
+          <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
+            <ion-select-option *ngFor="let i of subjectOE;" value="{{i}}">{{i}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="showSubjectN" class="fixclor">
+          <ion-label>Subject</ion-label>
+          <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
+            <ion-select-option *ngFor="let i of subjectN;" value="{{i}}">{{i}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="showSubjectT" class="fixclor">
+          <ion-label>Subject</ion-label>
+          <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
+            <ion-select-option *ngFor="let i of subjectT;" value="{{i}}">{{i}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-button expand="full" fill="clear" style="width: 100%;">
+          <input type="file" id="file-input" (change)="fileUploads($event)">
+        </ion-button>
+        <ion-button shape="round" (click)="uploadHome()">Upload</ion-button>
+      </div>
     </div>
   </div>
 

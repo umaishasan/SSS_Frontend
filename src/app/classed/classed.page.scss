@@ -27,3 +27,16 @@ ion-content{
 ion-item{
     --background: #f4f5f8;
 }
+
+.forCenter .foranimate{
+    display: none;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

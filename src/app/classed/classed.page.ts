@@ -3,6 +3,7 @@ import { ForSaveService } from '../service/for-save';
 import { File } from '@ionic-native/file/ngx';
 import { NetworkService } from '../service/network.service';
 import { ToastedService } from '../service/toasted.service';
+import { ViewChild, ElementRef, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-classed',
@@ -10,6 +11,12 @@ import { ToastedService } from '../service/toasted.service';
   styleUrls: ['./classed.page.scss'],
 })
 export class ClassedPage implements OnInit {
+  @ViewChild('overlapAnimateO', { read: ElementRef }) overlapAnimateO: ElementRef;
+  @ViewChild('overlapAnimateU', { read: ElementRef }) overlapAnimateU: ElementRef;
+  @ViewChild('overlapAnimateD', { read: ElementRef }) overlapAnimateD: ElementRef;
+  arrowToggleiconO: 'chevron-down' | 'chevron-up' = 'chevron-down';
+  arrowToggleiconU: 'chevron-down' | 'chevron-up' = 'chevron-down';
+  arrowToggleiconD: 'chevron-down' | 'chevron-up' = 'chevron-down';
   elementType: 'home' | 'quiz' | 'result' = "home";
   callProfile: any;
   studentClassData: any;
@@ -32,16 +39,16 @@ export class ClassedPage implements OnInit {
   score: number = 0;
   BufferVal: any;
 
-  constructor(private saveData: ForSaveService, private network: NetworkService, private toast: ToastedService, private file: File) {
+  constructor(private saveData: ForSaveService, private renderer: Renderer2, private network: NetworkService, private toast: ToastedService, private file: File) {
     this.homedata = this.saveData.homeWork;
     this.quizdata = this.saveData.quizWork;
     this.resultdata = this.saveData.resultWork;
     this.segmentsChanges(this.elementType);
     this.callProfile = this.saveData.ForStuDataSave;
-    console.log(this.callProfile.id+"s", this.callProfile.class);
+    console.log(this.callProfile.id + "s", this.callProfile.class);
     this.AccordingtoClassSubjectForHome();
     var arr = [];
-    this.network.getDataById("class" + this.callProfile.class + "s", this.callProfile.id+"s").then(data => {
+    this.network.getDataById("class" + this.callProfile.class + "s", this.callProfile.id + "s").then(data => {
       arr.push(data);
       console.log("From Constructor of dataae: ", arr);
     });
@@ -96,7 +103,7 @@ export class ClassedPage implements OnInit {
         Attendance: this.studentClassData[i].Attendance += this.attendance
       };
       console.log(task);
-      this.network.putDataById("class" + this.callProfile.class + "s", this.callProfile.id+"s", task,'Uploading Error','Please try again!').then(data => {
+      this.network.putDataById("class" + this.callProfile.class + "s", this.callProfile.id + "s", task, 'Uploading Error', 'Please try again!').then(data => {
         console.log(data);
       });
     }
@@ -162,7 +169,7 @@ export class ClassedPage implements OnInit {
   }
 
   uploadWork(table, task, message) {
-    this.network.putDataById(table, this.callProfile.id+"s", task,'Uploading Error','Please try again!').then(data => {
+    this.network.putDataById(table, this.callProfile.id + "s", task, 'Uploading Error', 'Please try again!').then(data => {
       console.log(data);
       this.toast.loadControlDismiss();
       this.toast.showToast(message);
@@ -170,7 +177,7 @@ export class ClassedPage implements OnInit {
   }
 
   uploadWorkForResult(table, task, message) {
-    this.network.putDataById(table, this.callProfile.id, task,'Uploading Error','Please try again!').then(data => {
+    this.network.putDataById(table, this.callProfile.id, task, 'Uploading Error', 'Please try again!').then(data => {
       console.log(data);
       this.toast.loadControlDismiss();
       this.toast.showToast(message);
@@ -271,5 +278,39 @@ export class ClassedPage implements OnInit {
       QuizScore: this.score
     };
     this.uploadWorkForResult("result-class" + this.callProfile.class + "s", task, "Quiz uploaded successfully!");
+  }
+
+  arrowTogleO() {
+    if (this.arrowToggleiconO == 'chevron-down') {
+      this.arrowToggleiconO = 'chevron-up';
+      console.log('online div show', this.overlapAnimateO.nativeElement);
+      this.renderer.setStyle(this.overlapAnimateO.nativeElement, 'display', 'block');
+      this.renderer.setStyle(this.overlapAnimateO.nativeElement, 'animation', 'fade-in 1s');
+    } else {
+      this.arrowToggleiconO = 'chevron-down';
+      this.renderer.setStyle(this.overlapAnimateO.nativeElement, 'display', 'none');
+    }
+  }
+  arrowTogleU() {
+    if (this.arrowToggleiconU == 'chevron-down') {
+      this.arrowToggleiconU = 'chevron-up';
+      console.log('online div show', this.overlapAnimateU.nativeElement);
+      this.renderer.setStyle(this.overlapAnimateU.nativeElement, 'display', 'block');
+      this.renderer.setStyle(this.overlapAnimateU.nativeElement, 'animation', 'fade-in 1s');
+    } else {
+      this.arrowToggleiconU = 'chevron-down';
+      this.renderer.setStyle(this.overlapAnimateU.nativeElement, 'display', 'none');
+    }
+  }
+  arrowTogleD() {
+    if (this.arrowToggleiconD == 'chevron-down') {
+      this.arrowToggleiconD = 'chevron-up';
+      console.log('online div show', this.overlapAnimateD.nativeElement);
+      this.renderer.setStyle(this.overlapAnimateD.nativeElement, 'display', 'block');
+      this.renderer.setStyle(this.overlapAnimateD.nativeElement, 'animation', 'fade-in 1s');
+    } else {
+      this.arrowToggleiconD = 'chevron-down';
+      this.renderer.setStyle(this.overlapAnimateD.nativeElement, 'display', 'none');
+    }
   }
 }

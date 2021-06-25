@@ -12,7 +12,7 @@ ion-button{
     border-bottom: 1px solid ghostwhite;
 }
 
-.forCenter2{
+.forCenter2btn{
     text-align: center;
 }
 
@@ -20,12 +20,12 @@ ion-button{
     margin-top: 10px;
 }
 
-#forCntr{
+#forCntrtwoBtn{
     display: flex;
     align-items: center;
 }
 
-.twoBtnCntr{
+.twoBtnCntrWidth{
     width: 50%;
 }
 
@@ -37,5 +37,18 @@ ion-card{
     --background: #f4f5f8;
     ion-item{
         --background: #f4f5f8;
+    }
+}
+
+.forCenter .foranimate{
+    display: none;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }
