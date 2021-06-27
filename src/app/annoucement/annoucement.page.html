@@ -8,11 +8,37 @@
 <ion-content>
   <ion-card>
     <ion-item>
-      <ion-label>Annoucement:</ion-label>
+      <ion-label>Announcement</ion-label>
+      <ion-checkbox [(ngModel)]="forAnno"></ion-checkbox>
+      <ion-label>Schedule</ion-label>
+      <ion-checkbox [(ngModel)]="forSche"></ion-checkbox>
     </ion-item>
-    <ion-item>
-      <ion-textarea type="text" [(ngModel)]="annoucement"></ion-textarea>
-    </ion-item>
+
+    <div *ngIf="forSche">
+      <ion-item>
+        <ion-label>Teacher</ion-label>
+        <ion-select [(ngModel)]="selectTeach" (ionChange)="selectedTeachCall()">
+          <ion-select-option *ngFor="let i of tacherCall" value="{{i.id}}">{{i.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label>Annoucement:</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-textarea type="text" [(ngModel)]="annoucement"></ion-textarea>
+      </ion-item>
+      <ion-button expand="full" shape="round" (click)="goToSchedule()">Send</ion-button>
+    </div>
+
+    <div *ngIf="forAnno">
+      <ion-item lines="none">
+        <ion-label>Annoucement:</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-textarea type="text" [(ngModel)]="annoucement"></ion-textarea>
+      </ion-item>
+      <ion-button expand="full" shape="round" (click)="goToAnnoucement()">Send</ion-button>
+    </div>
   </ion-card>
-  <ion-button expand="full" shape="round" (click)="goToAnnoucement()">Send</ion-button>
+
 </ion-content>

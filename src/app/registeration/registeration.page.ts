@@ -200,16 +200,6 @@ export class RegisterationPage implements OnInit {
     }
   }
 
-  checkCnfrmPass(event) {
-    event = this.pass;
-    if (this.cpass === event) {
-      document.getElementById('cpass').style.color = 'green';
-    }
-    else {
-      document.getElementById('cpass').style.color = 'red';
-    }
-  }
-
   passwordToggle() {
     this.ShowPassword = !this.ShowPassword;
     if (this.passwordToggleIcon == 'eye') {

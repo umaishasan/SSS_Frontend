@@ -116,7 +116,7 @@
         has minimum 8 character</span>
       <ion-item>
         <ion-input id="cpass" formControlName="ConfirmPassword" type="password" [(ngModel)]="cpass"
-          (keyup)="checkCnfrmPass($event)" placeholder="Enter Confirm Password"></ion-input>
+           [ngClass]="cpass==pass?'passMatch':'passnotMatch'" placeholder="Enter Confirm Password"></ion-input>
       </ion-item>
       <span
         *ngIf="RegisterFormAll.get('ConfirmPassword').hasError('required') && RegisterFormAll.get('ConfirmPassword').touched">Confirm Password

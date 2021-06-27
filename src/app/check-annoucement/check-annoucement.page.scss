@@ -3,6 +3,7 @@ ion-button{
 }
 
 .forShow{
+    margin: 5px;
     border: 1px solid black;
     background: whitesmoke;
 }
@@ -24,3 +25,10 @@ ion-content{
     --background: linear-gradient(rgba(202, 199, 199, 0.671),rgba(0, 0, 0, 0.897));
 }
 
+ion-checkbox{
+    margin: 7px;
+}
+
+p{
+    margin: 5px;
+}

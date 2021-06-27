@@ -1,25 +1,36 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar color="primary">
-    <ion-title style="text-align: center;">Login</ion-title>
+    <!-- <ion-title style="text-align: center;">Login</ion-title> -->
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-card>
-    <div class="forGap">
-      <ion-item>
-        <ion-icon slot="start" name="mail"></ion-icon>
-        <ion-input type="email" [(ngModel)]="email" placeholder="Enter Email"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-icon slot="start" name="lock-closed"></ion-icon>
-        <ion-input [(ngModel)]="pass" [type]="showPassword ? 'text' : 'password'" placeholder="Enter Password">
-        </ion-input>
-        <ion-icon slot="end" [name]="passwordTogleIcon" (click)="passwordTogle()"></ion-icon>
-      </ion-item>
-      <ion-button expand="full" shape="round" (click)="login()">Login</ion-button>
+
+  <ion-card class="ion-no-margin">
+    <div class="imgDiv">
+      <img src="assets/few.png" />
     </div>
-    <ion-item lines="none" routerDirection="root" (click)="scanCode()">
-      <ion-label>For student login: click here</ion-label>
-    </ion-item>
+    <ion-card-header>
+      <ion-card-title><b>Welcome!</b></ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="wrapGap">
+        <ion-item>
+          <ion-icon slot="start" name="mail"></ion-icon>
+          <ion-input type="email" [(ngModel)]="email" placeholder="Enter Email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-icon slot="start" name="lock-closed"></ion-icon>
+          <ion-input [(ngModel)]="pass" [type]="showPassword ? 'text' : 'password'" placeholder="Enter Password">
+          </ion-input>
+          <ion-icon slot="end" [name]="passwordTogleIcon" (click)="passwordTogle()"></ion-icon>
+        </ion-item>
+      </div>
+      <div class="studentBtn">
+        <ion-button fill="clear" class="ion-no-padding" (click)="scanCode()">For Student login</ion-button>
+      </div>
+      <div class="forAllBtn">
+        <ion-button expand="full" shape="round" (click)="login()">Login</ion-button>
+      </div>
+    </ion-card-content>
   </ion-card>
 </ion-content>
