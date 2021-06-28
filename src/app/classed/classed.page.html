@@ -33,25 +33,25 @@
       <h4 class="forGap" (click)="arrowTogleD()">Download <ion-icon size="small" [name]="arrowToggleiconD"></ion-icon>
       </h4>
       <div class="foranimate" #overlapAnimateD>
-        <ion-item class="fixclor">
+        <ion-item>
           <ion-label>Teacher</ion-label>
           <ion-select [(ngModel)]="selectTeacher" placeholder="Select Teacher">
             <ion-select-option *ngFor="let i of homedata;" value="{{i.name}}">{{i.name}}</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-item *ngIf="showSubjectO" class="fixclor">
+        <ion-item *ngIf="showSubjectO" >
           <ion-label>Subject</ion-label>
           <ion-select [(ngModel)]="selectS" (ionChange)="transferrr()" placeholder="Select Subject">
             <ion-select-option *ngFor="let i of subjectOE;" value="{{i}}">{{i}}</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-item *ngIf="showSubjectN" class="fixclor">
+        <ion-item *ngIf="showSubjectN" >
           <ion-label>Subject</ion-label>
           <ion-select [(ngModel)]="selectS" (ionChange)="transferrr()" placeholder="Select Subject">
             <ion-select-option *ngFor="let i of subjectN;" value="{{i}}">{{i}}</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-item *ngIf="showSubjectT" (ionChange)="transferrr()" class="fixclor">
+        <ion-item *ngIf="showSubjectT" (ionChange)="transferrr()" >
           <ion-label>Subject</ion-label>
           <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
             <ion-select-option *ngFor="let i of subjectT;" value="{{i}}">{{i}}</ion-select-option>
@@ -64,19 +64,19 @@
       <h4 class="forGap" (click)="arrowTogleU()">Upload <ion-icon size="small" [name]="arrowToggleiconU"></ion-icon>
       </h4>
       <div class="foranimate" #overlapAnimateU>
-        <ion-item *ngIf="showSubjectO" class="fixclor">
+        <ion-item *ngIf="showSubjectO" >
           <ion-label>Subject</ion-label>
           <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
             <ion-select-option *ngFor="let i of subjectOE;" value="{{i}}">{{i}}</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-item *ngIf="showSubjectN" class="fixclor">
+        <ion-item *ngIf="showSubjectN" >
           <ion-label>Subject</ion-label>
           <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
             <ion-select-option *ngFor="let i of subjectN;" value="{{i}}">{{i}}</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-item *ngIf="showSubjectT" class="fixclor">
+        <ion-item *ngIf="showSubjectT" >
           <ion-label>Subject</ion-label>
           <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
             <ion-select-option *ngFor="let i of subjectT;" value="{{i}}">{{i}}</ion-select-option>
@@ -92,40 +92,40 @@
 
   <div *ngIf="elementType=='quiz'">
     <div class="forCenter2">
-      <ion-item *ngIf="showSubjectO" class="fixclor">
+      <ion-item *ngIf="showSubjectO">
         <ion-label>Subject</ion-label>
-        <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
+        <ion-select [(ngModel)]="selectS" placeholder="Select Subject" (ionChange)="selectedQuiz()">
           <ion-select-option *ngFor="let i of subjectOE;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-item *ngIf="showSubjectN" class="fixclor">
+      <ion-item *ngIf="showSubjectN" >
         <ion-label>Subject</ion-label>
-        <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
+        <ion-select [(ngModel)]="selectS" placeholder="Select Subject" (ionChange)="selectedQuiz()">
           <ion-select-option *ngFor="let i of subjectN;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-item *ngIf="showSubjectT" class="fixclor">
+      <ion-item *ngIf="showSubjectT" >
         <ion-label>Subject</ion-label>
-        <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
+        <ion-select [(ngModel)]="selectS" placeholder="Select Subject" (ionChange)="selectedQuiz()">
           <ion-select-option *ngFor="let i of subjectT;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-card>
         <ion-card-content *ngIf="selectS">
-          <ion-radio-group (ionChange)="checkk($event)" *ngFor="let q of quizdata">
+          <ion-radio-group (ionChange)="checkk($event)" *ngFor="let o of quizSelectedData">
             <ion-list-header style="margin-top: 5px;">
-              <ion-label>Q{{q.QNo}}: {{q.Q}}</ion-label>
+              <ion-label>Q{{o.QNo}}: {{o.Q}}</ion-label>
             </ion-list-header>
-            <ion-item class="fixclor">
-              <ion-label>{{q.Option2}}</ion-label>
+            <ion-item >
+              <ion-label>{{o.Option2}}</ion-label>
               <ion-radio slot="start"></ion-radio>
             </ion-item>
-            <ion-item class="fixclor">
-              <ion-label>{{q.Ans}}</ion-label>
-              <ion-radio slot="start" name="{{q.QNo}}" value="{{q.Ans}}"></ion-radio>
+            <ion-item >
+              <ion-label>{{o.Ans}}</ion-label>
+              <ion-radio slot="start" name="{{o.QNo}}" value="{{o.Ans}}"></ion-radio>
             </ion-item>
-            <ion-item class="fixclor">
-              <ion-label>{{q.Option1}}</ion-label>
+            <ion-item >
+              <ion-label>{{o.Option1}}</ion-label>
               <ion-radio slot="start"></ion-radio>
             </ion-item>
           </ion-radio-group>

@@ -24,6 +24,7 @@ export class ClassedPage implements OnInit {
   selectTeacher: any;
   quizdata: any;
   quizdataAnswer: any;
+  quizSelectedData: any;
   resultdata: any;
   showSubjectO: boolean = false;
   showSubjectN: boolean = false;
@@ -42,6 +43,7 @@ export class ClassedPage implements OnInit {
   constructor(private saveData: ForSaveService, private renderer: Renderer2, private network: NetworkService, private toast: ToastedService, private file: File) {
     this.homedata = this.saveData.homeWork;
     this.quizdata = this.saveData.quizWork;
+    console.log(this.quizdata);
     this.resultdata = this.saveData.resultWork;
     this.segmentsChanges(this.elementType);
     this.callProfile = this.saveData.ForStuDataSave;
@@ -269,6 +271,19 @@ export class ClassedPage implements OnInit {
     this.toast.loadControlShow(5000);
     console.log("from button submit:", this.filesave);
     this.selectSubject();
+  }
+
+  selectedQuiz(){
+    var arr = [];
+    for(let i=0;i<this.quizdata.length;i++){
+      console.log(this.quizdata[i]);
+      console.log(this.quizdata[i].QNo);
+      if(this.quizdata[i].Subject === this.selectS){
+        arr.push(this.quizdata[i]);
+      }
+    }
+    this.quizSelectedData = arr;
+    console.log(this.quizSelectedData);
   }
 
   submitQuiz() {

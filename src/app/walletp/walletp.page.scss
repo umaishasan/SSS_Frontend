@@ -3,6 +3,7 @@
     font-weight: bold;
     text-align: center;
     margin-top: 20px;
+    color: white;
 }
 
 .forGap{
@@ -14,12 +15,18 @@ ion-button{
 }
 
 ion-content{
-    --background: linear-gradient(rgba(202, 199, 199, 0.671),rgba(0, 0, 0, 0.897));
+    --ion-background-color: linear-gradient(rgba(202, 199, 199, 0.671),rgba(0, 0, 0, 0.897));
 }
 
 ion-card{
-    --background: #f4f5f8;
-    ion-item{
-        --background: #f4f5f8;
+    margin: 15px;
+    margin-top: 35px;
+    --ion-background-color: transparent;
+    box-shadow: none !important;
+}
+
+ion-item{
+    ion-input{
+        color: white;
     }
 }

@@ -26,20 +26,33 @@ span{
 }
 
 ion-content{
-    --background: linear-gradient(rgba(202, 199, 199, 0.671),rgba(0, 0, 0, 0.897));
+    --ion-background-color: linear-gradient(rgba(202, 199, 199, 0.671),rgba(0, 0, 0, 0.897));
 }
 
 ion-card{
-    --background: #f4f5f8;
-    ion-item{
-        --background: #f4f5f8;
+    --ion-background-color: transparent;
+    box-shadow: none !important;
+}
+
+ion-item{
+    --ion-background-color: transparent;
+    ion-input{
+        color: white;
     }
-}
-
-.passMatch{
-    color: green;
-}
-
-.passnotMatch{
-    color: red;
+    ion-select{
+        color: white;
+    }
+    ion-icon{
+        color: white;
+    }
+    ion-label{
+        color: white;
+    }
+    .passMatch{
+        color: green;
+    }
+    
+    .passnotMatch{
+        color: red;
+    }
 }

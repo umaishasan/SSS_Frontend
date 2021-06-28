@@ -1,10 +1,31 @@
 ion-content{
-    --background: linear-gradient(rgba(202, 199, 199, 0.671),rgba(0, 0, 0, 0.897));
+    --ion-background-color: linear-gradient(rgba(202, 199, 199, 0.671),rgba(0, 0, 0, 0.897));
+}
+
+.forCardgap{
+    margin-top: 35px;
+}
+
+ion-item{
+    ion-input{
+        color: white;
+    }
+    ion-icon{
+        color: white;
+    }
+    ion-select{
+        color: white;
+    }
+    ion-label{
+        color: white;
+    }
 }
 
 ion-card{
-    --background: #f4f5f8;
-    ion-item{
-        --background: #f4f5f8;
-    }
+    --ion-background-color: transparent;
+    box-shadow: none !important;
+}
+
+ion-button{
+    margin: 25px;
 }

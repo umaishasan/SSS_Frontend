@@ -110,6 +110,10 @@ const routes: Routes = [
   {
     path: 'dairy',
     loadChildren: () => import('./dairy/dairy.module').then( m => m.DairyPageModule)
+  },
+  {
+    path: 'attendancet',
+    loadChildren: () => import('./attendancet/attendancet.module').then( m => m.AttendancetPageModule)
   }
 ];
 

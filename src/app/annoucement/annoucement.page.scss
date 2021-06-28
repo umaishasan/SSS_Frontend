@@ -6,6 +6,7 @@ ion-textarea{
     margin: 3px;
     border: 1px solid lightgray;
     height: 150px;
+    background-color: white;
 }
 
 ion-label{
@@ -13,12 +14,19 @@ ion-label{
 }
 
 ion-content{
-    --background: linear-gradient(rgba(202, 199, 199, 0.671),rgba(0, 0, 0, 0.897));
+    --ion-background-color: linear-gradient(rgba(202, 199, 199, 0.671),rgba(0, 0, 0, 0.897));
 }
 
 ion-card{
-    --background: #f4f5f8;
-    ion-item{
-        --background: #f4f5f8;
+    --ion-background-color: transparent;
+    box-shadow: none !important;
+}
+
+ion-item{
+    ion-select{
+        color: white;
+    }
+    ion-label{
+        color: white;
     }
 }

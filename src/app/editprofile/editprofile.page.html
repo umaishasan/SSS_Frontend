@@ -2,33 +2,37 @@
   <ion-toolbar color="primary">
     <ion-title>Edit Profile</ion-title>
     <ion-menu-button slot="start"></ion-menu-button>
-    <ion-button slot="end" (click)="update()">Save</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-item>
-      <ion-icon slot="start" name="people"></ion-icon>
-      <ion-select [(ngModel)]="slctCate" placeholder="Select User">
-        <ion-select-option value="admins">Admin</ion-select-option>
-        <ion-select-option value="teachers">Teacher</ion-select-option>
-        <ion-select-option value="parents">Parent</ion-select-option>
-        <ion-select-option value="canteens">Canteen</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-icon slot="start" name="call"></ion-icon>
-      <ion-input type="text" [(ngModel)]="phone" placeholder="Enter Phone No."></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-icon slot="start" name="mail"></ion-icon>
-      <ion-input type="text" [(ngModel)]="email" placeholder="Enter Email"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-icon slot="start" name="key"></ion-icon>
-      <ion-input [(ngModel)]="pass" [type]="ShowPassword ? 'text' : 'password'" placeholder="Enter Password"></ion-input>
-      <ion-icon slot="end" [name]="passwordToggleIcon" (click)="passwordToggle()"></ion-icon>
-    </ion-item>
-  </ion-card>
+  <div class="forCardgap">
+    <ion-card>
+      <ion-item>
+        <ion-icon slot="start" name="people"></ion-icon>
+        <ion-label>User</ion-label>
+        <ion-select [(ngModel)]="slctCate" placeholder="Select User">
+          <ion-select-option value="admins">Admin</ion-select-option>
+          <ion-select-option value="teachers">Teacher</ion-select-option>
+          <ion-select-option value="parents">Parent</ion-select-option>
+          <ion-select-option value="canteens">Canteen</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="call"></ion-icon>
+        <ion-input type="text" [(ngModel)]="phone" placeholder="Enter Phone No."></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="mail"></ion-icon>
+        <ion-input type="text" [(ngModel)]="email" placeholder="Enter Email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="key"></ion-icon>
+        <ion-input [(ngModel)]="pass" [type]="ShowPassword ? 'text' : 'password'" placeholder="Enter Password">
+        </ion-input>
+        <ion-icon slot="end" [name]="passwordToggleIcon" (click)="passwordToggle()"></ion-icon>
+      </ion-item>
+    </ion-card>
+  </div>
+  <ion-button shape="round" expand="full" forCardgap>Save</ion-button>
 </ion-content>

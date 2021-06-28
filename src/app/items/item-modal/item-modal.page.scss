@@ -9,17 +9,23 @@
 }
 
 ion-content{
-  --background: linear-gradient(rgba(202, 199, 199, 0.671),rgba(0, 0, 0, 0.897));
+  --ion-background-color: linear-gradient(rgba(202, 199, 199, 0.671),rgba(0, 0, 0, 0.897));
 }
 
 ion-card{
-  --background: #f4f5f8;
-  ion-item{
-      --background: #f4f5f8;
-  }
+  margin-top: 35px;
+  --ion-background-color: transparent;
+  box-shadow: none !important;
 }
 
 span{
   color: red;
   font-size: x-small;
+}
+
+ion-item{
+  margin-bottom: 7px;
+  ion-input{
+      color: white;
+  }
 }

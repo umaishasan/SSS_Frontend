@@ -104,7 +104,7 @@ export class LoginPage implements OnInit {
           { title: 'Registration', url: '/registeration', icon: 'person-add' },
           { title: 'Generate Card', url: '/generate-card', icon: 'id-card' },
           { title: 'Make Classes', url: '/make-classs', icon: 'build' },
-          { title: 'Annoucement', url: '/annoucement', icon: 'megaphone' },
+          { title: 'Announcement', url: '/annoucement', icon: 'megaphone' },
           { title: 'Attendance', url: '/attendance', icon: 'hand-left' },
           { title: 'Voucher Create', url: '/voucher-creater', icon: 'document' },
         ];
@@ -138,7 +138,8 @@ export class LoginPage implements OnInit {
           { title: 'Home', url: '/teachers', icon: 'home' },
           { title: 'Edit Profile', url: '/editprofile', icon: 'create' },
           { title: 'Class', url: '/teacher-upload-work', icon: 'book' },
-          { title: 'Annoucement', url: '/check-annoucement', icon: 'megaphone' }
+          { title: 'Announcement', url: '/check-annoucement', icon: 'megaphone' },
+          { title: 'Attendance', url: '/attendancet', icon: 'hand-left' },
         ];
         this.appComp.appPages = pageCall;
       }

@@ -8,7 +8,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-item *ngFor="let items of itemData" [ngClass]="{'zeoitem': items.quantity==0}">
+  <ion-item *ngFor="let items of itemData" [ngClass]="items.quantity==0?'zeoitem':'normal'">
     <ion-label>{{items.product_name}}</ion-label>
     <ion-label style="text-align: right;">{{items.product_price}}/-</ion-label>
   </ion-item>

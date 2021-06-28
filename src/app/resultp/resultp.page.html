@@ -6,7 +6,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-item class="forChild">
+  <ion-item>
     <ion-label>Child</ion-label>
     <ion-select [(ngModel)]="sSudent" placeholder="Select Child" (ionChange)="resultShoww()">
       <ion-select-option *ngFor="let j of datasF" value="{{j.id}}">{{j.username}}</ion-select-option>

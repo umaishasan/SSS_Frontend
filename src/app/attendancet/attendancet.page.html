@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Attendance</ion-title>
+    <ion-menu-button slot="start"></ion-menu-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>Class</ion-label>
+    <ion-select [(ngModel)]="sClass" placeholder="select class" (ionChange)="studentForAttendance()">
+      <ion-select-option *ngFor="let i of classs" value="{{i.class}}">{{i.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <div class="samePlace">
+    <ion-button expand="full" shape="round" (click)="scanCode()">
+      <ion-icon slot="start" name="scan"></ion-icon>Scan
+    </ion-button>
+    <ion-button expand="full" shape="round" (click)="viewStuAttend()">Attendance</ion-button>
+  </div>
+  <ion-card *ngIf="attendView">
+    <ion-list>
+      <ion-item *ngFor="let i of studentAttend">
+        <ion-label>{{i.name}}</ion-label>
+        <ion-label>{{i.Attendance}} Present</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>
