@@ -204,7 +204,7 @@ export class TeacherUploadWorkPage implements OnInit {
   AccordingtoClassSubjectForResult() {
     var justClass = this.selectC.split('-');
     console.log(justClass[1]);
-    this.network.getSpecificDataforAttendance(justClass[1], "Student").then(data => {
+    this.network.getSpecificDataforAttendance(justClass[1], "students").then(data => {
       this.dataa = data;
       console.log("all data", this.dataa);
       for (let i = 0; i < this.dataa.length; i++) {

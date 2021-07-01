@@ -179,7 +179,7 @@ export class ClassedPage implements OnInit {
   }
 
   uploadWorkForResult(table, task, message) {
-    this.network.putDataById(table, this.callProfile.id, task, 'Uploading Error', 'Please try again!').then(data => {
+    this.network.putDataById(table, this.callProfile.id+'s', task, 'Uploading Error', 'Please try again!').then(data => {
       console.log(data);
       this.toast.loadControlDismiss();
       this.toast.showToast(message);
@@ -293,6 +293,7 @@ export class ClassedPage implements OnInit {
       QuizScore: this.score
     };
     this.uploadWorkForResult("result-class" + this.callProfile.class + "s", task, "Quiz uploaded successfully!");
+    this.toast.alertMessage("Quiz Score","Your quiz score is: "+this.score);
   }
 
   arrowTogleO() {

@@ -30,7 +30,7 @@ export class ResultpPage implements OnInit {
       if (this.datasF[i].id == this.sSudent) {
         this.classCall = this.datasF[i].class;
         console.log(this.classCall);
-        this.ResultclassCall(this.classCall,this.sSudent);
+        this.ResultclassCall(this.classCall,this.sSudent+'s');
       }
     }
     if (this.classCall == 9) {

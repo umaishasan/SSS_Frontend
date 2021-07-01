@@ -156,7 +156,7 @@ export class LoginPage implements OnInit {
     this.network.getData("class" + ids + "s").then(data => {
       this.forHome = data;
       for (let i = 0; i < this.forHome.length; i++) {
-        if (this.forHome[i].user == "Teacher" || this.forHome[i].user == "teacher") {
+        if (this.forHome[i].user == "teachers") {
           this.saveData.homeWork.push(this.forHome[i]);
         }
       }
@@ -176,17 +176,18 @@ export class LoginPage implements OnInit {
       for (let i = 0; i < this.forResult.length; i++) {
         if (this.forResult[i].Id == idd) {
           this.saveData.resultWork = this.forResult[i];
+          console.log(this.saveData.resultWork);
         }
       }
     });
   }
 
   scanCode() {
-    this.barcodeScanner.scan().then(code => {
-      this.scanned = code.text;
+    // this.barcodeScanner.scan().then(code => {
+    //   this.scanned = code.text;
       for (let i = 0; i < this.studentData.length; i++) {
         this.studentDataById = this.studentData[i];
-        if (this.scanned === this.studentDataById.qrString) {
+        if (this.email === this.studentDataById.qrString) {
           this.route.navigateByUrl('/student');
           this.mnuCtrl.enable(true);
           this.jumpPage('studentPage');
@@ -194,10 +195,10 @@ export class LoginPage implements OnInit {
           this.saveData.ForStuDataSave = this.studentDataById;
           this.HomeclassCall(this.studentDataById.class);
           this.QuizclassCall(this.studentDataById.class);
-          this.ResultclassCall(this.studentDataById.class,this.studentDataById.id);
+          this.ResultclassCall(this.studentDataById.class,this.studentDataById.id+'s');
         }
       }
-    });
+    // });
   }
 
 }
