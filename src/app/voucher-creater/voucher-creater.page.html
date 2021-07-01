@@ -6,7 +6,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form [formGroup]="voucherForm" (ngSubmit)="createpdf()">
+  <form [formGroup]="voucherForm">
     <ion-card>
       <ion-item>
         <ion-label>Class</ion-label>
@@ -50,6 +50,6 @@
       <span *ngIf="voucherForm.get('Security').hasError('required') && voucherForm.get('Security').touched">Security fee
         should not be empty</span>
     </ion-card>
-    <ion-button expand="full" shape="round" [disabled]="!voucherForm.valid">Create Voucher</ion-button>
+    <ion-button expand="full" shape="round" [disabled]="!voucherForm.valid" (click)="createpdf()">Create Voucher</ion-button>
   </form>
 </ion-content>

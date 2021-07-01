@@ -7,15 +7,15 @@
 
 <ion-content>
   <ion-segment [(ngModel)]="elementType" (ionChange)="segmentChanged(elementType)">
-    <ion-segment-button value="Teacher">
+    <ion-segment-button value="teachers">
       <ion-label>Teacher</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="Student">
+    <ion-segment-button value="students">
       <ion-label>Student</ion-label>
     </ion-segment-button>
   </ion-segment>
 
-  <div *ngIf="elementType=='Teacher'">
+  <div *ngIf="elementType=='teachers'">
       <ion-radio-group (ionChange)="classSelect($event)">
         <ion-item *ngFor="let i of classs">
           <ion-label>{{i.name}}</ion-label>
@@ -24,7 +24,7 @@
       </ion-radio-group>
   </div>
 
-  <div *ngIf="elementType=='Student'">
+  <div *ngIf="elementType=='students'">
       <ion-radio-group (ionChange)="classSelect($event)">
         <ion-item *ngFor="let i of classs">
           <ion-label>{{i.name}}</ion-label>

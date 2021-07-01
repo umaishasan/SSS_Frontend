@@ -26,6 +26,7 @@ export class EditprofilePage implements OnInit {
   ngOnInit() { }
 
   update(){
+    this.toast.loadControlShow(5000);
     var task = {
       email: this.email,
       phone: this.phone,
@@ -33,8 +34,8 @@ export class EditprofilePage implements OnInit {
     };
     this.network.putDataById("all-users",this.id,task,'Uploading Error','Please try again!').then(data =>{
       console.log(data);
+      this.toast.showToast('Profile update successfully!');
     });
-    this.toast.showToast('Profile update successfully!')
   }
 
   passwordToggle(){

@@ -90,6 +90,7 @@ export class MakeClasssPage implements OnInit {
   }
 
   submit(){
+    this.toast.loadControlShow(3000);
     if(this.selectU === 'students'){
         var task = {
           id: this.Sn.id+'s',
@@ -113,6 +114,7 @@ export class MakeClasssPage implements OnInit {
   }
 
   remove(){
+    this.toast.loadControlShow(3000);
     if(this.selectU === 'students'){
       var ids = this.selectN+"s";
       this.deleteData(ids);

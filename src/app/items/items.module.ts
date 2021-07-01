@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { ItemsPageRoutingModule } from './items-routing.module';
 
 import { ItemsPage } from './items.page';
-import { ItemModalPage } from './item-modal/item-modal.page';
 
 @NgModule({
   imports: [

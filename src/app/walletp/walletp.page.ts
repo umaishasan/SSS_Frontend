@@ -31,8 +31,9 @@ export class WalletpPage implements OnInit {
   ngOnInit() { }
 
   addAmount(){
+    this.toast.loadControlShow(3000);
     var task = {SaveAmount: this.adamount};
-    this.network.putDataById('parents',this.id,task.SaveAmount,'Uploading Error','Please try again!').then(data =>{
+    this.network.putDataById('parents',this.id,task,'Uploading Error','Please try again!').then(data =>{
       console.log(data);
       this.toast.showToast("Amount add successfully!");
     });

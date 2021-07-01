@@ -35,19 +35,21 @@ export class AnnoucementPage implements OnInit {
   }
 
   goToAnnoucement() {
+    this.toast.loadControlShow(3000);
     var task = {
-      id: 0,
+      id: "0",
       annoucement: this.annoucement
     };
-    this.network.putData('annoucements', 0, task, 'Sending Error', 'Please try again!').then(data => {
+    this.network.putData('annoucements', '0', task, 'Sending Error', 'Please try again!').then(data => {
       console.log(data);
       this.toast.showToast("Announcement send successfully!");
     });
   }
 
   goToSchedule() {
+    this.toast.loadControlShow(3000);
     var taskT = {
-      AdminAnnouncement: this.annoucement
+      annoucement: this.annoucement
     };
     this.network.putDataById('teachers', this.teachName.id, taskT, 'Sending Error', 'Please try again!').then(data => {
       console.log(data);

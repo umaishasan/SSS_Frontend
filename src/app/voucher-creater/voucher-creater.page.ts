@@ -22,7 +22,13 @@ export class VoucherCreaterPage implements OnInit {
   registration: number;
   security: number;
   number: number;
-  clase: Classs[] = [{ clas: 'class1s', name: 'Class1' }, { clas: 'class2s', name: 'Class2' }, { clas: 'class3s', name: 'Class3' }, { clas: 'class4s', name: 'Class4' }, { clas: 'class5s', name: 'Class5' }, { clas: 'class6s', name: 'Class6' }, { clas: 'class7s', name: 'Class7' }, { clas: 'class8s', name: 'Class8' }, { clas: 'class9s', name: 'Class9' }, { clas: 'class10s', name: 'Class10' }];
+  clase: Classs[] = [
+    { clas: 'class1s', name: 'Class1' }, { clas: 'class2s', name: 'Class2' }, 
+    { clas: 'class3s', name: 'Class3' }, { clas: 'class4s', name: 'Class4' }, 
+    { clas: 'class5s', name: 'Class5' }, { clas: 'class6s', name: 'Class6' }, 
+    { clas: 'class7s', name: 'Class7' }, { clas: 'class8s', name: 'Class8' }, 
+    { clas: 'class9s', name: 'Class9' }, { clas: 'class10s', name: 'Class10' }
+  ];
   sClass: string;
   sSudent: string;
   dataa: any;
@@ -344,10 +350,10 @@ export class VoucherCreaterPage implements OnInit {
       };
     }
     this.pdfObj = pdfmake.createPdf(docDefinition);
+    this.toast.loadControlShow(5000);
     this.pdfObj.getBuffer((buffer) => {
       console.log(buffer);
       var task = { Voucher: buffer }
-      this.toast.loadControlShow(5000);
       this.network.putDataById('students', arrID, task,'Uploading Error','Please try again!').then(data => {
         console.log(data);
         this.toast.loadControlDismiss();
@@ -357,7 +363,7 @@ export class VoucherCreaterPage implements OnInit {
   }
 
   onChange() {
-    this.network.getSpecificDataforAttendance(this.sClass, "Student").then(data => {
+    this.network.getSpecificDataforAttendance(this.sClass, "students").then(data => {
       this.dataa = data;
       console.log("all data", this.dataa);
       for (let i = 0; i < this.dataa.length; i++) {
@@ -369,8 +375,10 @@ export class VoucherCreaterPage implements OnInit {
 
   inChange() {
     console.log(this.sSudent);
+    var pureId = this.sSudent.split('s');
+    console.log(pureId[0]);
     var arrr = [];
-    this.network.getDataById('students', this.sSudent).then(data => {
+    this.network.getDataById('students', pureId[0]).then(data => {
       console.log(data);
       arrr.push(data);
       console.log(arrr);

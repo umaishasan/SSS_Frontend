@@ -13,7 +13,7 @@ interface Classs {
   styleUrls: ['./attendance.page.scss'],
 })
 export class AttendancePage implements OnInit {
-  elementType: 'Teacher' | 'Student' = "Teacher";
+  elementType: 'teachers' | 'students' = "teachers";
   selectedVal: any;
   classs: Classs[] = [
     { class: "class1s", name: "Class1", link: '/show-studentatten' }, { class: "class2s", name: "Class2", link: '/show-studentatten' },
@@ -40,6 +40,7 @@ export class AttendancePage implements OnInit {
   classSelect(event) {
     var param = [];
     this.selectedVal = event.detail.value;
+    console.log(this.selectedVal);
     console.log("selected class value: ",this.selectedVal);
     for(let i=0;i<this.classs.length;i++){
       if(this.selectedVal == this.classs[i].class){
@@ -48,6 +49,7 @@ export class AttendancePage implements OnInit {
     }
     this.network.getSpecificDataforAttendance(this.selectedVal, this.elementType).then(data => {
       this.saveSelectedval = data;
+      console.log(this.saveSelectedval);
       for (let i = 0; i < this.saveSelectedval.length; i++) {
         this.saveSelectedvalById = this.saveSelectedval[i];
         var task = {name: this.saveSelectedvalById.name, attendance: this.saveSelectedvalById.Attendance};
