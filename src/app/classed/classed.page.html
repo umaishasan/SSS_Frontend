@@ -51,9 +51,9 @@
             <ion-select-option *ngFor="let i of subjectN;" value="{{i}}">{{i}}</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-item *ngIf="showSubjectT" (ionChange)="transferrr()" >
+        <ion-item *ngIf="showSubjectT">
           <ion-label>Subject</ion-label>
-          <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
+          <ion-select [(ngModel)]="selectS" placeholder="Select Subject" (ionChange)="transferrr()">
             <ion-select-option *ngFor="let i of subjectT;" value="{{i}}">{{i}}</ion-select-option>
           </ion-select>
         </ion-item>

@@ -17,9 +17,11 @@ export class EditprofilePage implements OnInit {
   ShowPassword: boolean = false;
   passwordToggleIcon: 'eye' | 'eye-off' = 'eye';
   dataa: any;
+  VeriEmail: any;
 
   constructor(private network: NetworkService,private toast: ToastedService,private saveData: ForSaveService) {
     this.id = this.saveData.pid;
+    this.VeriEmail = this.saveData.ema;
     console.log("call from edit profile",this.id);
    }
 
@@ -28,11 +30,17 @@ export class EditprofilePage implements OnInit {
   update(){
     this.toast.loadControlShow(5000);
     var task = {
-      email: this.email,
       phone: this.phone,
       password: this.pass
     };
-    this.network.putDataById("all-users",this.id,task,'Uploading Error','Please try again!').then(data =>{
+    this.network.putDataById(this.slctCate,this.id,task,'Uploading Error','Please try again!').then(data =>{
+      console.log(data);
+      this.toast.showToast('Profile update successfully!');
+    });
+    var taskk = {
+      password: this.pass
+    };
+    this.network.putDataById("all-users",this.VeriEmail,taskk,'Uploading Error','Please try again!').then(data =>{
       console.log(data);
       this.toast.showToast('Profile update successfully!');
     });

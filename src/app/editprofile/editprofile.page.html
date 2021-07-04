@@ -23,10 +23,6 @@
         <ion-input type="text" [(ngModel)]="phone" placeholder="Enter Phone No."></ion-input>
       </ion-item>
       <ion-item>
-        <ion-icon slot="start" name="mail"></ion-icon>
-        <ion-input type="text" [(ngModel)]="email" placeholder="Enter Email"></ion-input>
-      </ion-item>
-      <ion-item>
         <ion-icon slot="start" name="key"></ion-icon>
         <ion-input [(ngModel)]="pass" [type]="ShowPassword ? 'text' : 'password'" placeholder="Enter Password">
         </ion-input>
@@ -34,5 +30,5 @@
       </ion-item>
     </ion-card>
   </div>
-  <ion-button shape="round" expand="full" forCardgap>Save</ion-button>
+  <ion-button shape="round" expand="full" (click)="update()">Save</ion-button>
 </ion-content>

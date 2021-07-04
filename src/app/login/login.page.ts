@@ -183,11 +183,11 @@ export class LoginPage implements OnInit {
   }
 
   scanCode() {
-    // this.barcodeScanner.scan().then(code => {
-    //   this.scanned = code.text;
+    this.barcodeScanner.scan().then(code => {
+      this.scanned = code.text;
       for (let i = 0; i < this.studentData.length; i++) {
         this.studentDataById = this.studentData[i];
-        if (this.email === this.studentDataById.qrString) {
+        if (this.scanned === this.studentDataById.qrString) {
           this.route.navigateByUrl('/student');
           this.mnuCtrl.enable(true);
           this.jumpPage('studentPage');
@@ -198,7 +198,7 @@ export class LoginPage implements OnInit {
           this.ResultclassCall(this.studentDataById.class,this.studentDataById.id+'s');
         }
       }
-    // });
+    });
   }
 
 }

@@ -5,10 +5,15 @@ import { ForSaveService } from '../service/for-save';
 import { NetworkService } from '../service/network.service';
 import { ToastedService } from '../service/toasted.service';
 import { ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 interface Classe {
   id: string,
   name: string
+}
+interface Subject {
+  name: string,
+  sub: any
 }
 @Component({
   selector: 'app-teacher-upload-work',
@@ -36,6 +41,7 @@ export class TeacherUploadWorkPage implements OnInit {
   subjectN: any[] = ["Eng", "Urdu", "Math", "Che", "Pst"];
   subjectT: any[] = ["Eng", "Urdu", "Phy", "Che", "Isl"];
   selectS: any;
+  subNam: Subject[];
   //for homework
   filess: any;
   classesForHome: Classe[] = [{ id: "class1s", name: 'Class1' }, { id: "class2s", name: 'Class2' }, { id: "class3s", name: 'Class3' }, { id: "class4s", name: 'Class4' }, { id: "class5s", name: 'Class5' }, { id: "class6s", name: 'Class6' }, { id: "class7s", name: 'Class7' }, { id: "class8s", name: 'Class8' }, { id: "class9s", name: 'Class9' }, { id: "class10s", name: 'Class10' }];
@@ -77,11 +83,19 @@ export class TeacherUploadWorkPage implements OnInit {
   StudentList: any;
   StudentSelect: any;
   BufferVal: any;
+  RegisterForQuiz: FormGroup;
 
   constructor(private network: NetworkService, private renderer: Renderer2, private route: Router, private saveData: ForSaveService, private toast: ToastedService, private file: File) {
     this.segmentsChanges(this.elementType);
     this.teacherId = this.saveData.pid + "t";
     console.log("call from Upload works", this.teacherId);
+    this.RegisterForQuiz = new FormGroup({
+      QNo: new FormControl('', Validators.required),
+      Q: new FormControl('', Validators.required),
+      O1: new FormControl('', Validators.required),
+      O2: new FormControl('', Validators.required),
+      A: new FormControl('', Validators.required)
+    });
   }
 
   ngOnInit() { }
@@ -92,7 +106,7 @@ export class TeacherUploadWorkPage implements OnInit {
     this.network.getData(clsas).then(data => {
       studentsID = data;
       for (let i = 0; i < studentsID.length; i++) {
-        if (studentsID[i].user == "Student" || studentsID[i].user == "student") {
+        if (studentsID[i].user == "students") {
           arrr.push(studentsID[i]);
           this.StudentList = arrr;
         }
@@ -100,7 +114,6 @@ export class TeacherUploadWorkPage implements OnInit {
       var arr = [];
     });
   }
-
   segmentsChanges(events) {
     console.log("segments: ", events);
     if (events === 'home') { }
@@ -265,22 +278,28 @@ export class TeacherUploadWorkPage implements OnInit {
   }
 
   Transfrrrrr() {
-    var ids = this.StudentSelect + "s";
-    this.network.getSpecificDataforTeach(this.selectCD, ids, this.selectS).then(data => {
+    this.network.getSpecificDataforTeach(this.selectCD, this.StudentSelect, this.selectS).then(data => {
       this.assignment = data;
       console.log("direct: ", this.assignment);
-      console.log(ids);
+      console.log(this.StudentSelect);
       for (let i = 0; i < this.assignment.length; i++) {
-        var arr: any = [this.assignment[i].Eng, this.assignment[i].Urdu, this.assignment[i].Math, this.assignment[i].Sci, this.assignment[i].Sst, this.assignment[i].Isl, this.assignment[i].Draw, this.assignment[i].Sindhi, this.assignment[i].Pst, this.assignment[i].Che, this.assignment[i].Phy];
-        console.log("selected by assignment: ", this.assignment[i]);
-        console.log("all by arr: ", arr);
-        for (let j = 0; j < arr.length; j++) {
-          if (arr[j] !== undefined && arr[j] !== null) {
-            console.log("assignments: ", arr[j]);
+        this.subNam = [{ name: "Eng", sub: this.assignment[i].Eng },
+        { name: "Urdu", sub: this.assignment[i].Urdu }, { name: "Math", sub: this.assignment[i].Math }, { name: "Sci", sub: this.assignment[i].Sci },
+        { name: "Sst", sub: this.assignment[i].Sst }, { name: "Isl", sub: this.assignment[i].Isl }, { name: "Draw", sub: this.assignment[i].Draw },
+        { name: "Sindhi", sub: this.assignment[i].Sindhi }, { name: "Pst", sub: this.assignment[i].Pst }, { name: "Che", sub: this.assignment[i].Che }, { name: "Phy", sub: this.assignment[i].Phy }];
+        console.log(this.subNam);
+        for (let j = 0; j < this.subNam.length; j++) {
+          if (this.subNam[j].name == this.selectS && this.subNam[j].sub != undefined) {
             (window as any).global = window;
             // @ts-ignore
             window.Buffer = window.Buffer || require('buffer').Buffer;
-            this.BufferVal = Buffer.from(arr[j]);
+            this.BufferVal = Buffer.from(this.subNam[j].sub.data);
+            console.log(this.BufferVal);
+            break;
+          }
+          else if(this.subNam[j].name == this.selectS && this.subNam[j].sub == undefined){
+            this.toast.alertMessage("File Error","File is not available!");
+            break;
           }
         }
       }
@@ -289,7 +308,7 @@ export class TeacherUploadWorkPage implements OnInit {
 
   DownloadHome() {
     this.Transfrrrrr();
-    this.toast.loadControlShow(6000);
+    this.toast.loadControlShow(5000);
     console.log("assignments buffer: ", this.BufferVal);
     var Uintt = new Uint8Array(this.BufferVal);
     var binaryArr = Uintt.buffer;
@@ -297,10 +316,10 @@ export class TeacherUploadWorkPage implements OnInit {
     console.log("assignments file: ", blob);
     let result = this.file.createDir(this.file.externalDataDirectory, "SchoolWork", true);
     result.then(data => {
-      var dirPath = data.toURL();
+      this.dirPath = data.toURL();
       this.toast.loadControlDismiss();
       this.toast.alertMessage("Directory path", "Directory created at: " + this.dirPath);
-      this.file.writeFile(dirPath, "newHomework.docx", blob, { replace: true });
+      this.file.writeFile(this.dirPath, "newHomework.docx", blob, { replace: true });
       this.toast.alertMessage("File path", "File created at: " + this.dirPath);
       this.toast.showToast("File download successfully!");
     }).catch(err => {

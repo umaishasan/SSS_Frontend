@@ -20,7 +20,8 @@
 
   <div *ngIf="elementType=='home'">
     <div class="forCenter">
-      <h4 class="forGap" (click)="arrowTogleO()">Online Class <ion-icon size="small" [name]="arrowToggleiconO"></ion-icon>
+      <h4 class="forGap" (click)="arrowTogleO()">Online Class <ion-icon size="small" [name]="arrowToggleiconO">
+        </ion-icon>
       </h4>
       <div class="foranimate" #overlapAnimateO>
         <ion-item>
@@ -80,28 +81,28 @@
             <ion-select-option *ngFor="let i of classesForHome;" value="{{i.id}}">{{i.name}}</ion-select-option>
           </ion-select>
         </ion-item>
+        <ion-item *ngIf="selectCD">
+          <ion-label>Student</ion-label>
+          <ion-select [(ngModel)]="StudentSelect" placeholder="Select Student">
+            <ion-select-option *ngFor="let i of StudentList" value="{{i.id}}">{{i.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
         <ion-item *ngIf="showSubjectO">
           <ion-label>Subject</ion-label>
-          <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
+          <ion-select [(ngModel)]="selectS" placeholder="Select Subject" (ionChange)="Transfrrrrr()">
             <ion-select-option *ngFor="let i of subjectOE;" value="{{i}}">{{i}}</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item *ngIf="showSubjectN">
           <ion-label>Subject</ion-label>
-          <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
+          <ion-select [(ngModel)]="selectS" placeholder="Select Subject" (ionChange)="Transfrrrrr()">
             <ion-select-option *ngFor="let i of subjectN;" value="{{i}}">{{i}}</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item *ngIf="showSubjectT">
           <ion-label>Subject</ion-label>
-          <ion-select [(ngModel)]="selectS" placeholder="Select Subject">
+          <ion-select [(ngModel)]="selectS" placeholder="Select Subject" (ionChange)="Transfrrrrr()">
             <ion-select-option *ngFor="let i of subjectT;" value="{{i}}">{{i}}</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <ion-item *ngIf="selectCD">
-          <ion-label>Student</ion-label>
-          <ion-select [(ngModel)]="StudentSelect" placeholder="Select Student">
-            <ion-select-option *ngFor="let i of StudentList" value="{{i.id}}">{{i.name}}</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-button shape="round" (click)="DownloadHome()">Download</ion-button>
@@ -135,16 +136,30 @@
           <ion-select-option *ngFor="let i of subjectT;" value="{{i}}">{{i}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-input type="number" placeholder="Question No" [(ngModel)]="qno"></ion-input>
-      <ion-textarea class="textArea" placeholder="Write Question" [(ngModel)]="ques"></ion-textarea>
-      <ion-input type="text" placeholder="Option 1" [(ngModel)]="op1"></ion-input>
-      <ion-input type="text" placeholder="Option 2" [(ngModel)]="op2"></ion-input>
-      <ion-input type="text" placeholder="Correct Answer" [(ngModel)]="ans"></ion-input>
+      <form [formGroup]="RegisterForQuiz">
+        <ion-input type="number" formControlName="QNo" placeholder="Question No" [(ngModel)]="qno"></ion-input>
+        <span *ngIf="RegisterForQuiz.get('QNo').hasError('required') && RegisterForQuiz.get('QNo').touched">Question No
+          should not be empty</span>
+        <ion-textarea class="textArea" formControlName="Q" placeholder="Write Question" [(ngModel)]="ques">
+        </ion-textarea>
+        <span *ngIf="RegisterForQuiz.get('Q').hasError('required') && RegisterForQuiz.get('Q').touched">Question
+          should not be empty</span>
+        <ion-input type="text" formControlName="O1" placeholder="Option 1" [(ngModel)]="op1"></ion-input>
+        <span *ngIf="RegisterForQuiz.get('O1').hasError('required') && RegisterForQuiz.get('O1').touched">Option
+          should not be empty</span>
+        <ion-input type="text" formControlName="O2" placeholder="Option 2" [(ngModel)]="op2"></ion-input>
+        <span *ngIf="RegisterForQuiz.get('O2').hasError('required') && RegisterForQuiz.get('O2').touched">Option
+          should not be empty</span>
+        <ion-input type="text" formControlName="A" placeholder="Correct Answer" [(ngModel)]="ans"></ion-input>
+        <span *ngIf="RegisterForQuiz.get('A').hasError('required') && RegisterForQuiz.get('A').touched">Option
+          should not be empty</span>
+        <div id="forCntrtwoBtn">
+          <ion-button class="twoBtnCntrWidth" shape="round" [disabled]="!RegisterForQuiz.valid" (click)="submitQuiz()">
+            Submit</ion-button>
+          <ion-button class="twoBtnCntrWidth" shape="round" (click)="DeleteQuiz()">Reset</ion-button>
+        </div>
+      </form>
     </ion-card>
-    <div id="forCntrtwoBtn">
-      <ion-button class="twoBtnCntrWidth" shape="round" (click)="submitQuiz()">Submit</ion-button>
-      <ion-button class="twoBtnCntrWidth" shape="round" (click)="DeleteQuiz()">Reset</ion-button>
-    </div>
   </div>
 
   <div *ngIf="elementType=='result'" class="resultCard">

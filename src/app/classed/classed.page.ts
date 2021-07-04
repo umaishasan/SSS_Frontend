@@ -5,6 +5,10 @@ import { NetworkService } from '../service/network.service';
 import { ToastedService } from '../service/toasted.service';
 import { ViewChild, ElementRef, Renderer2 } from '@angular/core';
 
+interface Subject {
+  name: string,
+  sub: any
+}
 @Component({
   selector: 'app-classed',
   templateUrl: './classed.page.html',
@@ -33,6 +37,7 @@ export class ClassedPage implements OnInit {
   subjectN: any[] = ["Eng", "Urdu", "Math", "Che", "Pst"];
   subjectT: any[] = ["Eng", "Urdu", "Phy", "Che", "Isl"];
   selectS: any;
+  subNam: Subject[];
   attendance: number = 1;
   assignment: any;
   filesave: any;
@@ -114,15 +119,26 @@ export class ClassedPage implements OnInit {
   transferrr() {
     this.network.getSpecificData("class" + this.callProfile.class + "s", this.selectTeacher, this.selectS).then(data => {
       this.assignment = data;
+      console.log(this.assignment);
+      console.log(this.assignment[0]);
       for (let i = 0; i < this.assignment.length; i++) {
-        var arr: any = [this.assignment[i].Eng, this.assignment[i].Urdu, this.assignment[i].Math, this.assignment[i].Sci, this.assignment[i].Sst, this.assignment[i].Isl, this.assignment[i].Draw, this.assignment[i].Sindhi, this.assignment[i].Pst, this.assignment[i].Che, this.assignment[i].Phy];
-        for (let j = 0; j < arr.length; j++) {
-          if (arr[j] !== undefined && arr[j] !== null) {
+        this.subNam = [{ name: "Eng", sub: this.assignment[i].Eng },
+        { name: "Urdu", sub: this.assignment[i].Urdu }, { name: "Math", sub: this.assignment[i].Math }, { name: "Sci", sub: this.assignment[i].Sci },
+        { name: "Sst", sub: this.assignment[i].Sst }, { name: "Isl", sub: this.assignment[i].Isl }, { name: "Draw", sub: this.assignment[i].Draw },
+        { name: "Sindhi", sub: this.assignment[i].Sindhi }, { name: "Pst", sub: this.assignment[i].Pst }, { name: "Che", sub: this.assignment[i].Che }, { name: "Phy", sub: this.assignment[i].Phy }];
+        console.log(this.subNam);
+        for (let j = 0; j < this.subNam.length; j++) {
+          if (this.subNam[j].name == this.selectS && this.subNam[j].sub != undefined) {
             (window as any).global = window;
             // @ts-ignore
             window.Buffer = window.Buffer || require('buffer').Buffer;
-            this.BufferVal = Buffer.from(arr[j]);
+            this.BufferVal = Buffer.from(this.subNam[j].sub.data);
             console.log(this.BufferVal);
+            break;
+          }
+          else if(this.subNam[j].name == this.selectS && this.subNam[j].sub == undefined){
+            this.toast.alertMessage("File Error","File is not available!");
+            break;
           }
         }
       }
@@ -130,6 +146,7 @@ export class ClassedPage implements OnInit {
   }
 
   DownloadHome() {
+    this.transferrr();
     this.toast.loadControlShow(5000);
     console.log(this.BufferVal);
     var Uintt = new Uint8Array(this.BufferVal);
@@ -149,7 +166,6 @@ export class ClassedPage implements OnInit {
     }).catch(err => {
       this.toast.alertMessage("Error", "Error: " + err);
     });
-
   }
 
   fileUploads(event) {
@@ -179,7 +195,7 @@ export class ClassedPage implements OnInit {
   }
 
   uploadWorkForResult(table, task, message) {
-    this.network.putDataById(table, this.callProfile.id+'s', task, 'Uploading Error', 'Please try again!').then(data => {
+    this.network.putDataById(table, this.callProfile.id + 's', task, 'Uploading Error', 'Please try again!').then(data => {
       console.log(data);
       this.toast.loadControlDismiss();
       this.toast.showToast(message);
@@ -273,12 +289,12 @@ export class ClassedPage implements OnInit {
     this.selectSubject();
   }
 
-  selectedQuiz(){
+  selectedQuiz() {
     var arr = [];
-    for(let i=0;i<this.quizdata.length;i++){
+    for (let i = 0; i < this.quizdata.length; i++) {
       console.log(this.quizdata[i]);
       console.log(this.quizdata[i].QNo);
-      if(this.quizdata[i].Subject === this.selectS){
+      if (this.quizdata[i].Subject === this.selectS) {
         arr.push(this.quizdata[i]);
       }
     }
@@ -293,7 +309,7 @@ export class ClassedPage implements OnInit {
       QuizScore: this.score
     };
     this.uploadWorkForResult("result-class" + this.callProfile.class + "s", task, "Quiz uploaded successfully!");
-    this.toast.alertMessage("Quiz Score","Your quiz score is: "+this.score);
+    this.toast.alertMessage("Quiz Score", "Your quiz score is: " + this.score);
   }
 
   arrowTogleO() {
